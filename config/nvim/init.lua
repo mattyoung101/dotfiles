@@ -42,6 +42,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.relativenumber = true
+vim.opt.scrolloff = 999
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
