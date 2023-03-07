@@ -1,5 +1,17 @@
 # kickstart.nvim
 
+## NOTES
+- Install oh-my-zsh
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+- Install a patched font (JetBrains Mono)
+```
+brew install --cask font-jetbrains-mono-nerd-font
+# don't forget to set iTerm2 to use this font
+# and also restart
+```
+
 ### Introduction
 
 A starting point for Neovim that is:
