@@ -44,6 +44,7 @@ vim.g.maplocalleader = ' '
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 999
 vim.opt.wrap = false
+vim.opt.awa = true
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -291,7 +292,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'markdown' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'markdown', 'latex' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -411,6 +412,7 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   clangd = {},
+  texlab = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
