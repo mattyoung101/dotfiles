@@ -41,9 +41,6 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.opt.relativenumber = true
-vim.opt.scrolloff = 999
-vim.opt.wrap = false
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -195,6 +192,15 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+-- Relative line numbers
+vim.opt.relativenumber = true
+
+-- Keep cursor centered
+vim.opt.scrolloff = 999
+
+-- No line wrap
+vim.opt.wrap = false
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -291,7 +297,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'markdown', 'latex' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -411,6 +417,7 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   clangd = {},
+  texlab = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
