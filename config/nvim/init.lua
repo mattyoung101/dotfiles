@@ -41,10 +41,6 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.opt.relativenumber = true
-vim.opt.scrolloff = 999
-vim.opt.wrap = false
-vim.opt.awa = true
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -195,6 +191,15 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+
+-- Relative line numbers
+vim.opt.relativenumber = true
+
+-- Keep cursor centered
+vim.opt.scrolloff = 999
+
+-- No line wrap
+vim.opt.wrap = false
 
 -- Set highlight on search
 vim.o.hlsearch = false
