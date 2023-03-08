@@ -7,7 +7,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 - Install a patched font (JetBrains Mono)
 ```
-brew install --cask font-jetbrains-mono-nerd-font
+brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font
 # don't forget to set iTerm2 to use this font
 # and also restart
 ```
