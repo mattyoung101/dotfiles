@@ -12,6 +12,11 @@ brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-fon
 # and also restart
 ```
 
+- Install ripgrep
+```
+brew install ripgrep
+```
+
 ### Introduction
 
 A starting point for Neovim that is:
