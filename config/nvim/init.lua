@@ -126,7 +126,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'starry',
+        theme = 'gruvbox',
         component_separators = '|',
         section_separators = '',
       },
@@ -191,6 +191,9 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+
+-- Set encoding
+vim.opt.encoding = 'utf-8'
 
 -- Relative line numbers
 vim.opt.relativenumber = true
