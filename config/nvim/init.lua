@@ -423,7 +423,7 @@ local servers = {
   clangd = {},
   texlab = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
 
