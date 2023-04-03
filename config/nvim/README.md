@@ -1,5 +1,7 @@
 # kickstart.nvim
 
+We do a little theivery
+
 ## NOTES
 - Install oh-my-zsh
 ```
@@ -15,6 +17,11 @@ brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-fon
 - Install ripgrep
 ```
 brew install ripgrep
+```
+
+- Install npm
+```
+brew install node
 ```
 
 ### Introduction

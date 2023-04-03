@@ -112,11 +112,11 @@ require('lazy').setup({
     },
   },
 
-  { -- theme inspired by atom
-    'catppuccin/nvim',
+  { -- colorscheme
+    'ray-x/starry.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      require('starry.functions').change_style("moonlight")
     end,
   },
 
@@ -126,7 +126,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'catppuccin',
+        theme = 'starry',
         component_separators = '|',
         section_separators = '',
       },
