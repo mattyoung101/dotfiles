@@ -113,10 +113,10 @@ require('lazy').setup({
   },
 
   { -- colorscheme
-    'ray-x/starry.nvim',
+    'morhetz/gruvbox',
     priority = 1000,
     config = function()
-      require('starry.functions').change_style("moonlight")
+      vim.cmd.colorscheme('gruvbox')
     end,
   },
 
