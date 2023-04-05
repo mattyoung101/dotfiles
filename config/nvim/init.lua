@@ -113,10 +113,10 @@ require('lazy').setup({
   },
 
   { -- colorscheme
-    'morhetz/gruvbox',
+    'ray-x/starry.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme('gruvbox')
+      require('starry.functions').change_style("monokai")
     end,
   },
 
@@ -126,7 +126,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'gruvbox',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
       },
