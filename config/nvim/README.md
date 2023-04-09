@@ -15,6 +15,12 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 
 Add `ZSH_THEME="powerlevel10k/powerlevel10k"` to `~/.zshrc`.
 
+```
+brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font
+# don't forget to set iTerm2 to use this font and to enable use ligatures
+# and also restart
+```
+
 - Install ripgrep
 ```
 brew install ripgrep
@@ -25,4 +31,4 @@ brew install ripgrep
 brew install node
 ```
 
-I've missed a lot of dependencies so oh well. Whoops.
+I've missed a lot of dependencies so oh well. Whoops
