@@ -135,6 +135,7 @@ require('lazy').setup({
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter-context',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
