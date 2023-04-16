@@ -16,6 +16,9 @@ some more, but that's boring, so here's a list of the stuff I've added.
 **[ starry.nvim ]( https://github.com/ray-x/starry.nvim )**
 - Lets me swap between a bunch of different themes without having to reinstall new ones
 
+**[ dashboard-nvim ]( https://github.com/nvimdev/dashboard-nvim )**
+- Dashboard plugin, just so it looks nice when I first open this up
+
 **[ transparent.nvim ]( https://github.com/xiyaowong/transparent.nvim )**
 - For when I have a fun background
 
