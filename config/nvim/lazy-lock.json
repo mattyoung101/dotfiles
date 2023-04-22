@@ -1,6 +1,7 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "a89339ffbee677ab0521a483b6dac7e2e67c907e" },
   "LuaSnip": { "branch": "master", "commit": "a6355b12a3b7da0aef71f02560e17ff480182b97" },
+  "cmp-matlab": { "branch": "main", "commit": "6f8185668e0c6de65e06d2a62900677e453acd8c" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
   "cmp-spell": { "branch": "master", "commit": "60584cb75e5e8bba5a0c9e4c3ab0791e0698bffa" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
@@ -27,6 +28,7 @@
   "nvim-treesitter": { "branch": "master", "commit": "21f2fb188e4e5bb81fd0ff467c5e96dad858becb" },
   "nvim-treesitter-context": { "branch": "master", "commit": "0d730df898f3dc27fd88f03cfa6d26d2405554b4" },
   "nvim-web-devicons": { "branch": "master", "commit": "4ec26d67d419c12a4abaea02f1b6c57b40c08d7e" },
+  "playground": { "branch": "master", "commit": "2b81a018a49f8e476341dfcb228b7b808baba68b" },
   "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
   "ripgrep": { "branch": "master", "commit": "041544853c86dde91c49983e5ddd0aa799bd2831" },
   "ros-nvim": { "branch": "main", "commit": "254e6965c290e26fd940f58aa031e667f0a6a9e5" },
