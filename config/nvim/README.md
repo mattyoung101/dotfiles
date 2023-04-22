@@ -7,7 +7,7 @@ just stole from [ Josean Martinez ]( https://youtu.be/U-omALWIBos ) with the mos
 changes. It contains all the usual stuff like a package manager 
 ([ lazy.nvim ]( https://github.com/folke/lazy.nvim )), fuzzy finder 
 ([ telescope.nvim ]( https://github.com/nvim-telescope/telescope.nvim ) and 
-[ telescope-fzf-native.nvim ]( https://github.com/nvim-telescope/telescope-fzf-native.nvim ),
+[ telescope-fzf-native.nvim ]( https://github.com/nvim-telescope/telescope-fzf-native.nvim )),
 tree sitter ([ nvim-treesitter ]( https://github.com/nvim-treesitter/nvim-treesitter )) and
 some more, but that's boring, so here's a list of the stuff I've added.
 
@@ -57,6 +57,9 @@ some more, but that's boring, so here's a list of the stuff I've added.
 
 **[ ros-nvim ]( https://github.com/taDachs/ros-nvim )**
 - Lets me finally navigate through launch links and peek at message definitions
+
+**[ cmp-matlab ]( https://github.com/mstanciu552/cmp-matlab )**
+- MATLAB completion source for nvim-cmp, not super extensive but it does the trick
 
 There are a few others included but I don't really use them so I won't mention them.
 
