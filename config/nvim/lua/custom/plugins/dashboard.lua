@@ -3,8 +3,10 @@ return {
   event = 'VimEnter',
   config = function()
     require('dashboard').setup {
-      -- config
+      -- Setup
     }
+    -- Exclude dashboard from indent lines
+    vim.g.indent_blankline_filetype_exclude = {'dashboard'}
   end,
   dependencies = { {'nvim-tree/nvim-web-devicons'}}
 }
