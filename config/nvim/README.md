@@ -39,6 +39,9 @@ some more, but that's boring, so here's a list of the stuff I've added.
 **[ markdown-preview.nvim ]( https://github.com/iamcco/markdown-preview.nvim )**
 - Plugin to preview markdown
 
+**[ nvim-ufo ]( https://github.com/kevinhwang91/nvim-ufo )**
+- Plugin for folding code sections - works out of the box which is super nice
+
 ### Navigation
 
 **[ neo-tree.nvim ]( https://github.com/nvim-neo-tree/neo-tree.nvim )**
@@ -76,11 +79,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 
 Add `ZSH_THEME="powerlevel10k/powerlevel10k"` to `~/.zshrc`.
 
-```
-brew tap homebrew/cask-fonts && brew install --cask font-jetbrains-mono-nerd-font
-# don't forget to set iTerm2 to use this font and to enable use ligatures
-# and also restart
-```
+Don't forget to make sure the font is set the 'MesloLGS NF' with ligatures on.
 
 - Install ripgrep
 ```
