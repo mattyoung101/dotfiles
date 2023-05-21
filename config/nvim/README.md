@@ -53,6 +53,9 @@ some more, but that's boring, so here's a list of the stuff I've added.
 **[ nvim-tmux-navigation ]( https://github.com/alexghergh/nvim-tmux-navigation )**
 - Used for tmux integration
 
+**[ oil.nvim ]( https://github.com/stevearc/oil.nvim )**
+- So this is pretty cool, you can navigate through files in a netrw like interface but can add, rename and remove files just by editing the lines in the buffer
+
 ### Other
 
 **[ vim-wakatime ]( https://github.com/wakatime/vim-wakatime )**
