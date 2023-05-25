@@ -1,10 +1,9 @@
 # NVIM Setup
 
-Built off [ kickstart.nvim ]( https://github.com/nvim-lua/kickstart.nvim ). Made for my own
-[ iTerm2 ]( https://iterm2.com/ ) setup using [ oh-my-zsh ]( https://ohmyz.sh/ ) but should 
-be able to be loaded onto anything. Also includes my tmux configuration which I basically 
-just stole from [ Josean Martinez ]( https://youtu.be/U-omALWIBos ) with the most minor of 
-changes. It contains all the usual stuff like a package manager 
+Built off [Ethan's vim config](https://github.com/nvim-lua/kickstart.nvim) with some changes to my liking
+and explicit support for Linux. I will attempt to keep this synced with his upstream.
+
+It contains all the usual stuff like a package manager 
 ([ lazy.nvim ]( https://github.com/folke/lazy.nvim )), fuzzy finder 
 ([ telescope.nvim ]( https://github.com/nvim-telescope/telescope.nvim ) and 
 [ telescope-fzf-native.nvim ]( https://github.com/nvim-telescope/telescope-fzf-native.nvim )),
@@ -69,34 +68,21 @@ some more, but that's boring, so here's a list of the stuff I've added.
 
 There are a few others included but I don't really use them so I won't mention them.
 
-## NOTES
-- Install [oh-my-zsh](https://ohmyz.sh/).
-```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
+## Installation
+1. Install the latest Neovim, use the unstable PPA: https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable
+2. Clone the repo as ~/.config/nvim, for example: `git clone git@github.com:mattyoung101/nvim-setup.git ~/.config/nvim`
+3. (If using nvim.fish): Edit `~/.config/fish/config.fish` to source nvm on startup: `nvm -s use latest`
+4. On Linux Mint, the default terminal font is DejaVu Sans Mono (even though the font is just listed as "Monospace").
+You can prove this to yourself by doing `fc-match monospace`. You will need to install the NerdFont patch for this
+so that the icons show: https://www.nerdfonts.com/font-downloads
+5. Change the monospace font in System Settings to the DejaVu Sans Mono Nerd font.
 
-- Install [Powerlevel10k](https://github.com/romkatv/powerlevel10k#oh-my-zsh) theme.
-```
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-```
-
-Add `ZSH_THEME="powerlevel10k/powerlevel10k"` to `~/.zshrc`.
-
-Don't forget to make sure the font is set the 'MesloLGS NF' with ligatures on.
-
-- Install ripgrep
-```
-brew install ripgrep
-```
-
-- Install npm
-```
-brew install node
-```
-
-- Install tpm for tmux integration
-```
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-```
-
-I've missed a lot of dependencies so oh well. Whoops
+## Wishlist (plugins to be added and changes to make)
+- SystemVerilog LSP
+    - Probably either svls or Veridian
+- Markdown auto complete like in IntelliJ (e.g. when you press enter it'll keep the list going)
+- Better spelling so works like IntelliJ are marked valid
+- (DONE) Autosave
+    - TODO: Configure it so that if you create a new file like `nvim test.txt`, it does _NOT_ autosave
+- Markdown plugin to show stuff like _italics_ in actual italics in the editor
+- Make the TODO plugin work with Markdown

@@ -154,12 +154,6 @@ require('lazy').setup({
 -- Set encoding
 vim.opt.encoding = 'utf-8'
 
--- Relative line numbers
-vim.opt.relativenumber = true
-
--- Keep cursor centered
-vim.opt.scrolloff = 999
-
 -- No line wrap
 vim.opt.wrap = false
 
@@ -200,6 +194,9 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- 110 character ruler
+vim.opt.colorcolumn = "110"
 
 -- Spelling
 vim.opt.spell = true
