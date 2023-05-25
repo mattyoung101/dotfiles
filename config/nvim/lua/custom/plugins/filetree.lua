@@ -44,6 +44,10 @@ return {
         }
       },
       -- Other options ...
+      source_selector = {
+          winbar = true,
+          statusline = false
+      }
     })
 
     vim.keymap.set('n', '<leader>ftl', ":Neotree action=focus source=filesystem position=left toggle=true<cr>", { silent=true, desc="[F]iletree [T]oggle [L]eft" })

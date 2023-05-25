@@ -118,7 +118,7 @@ require('lazy').setup({
   { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' } },
+  { 'nvim-telescope/telescope.nvim', branch='master', dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' } },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -150,6 +150,10 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+
+-- Spaces not tabs
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Set encoding
 vim.opt.encoding = 'utf-8'
@@ -389,6 +393,7 @@ local servers = {
   pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
+  svls = {},
 
   lua_ls = {
     Lua = {

@@ -41,6 +41,13 @@ some more, but that's boring, so here's a list of the stuff I've added.
 **[ nvim-ufo ]( https://github.com/kevinhwang91/nvim-ufo )**
 - Plugin for folding code sections - works out of the box which is super nice
 
+**[auto-save.nvim](https://github.com/Pocco81/auto-save.nvim)**
+- Autosave, because you never know when your power cord gets yanked :)
+
+**[lazygit.nvim](https://github.com/kdheepak/lazygit.nvim)**
+- Git integration, allows you to launch [lazygit](https://github.com/jesseduffield/lazygit), a seemingly pretty
+cool looking git TUI
+
 ### Navigation
 
 **[ neo-tree.nvim ]( https://github.com/nvim-neo-tree/neo-tree.nvim )**
@@ -55,10 +62,13 @@ some more, but that's boring, so here's a list of the stuff I've added.
 **[ oil.nvim ]( https://github.com/stevearc/oil.nvim )**
 - So this is pretty cool, you can navigate through files in a netrw like interface but can add, rename and remove files just by editing the lines in the buffer
 
+**[barbar.nvim](https://github.com/romgrk/barbar.nvim)**
+- Elegant tab navigation for nvim, a nice QoL improvement for me
+
 ### Other
 
 **[ vim-wakatime ]( https://github.com/wakatime/vim-wakatime )**
-- Why do I even look at these stats, I barely even program
+- Accurate statistics about how much time I _didn't_ spend outside
 
 **[ ros-nvim ]( https://github.com/taDachs/ros-nvim )**
 - Lets me finally navigate through launch links and peek at message definitions
@@ -81,8 +91,14 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
 - SystemVerilog LSP
     - Probably either svls or Veridian
 - Markdown auto complete like in IntelliJ (e.g. when you press enter it'll keep the list going)
-- Better spelling so works like IntelliJ are marked valid
+- Better spelling so words like IntelliJ are marked valid
+- Markdown plugin to show stuff like _italics_ and **bold** in actual italics and bold in the editor
+- Make the TODO plugin work with Markdown
+- File navigation menu should open by default on the left hand side
+
+**Done:**
+
 - (DONE) Autosave
     - TODO: Configure it so that if you create a new file like `nvim test.txt`, it does _NOT_ autosave
-- Markdown plugin to show stuff like _italics_ in actual italics in the editor
-- Make the TODO plugin work with Markdown
+- (DONE) Tabs
+- (DONE) Git integration
