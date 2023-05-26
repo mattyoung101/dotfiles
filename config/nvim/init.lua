@@ -76,13 +76,16 @@ require('lazy').setup({
     },
   },
 
-  { -- colorscheme
-    'ray-x/starry.nvim',
-    priority = 1000,
-    config = function()
-      require('starry.functions').change_style("monokai")
-    end,
-  },
+  -- { -- colorscheme
+  --   'ray-x/starry.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     require('starry.functions').change_style("monokai")
+  --   end,
+  -- },
+
+  -- dracula colour scheme 
+  { "briones-gabriel/darcula-solid.nvim", dependencies = "rktjmp/lush.nvim" },
 
   { -- transparent plugin if i have image background
     'xiyaowong/transparent.nvim',
@@ -151,9 +154,15 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Spaces not tabs
+-- Use darcula colour scheme
+-- For some reason, we cannot do this with lua, we have to execute a Vim command
+vim.cmd 'colorscheme darcula-solid'
+
+-- Spaces not tabs. I mean it!!!!
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
 
 -- Set encoding
 vim.opt.encoding = 'utf-8'
@@ -205,6 +214,7 @@ vim.opt.colorcolumn = "110"
 -- Spelling
 vim.opt.spell = true
 vim.opt.spelllang = { 'en_gb' }
+vim.opt.spelloptions = 'camel'
 
 -- [[ Basic Keymaps ]]
 
@@ -393,7 +403,9 @@ local servers = {
   pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  svls = {},
+  -- svls = {},
+  --verible = {},
+  svlangserver = {},
 
   lua_ls = {
     Lua = {

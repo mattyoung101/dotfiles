@@ -21,6 +21,9 @@ some more, but that's boring, so here's a list of the stuff I've added.
 **[ transparent.nvim ]( https://github.com/xiyaowong/transparent.nvim )**
 - For when I have a fun background
 
+**[darcula-solid.nvim](https://github.com/briones-gabriel/darcula-solid.nvim)**
+- I've always been a huge fan of IntelliJ's Darcula theme, so here it is!
+
 ### Editing QoL
 
 **[ nvim-autopairs ]( https://github.com/windwp/nvim-autopairs )**
@@ -47,6 +50,10 @@ some more, but that's boring, so here's a list of the stuff I've added.
 **[lazygit.nvim](https://github.com/kdheepak/lazygit.nvim)**
 - Git integration, allows you to launch [lazygit](https://github.com/jesseduffield/lazygit), a seemingly pretty
 cool looking git TUI
+
+**[nvim-ts-rainbow2](https://github.com/HiPhish/nvim-ts-rainbow2)**
+- Adds bracket pair colourisation, as in VSCode. I personally quite like this feature, and it should be pretty
+fast as it interfaces with treesitter directly.
 
 ### Navigation
 
@@ -90,15 +97,29 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
 ## Wishlist (plugins to be added and changes to make)
 - SystemVerilog LSP
     - Probably either svls or Veridian
-- Markdown auto complete like in IntelliJ (e.g. when you press enter it'll keep the list going)
-- Better spelling so words like IntelliJ are marked valid
-- Markdown plugin to show stuff like _italics_ and **bold** in actual italics and bold in the editor
-- Make the TODO plugin work with Markdown
-- File navigation menu should open by default on the left hand side
+    - Must have completion (even if that requires universal ctags)
+    - May require custom plugin or us to cope with NodeJS LSPs
+- Better markdown
+    - Auto complete like in IntelliJ (e.g. when you press enter it'll keep the list going)
+    - Show stuff like _italics_ and **bold** in actual italics and bold in the editor
+    - May require custom plugin
+- Better spelling
+    - CamelCase and camelCase and snake_case should work as word separators
+    - Add more dictionaries from "cspell" (without using cspell because I don't want to touch nodejs on a ten
+    foot pole) -> this will require compiling custom spell files
+    - Fix this: the word "Ethan" is marked as valid, but "Ethan's" (with the apostrophe s) is invalid. We should
+    ignore words that 
+    - Fully uppercase words (i.e. acronyms) should be ignored
+- Make the TODO plugin work with Markdown (basically regex for "TODO" everywhere)
+- Make the TODO plugin highlighting look less ugly
+- Telescope search results should be centred on screen
 
 **Done:**
 
 - (DONE) Autosave
     - TODO: Configure it so that if you create a new file like `nvim test.txt`, it does _NOT_ autosave
+    - TODO: make it not autosave as often
 - (DONE) Tabs
 - (DONE) Git integration
+- (DONE) File navigation menu should open by default on the left hand side
+    - Technically I changed nothing, you just do `nvim .` instead of `nvim`
