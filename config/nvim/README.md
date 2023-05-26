@@ -95,7 +95,7 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
 5. Change the monospace font in System Settings to the DejaVu Sans Mono Nerd font.
 
 ## Wishlist (plugins to be added and changes to make)
-- SystemVerilog LSP
+- _(Partially done)_ SystemVerilog LSP
     - Probably either svls or Veridian
     - Must have completion (even if that requires universal ctags)
     - May require custom plugin or us to cope with NodeJS LSPs
@@ -113,6 +113,11 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
 - Make the TODO plugin work with Markdown (basically regex for "TODO" everywhere)
 - Make the TODO plugin highlighting look less ugly
 - Telescope search results should be centred on screen
+- **FIXME:** When closing certain lua files with nvim-ts-rainbow2 and barbar enabled, there is an exception thrown
+    - Can only reproduce with lua/custom/plugins/** files, nothing else atm
+    - It's this bug here: https://github.com/HiPhish/nvim-ts-rainbow2/issues/40
+    - They are blaming upstream neovim, questionable, guess we'll wait til it gets resolved in up/down stream
+    - Can possibly fix by downgrading to 0.9.0? (maybe try flatpak)
 
 **Done:**
 
@@ -123,3 +128,12 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
 - (DONE) Git integration
 - (DONE) File navigation menu should open by default on the left hand side
     - Technically I changed nothing, you just do `nvim .` instead of `nvim`
+
+## Cheatsheet
+Common operations I forget:
+
+- **Comment out a section of code:** visual select, g, c
+- **Search in current buffer:** space, slash
+- **Cut text:** visual select, d
+- **Copy text:** visual select, y (yank)
+- **Quit everything:** :qa
