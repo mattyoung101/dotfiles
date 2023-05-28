@@ -19,7 +19,7 @@ return {
         git_status = {
           symbols = {
             renamed   = "󰁕",
-            unstaged  = "󰄱",
+            unstaged  = "󱪘",
           },
         },
       },
@@ -45,6 +45,10 @@ return {
       },
       -- Other options ...
       source_selector = {
+        sources = {
+          { source = "filesystem", display_name = " 󰉓 Files " },
+          { source = "git_status", display_name = " 󰊢 Git " },
+        },
           winbar = true,
           statusline = false
       }
