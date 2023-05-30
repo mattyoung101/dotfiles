@@ -158,3 +158,5 @@ Common operations I forget:
 - **Copy text:** visual select, y (yank)
 - **Quit everything:** :qa
 - **Find a file:** space, s, f
+- **Cancel autocomplete:** Ctrl+E
+- **Create a new file in neotree:** TODO

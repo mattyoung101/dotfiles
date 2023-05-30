@@ -273,8 +273,11 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
+  -- ADD TREESITTER LANGUAGES HERE
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline', 'latex', 'jsonc' },
+  ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
+    'latex', 'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
+    'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust'},
 
   -- Rainbow brackets
   rainbow = {
@@ -408,15 +411,17 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
+  -- ADD LANGUAGE SERVERS HERE
   clangd = {},
+  -- TODO: check if we need to add clang-format
   texlab = {},
-  -- gopls = {},
   pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
+  rust_analyzer = {},
   -- svls = {},
   --verible = {},
   svlangserver = {},
+  -- TODO: see if we can get veridian
+  neocmake = {},
 
   lua_ls = {
     Lua = {
