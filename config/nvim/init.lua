@@ -76,14 +76,6 @@ require('lazy').setup({
     },
   },
 
-  -- { -- colorscheme
-  --   'ray-x/starry.nvim',
-  --   priority = 1000,
-  --   config = function()
-  --     require('starry.functions').change_style("monokai")
-  --   end,
-  -- },
-
   -- dracula colour scheme 
   { "briones-gabriel/darcula-solid.nvim", dependencies = "rktjmp/lush.nvim" },
 

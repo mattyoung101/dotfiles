@@ -24,7 +24,8 @@ Big thanks again to Ethan for the original config and getting me into Neovim.
 - For when I have a fun background
 
 **[darcula-solid.nvim](https://github.com/briones-gabriel/darcula-solid.nvim)**
-- I've always been a huge fan of IntelliJ's Darcula theme, so here it is!
+- I've always been a huge fan of IntelliJ's Darcula theme, so here it is! This isn't a completely faithful
+recreation like https://github.com/doums/darcula, which I might try in future
 
 ### Editing QoL
 
@@ -57,6 +58,9 @@ cool looking git TUI
 - Adds bracket pair colourisation, as in VSCode. I personally quite like this feature, and it should be pretty
 fast as it interfaces with treesitter directly.
 
+**[suda.nvim](https://github.com/lambdalisue/suda.vim)**
+- Simple script that allows reading/writing files with root permissions. Useful for system configuration.
+
 ### Navigation
 
 **[ neo-tree.nvim ]( https://github.com/nvim-neo-tree/neo-tree.nvim )**
@@ -86,68 +90,43 @@ fast as it interfaces with treesitter directly.
 - Add SystemVerilog language server
 - Change theme to Darcula (my favourite theme of all time)
 - 110 character side ruler, this is the width I use when editing
-- Some other misc changes, e.g. no relative line numbers, etc. See my wishlist below for more details.
+- Some other misc changes, e.g. no relative line numbers, etc. 
 
 **Note:** There are a few extra plugins that I may have forgot to include on this list.
 
 ## Installation
-1. Install the latest **stable** Neovim (currently 0.9.0 as of 27 May 2023). I suggest building from source, it's
-very easy. Instructions are here: https://github.com/neovim/neovim/wiki/Building-Neovim
-    - It's important that you _don't_ use the unstable PPA, as I suggested previously, because there's a few bugs
-    on bleeding edge unstable nvim (who'da thunk it) that impact usability. Details are below, it's currently just
-    an issue with the rainbow bracket splugin.
+1. Install the latest **stable** Neovim (currently 0.9.0 as of 27 May 2023). 
 2. Clone the repo as ~/.config/nvim, for example: `git clone git@github.com:mattyoung101/nvim-setup.git ~/.config/nvim`
 3. (If using nvim.fish): Edit `~/.config/fish/config.fish` to source nvm on startup: `nvm -s use latest`
 4. On Linux Mint, the default terminal font is DejaVu Sans Mono (even though the font is just listed as "Monospace").
 You can prove this to yourself by doing `fc-match monospace`. You will need to install the NerdFont patch for this
 so that the icons show: https://www.nerdfonts.com/font-downloads
 5. Change the monospace font in System Settings to the DejaVu Sans Mono Nerd font.
+6. Install [LazyGit](https://github.com/jesseduffield/lazygit), which may require installing go
+7. You should also have a gcc/clang and the latest stable rust (probably with rustup) on your system
 
 ## Wishlist (plugins to be added and changes to make)
 **Needs doing:**
 
 - Better spelling
-    - CamelCase and camelCase and snake_case should work as word separators
     - Add more dictionaries from "cspell" (without using cspell because I don't want to touch nodejs on a ten
     foot pole) -> this will require compiling custom spell files
     - Fix this: the word "Ethan" is marked as valid, but "Ethan's" (with the apostrophe s) is invalid. We should
     ignore words that 
     - Fully uppercase words (i.e. acronyms) should be ignored
-    - Worst case, this may require a custom plugin or even LSP (somehow?), but would be an interesting exercise
-    in data structures so I'm not complaining :)
 - Make the TODO plugin work with Markdown (basically regex for "TODO" everywhere)
 - Make the TODO plugin highlighting look less ugly
 - Telescope search results should be centred on screen
 - Git integration in the file tree doesn't seem to work until restart (modified files are not shown in orange)
-- Figure out how to create files in neovim file tree
 - Add keybindings for barbar tab navigation
 - Bind ctrl+backspace to delete last word
 
 **Partially done:**
 
-- When closing certain lua files with nvim-ts-rainbow2 and barbar enabled, there is an exception thrown
-    - Can only reproduce with lua/custom/plugins/** files, nothing else atm
-    - It's this bug here: https://github.com/HiPhish/nvim-ts-rainbow2/issues/40
-    - They are blaming upstream neovim, questionable, guess we'll wait til it gets resolved in up/down stream
-    - Partially fixed by downgrading to 0.9.0 (build from source), which works, but not super ideal
-    - This will be less bad once I move to Arch and can use actually up to date packages
 - SystemVerilog LSP
     - Currently using IMC's svlangserver, but I'm unhappy with this and may write my own from scratch based
     on slang
-
-**Done:**
-
-- (DONE) Autosave
-    - TODO: Configure it so that if you create a new file like `nvim test.txt`, it does _NOT_ autosave
-    - TODO: make it not autosave as often
-- (DONE) Tabs
-- (DONE) Git integration
-- (DONE) File navigation menu should open by default on the left hand side
-    - Technically I changed nothing, you just do `nvim .` instead of `nvim`
-- (DONE) Better markdown
-    - Show stuff like _italics_ and **bold** in actual italics and bold in the editor
-    - This didn't end up actually requiring a custom plugin, I just added the markdown_inline language from
-    here: https://github.com/MDeiml/tree-sitter-markdown (as mentioned here: https://github.com/nvim-treesitter/nvim-treesitter)
+    - Try Veridian
 
 ## Cheatsheet
 Common operations I forget:
@@ -159,4 +138,7 @@ Common operations I forget:
 - **Quit everything:** :qa
 - **Find a file:** space, s, f
 - **Cancel autocomplete:** Ctrl+E
-- **Create a new file in neotree:** TODO
+- **Create a new file in neotree:** a (read [documentation](https://github.com/nvim-neo-tree/neo-tree.nvim#longer-example-for-packer))
+- **Rename a file in neotree:** r
+- **Delete a word (like ctrl+bkspce):** ctrl+w
+- **Go to beginning of line:** press ^ (shift 6)
