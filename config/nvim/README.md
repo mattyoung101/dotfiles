@@ -109,13 +109,9 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
 **Needs doing:**
 
 - Better spelling
-    - Add more dictionaries from "cspell" (without using cspell because I don't want to touch nodejs on a ten
-    foot pole) -> this will require compiling custom spell files
     - Fix this: the word "Ethan" is marked as valid, but "Ethan's" (with the apostrophe s) is invalid. We should
     ignore words that 
     - Fully uppercase words (i.e. acronyms) should be ignored
-- Make the TODO plugin work with Markdown (basically regex for "TODO" everywhere)
-- Make the TODO plugin highlighting look less ugly
 - Telescope search results should be centred on screen
 - Git integration in the file tree doesn't seem to work until restart (modified files are not shown in orange)
 - Add keybindings for barbar tab navigation
