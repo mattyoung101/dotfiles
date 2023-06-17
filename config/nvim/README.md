@@ -115,14 +115,19 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
 - Telescope search results should be centred on screen
 - Git integration in the file tree doesn't seem to work until restart (modified files are not shown in orange)
 - Add keybindings for barbar tab navigation
-- Bind ctrl+backspace to delete last word
+- Semantic highlighting, like in IntelliJ/CLion
+- Pressing enter in a list of Markdown items should auto-insert a "-" on the next line
+- Filetree should auto refresh git status (it doesn't seem to reload when git status or even files in directory
+are changed atm)
 
 **Partially done:**
 
 - SystemVerilog LSP
     - Currently using IMC's svlangserver, but I'm unhappy with this and may write my own from scratch based
     on slang
-    - Try Veridian
+    - Veridian: eh, would be cool but doesn't seem to accept my code
+    - svls: only provides linting
+    - verible: same as svls, only provides lint
 
 ## Cheatsheet
 Common operations I forget:

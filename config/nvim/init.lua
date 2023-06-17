@@ -409,10 +409,8 @@ local servers = {
   texlab = {},
   pyright = {},
   rust_analyzer = {},
-  -- svls = {},
   --verible = {},
   svlangserver = {},
-  -- TODO: see if we can get veridian
   neocmake = {},
 
   lua_ls = {
@@ -449,6 +447,11 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+-- setup veridian (systemverilog language server) if you want it here
+-- unfortunately, it seems kinda pedantic and won't accept my verilog code at the moment, so we're back to
+-- svlangserver until I make my own
+--[[ require('lspconfig').veridian.setup{} ]]
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
