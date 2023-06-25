@@ -18,7 +18,7 @@ return {
           TODO = { icon = " ", color = "warning" },
           HACK = { icon = " ", color = "warning" },
           WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-          PERF = { icon = "󱫌 ", color = "warning", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+          PERF = { icon = "󱫌 ", color = "warning", alt = { "PERFORMANCE" } },
           NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
         },
         gui_style = {

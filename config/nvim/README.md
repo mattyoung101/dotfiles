@@ -112,8 +112,7 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
     - Fix this: the word "Ethan" is marked as valid, but "Ethan's" (with the apostrophe s) is invalid. We should
     ignore words that 
     - Fully uppercase words (i.e. acronyms) should be ignored
-- Telescope search results should be centred on screen
-- Git integration in the file tree doesn't seem to work until restart (modified files are not shown in orange)
+- Telescope search results should be centred on screen when you navigate to them
 - Add keybindings for barbar tab navigation
 - Semantic highlighting, like in IntelliJ/CLion
 - Pressing enter in a list of Markdown items should auto-insert a "-" on the next line
@@ -143,3 +142,4 @@ Common operations I forget:
 - **Rename a file in neotree:** r
 - **Delete a word (like ctrl+bkspce):** ctrl+w
 - **Go to beginning of line:** press ^ (shift 6)
+- **Apply fix:** space, c, a
