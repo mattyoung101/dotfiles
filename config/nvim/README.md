@@ -114,13 +114,20 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
     - Fully uppercase words (i.e. acronyms) should be ignored
 - Telescope search results should be centred on screen when you navigate to them
 - Add keybindings for barbar tab navigation
-- Semantic highlighting, like in IntelliJ/CLion
 - Pressing enter in a list of Markdown items should auto-insert a "-" on the next line
 - Filetree should auto refresh git status (it doesn't seem to reload when git status or even files in directory
 are changed atm)
+- LSP inlay hints (this is like how CLion will annotate the parameters of function calls in grey text)
+    - Requires bleeding edge neovim: https://www.reddit.com/r/neovim/comments/115uoft/comment/jov7vi7/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+    - https://github.com/lvimuser/lsp-inlayhints.nvim
+    - https://github.com/simrat39/inlay-hints.nvim
+- Each variable should get a unique colour (like what CLion calls "semantic highlighting", which is separate
+from LSP semantic highlighting). This will require a custom plugin or custom Lua.
 
 **Partially done:**
 
+- Semantic highlighting, like in IntelliJ/CLion
+    - Sort of works atm, but needs some more customisation from my end to work with the darcula-solid theme better
 - SystemVerilog LSP
     - Currently using IMC's svlangserver, but I'm unhappy with this and may write my own from scratch based
     on slang

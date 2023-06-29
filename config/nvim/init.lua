@@ -77,7 +77,7 @@ require('lazy').setup({
   },
 
   -- dracula colour scheme 
-  { "briones-gabriel/darcula-solid.nvim", dependencies = "rktjmp/lush.nvim" },
+  { "briones-gabriel/darcula-solid.nvim", version = "*", dependencies = "rktjmp/lush.nvim" },
 
   { -- transparent plugin if i have image background
     'xiyaowong/transparent.nvim',
@@ -145,6 +145,28 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+
+-- use LSP semantic highlighting
+-- source: https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316
+local links = {
+  --['@lsp.type.namespace'] = '@namespace',
+  ['@lsp.type.type'] = '@type',
+  ['@lsp.type.class'] = '@type',
+  ['@lsp.type.enum'] = '@type',
+  ['@lsp.type.interface'] = '@type',
+  ['@lsp.type.struct'] = '@structure',
+  ['@lsp.type.parameter'] = '@parameter',
+  ['@lsp.type.variable'] = '@variable',
+  ['@lsp.type.property'] = '@property',
+  ['@lsp.type.enumMember'] = '@constant',
+  ['@lsp.type.function'] = '@function',
+  ['@lsp.type.method'] = '@method',
+  ['@lsp.type.macro'] = '@macro',
+  ['@lsp.type.decorator'] = '@function',
+}
+for newgroup, oldgroup in pairs(links) do
+  vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
+end
 
 -- Use darcula colour scheme
 -- For some reason, we cannot do this with lua, we have to execute a Vim command
@@ -240,6 +262,11 @@ require('telescope').setup {
       },
     },
   },
+  pickers = {
+    find_files = {
+      hidden = true
+    }
+  }
 }
 
 -- Enable telescope fzf native, if installed
