@@ -118,6 +118,7 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
 - Pressing enter in a list of Markdown items should auto-insert a "-" on the next line
 - Filetree should auto refresh git status (it doesn't seem to reload when git status or even files in directory
 are changed atm)
+- gdb integration
 
 **Partially done:**
 
@@ -127,6 +128,7 @@ are changed atm)
     - Veridian: eh, would be cool but doesn't seem to accept my code
     - svls: only provides linting
     - verible: same as svls, only provides lint
+    - Note: Currently working on my own LSP
 
 ## Cheatsheet
 Common operations I forget:
