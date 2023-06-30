@@ -289,6 +289,47 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
+-- Barbar keybindings
+local bbmap = vim.api.nvim_set_keymap
+local bbopts = { noremap = true, silent = true }
+
+-- Move to previous/next
+bbmap('n', '<A-,>', '<Cmd>BufferPrevious<CR>', bbopts)
+bbmap('n', '<A-.>', '<Cmd>BufferNext<CR>', bbopts)
+-- Re-order to previous/next
+bbmap('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', bbopts)
+bbmap('n', '<A->>', '<Cmd>BufferMoveNext<CR>', bbopts)
+-- Goto buffer in position...
+bbmap('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', bbopts)
+bbmap('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', bbopts)
+bbmap('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', bbopts)
+bbmap('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', bbopts)
+bbmap('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', bbopts)
+bbmap('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', bbopts)
+bbmap('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', bbopts)
+bbmap('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', bbopts)
+bbmap('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', bbopts)
+bbmap('n', '<A-0>', '<Cmd>BufferLast<CR>', bbopts)
+-- Pin/unpin buffer
+bbmap('n', '<A-p>', '<Cmd>BufferPin<CR>', bbopts)
+-- Close buffer
+bbmap('n', '<A-c>', '<Cmd>BufferClose<CR>', bbopts)
+-- Wipeout buffer
+--                 :BufferWipeout
+-- Close commands
+--                 :BufferCloseAllButCurrent
+--                 :BufferCloseAllButPinned
+--                 :BufferCloseAllButCurrentOrPinned
+--                 :BufferCloseBuffersLeft
+--                 :BufferCloseBuffersRight
+-- Magic buffer-picking mode
+bbmap('n', '<C-p>', '<Cmd>BufferPick<CR>', bbopts)
+-- Sort automatically by...
+bbmap('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', bbopts)
+bbmap('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', bbopts)
+bbmap('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', bbopts)
+bbmap('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', bbopts)
+
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
@@ -500,15 +541,16 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    -- this used to be commented in, but is not the behaviour I want from TAB
+    -- ['<Tab>'] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_next_item()
+    --   elseif luasnip.expand_or_jumpable() then
+    --     luasnip.expand_or_jump()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()

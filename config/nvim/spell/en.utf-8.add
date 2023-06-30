@@ -35,3 +35,5 @@ tmp
 verilator
 pos
 malding
+pipelining
+max

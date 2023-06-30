@@ -113,7 +113,6 @@ so that the icons show: https://www.nerdfonts.com/font-downloads
     ignore words that 
     - Fully uppercase words (i.e. acronyms) should be ignored
 - Telescope search results should be centred on screen when you navigate to them
-- Add keybindings for barbar tab navigation
 - Pressing enter in a list of Markdown items should auto-insert a "-" on the next line
 - Filetree should auto refresh git status (it doesn't seem to reload when git status or even files in directory
 are changed atm)
