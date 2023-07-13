@@ -37,3 +37,9 @@ pos
 malding
 pipelining
 max
+deserialise
+flexbuffers
+flatbuffers
+sqlite
+LSP
+xxh3

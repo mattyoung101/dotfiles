@@ -339,17 +339,6 @@ require('nvim-treesitter.configs').setup {
     'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
     'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust'},
 
-  -- Rainbow brackets
-  rainbow = {
-    enable = true,
-    -- list of languages you want to disable the plugin for
-    disable = {  },
-    -- Which query to use for finding delimiters
-    query = 'rainbow-parens',
-    -- Highlight the entire buffer all at once
-    strategy = require('ts-rainbow').strategy.global,
-  },
-
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
   query_linter = {
@@ -566,6 +555,35 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'cmp_matlab' },
   },
+}
+
+-- This module contains a number of default definitions
+local rainbow_delimiters = require 'rainbow-delimiters'
+
+-- We have to configure rainbow delimiters here like this. It seems like any
+-- configuration we attempt to do in the rainbow.lua file shits up the entire
+-- lazy plugin loader. This is absolutely infuriating but we have no other choice.
+-- I'm assuming Lazy is at fault here.
+-- FIXME: configure this in the rainbow.lua file not here
+vim.g.rainbow_delimiters = {
+    strategy = {
+        [''] = rainbow_delimiters.strategy['global'],
+        commonlisp = rainbow_delimiters.strategy['local'],
+    },
+    query = {
+        [''] = 'rainbow-delimiters',
+        lua = 'rainbow-blocks',
+        verilog = 'rainbow-blocks',
+    },
+    highlight = {
+        --'RainbowDelimiterRed',
+        'RainbowDelimiterYellow',
+        'RainbowDelimiterBlue',
+        'RainbowDelimiterOrange',
+        'RainbowDelimiterGreen',
+        'RainbowDelimiterViolet',
+        'RainbowDelimiterCyan',
+    },
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
