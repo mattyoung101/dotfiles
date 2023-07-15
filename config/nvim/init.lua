@@ -467,7 +467,7 @@ local servers = {
   pyright = {},
   rust_analyzer = {},
   --verible = {},
-  svlangserver = {},
+  --svlangserver = {},
   neocmake = {},
 
   lua_ls = {
@@ -477,6 +477,31 @@ local servers = {
     },
   },
 }
+
+-- setup my slingshot systemverilog LSP for development
+-- references used:
+--  https://neovim.discourse.group/t/how-to-add-a-custom-server-to-nvim-lspconfig/3925a
+--  https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/veridian.lua
+--  https://github.com/neovim/nvim-lspconfig/issues/691#issuecomment-766199011
+--  https://github.com/VHDL-LS/rust_hdl/issues/10#issuecomment-1000289556
+local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig.configs'
+
+if not configs.slingshot then
+  -- this require lspconfig.configs is the trick required to make it work
+  require("lspconfig.configs").slingshot = {
+    default_config = {
+    cmd = {'/home/matt/workspace/slingshot/target/debug/slingshot'};
+    filetypes = {'verilog', 'systemverilog'};
+    root_dir = function(fname)
+      return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+    end;
+    settings = {};
+    };
+  }
+end
+
+lspconfig.slingshot.setup{}
 
 -- Setup neovim lua configuration
 require('neodev').setup()
@@ -504,11 +529,6 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
-
--- setup veridian (systemverilog language server) if you want it here
--- unfortunately, it seems kinda pedantic and won't accept my verilog code at the moment, so we're back to
--- svlangserver until I make my own
---[[ require('lspconfig').veridian.setup{} ]]
 
 -- nvim-cmp setup
 local cmp = require 'cmp'

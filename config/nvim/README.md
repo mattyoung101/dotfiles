@@ -54,9 +54,10 @@ recreation like https://github.com/doums/darcula, which I might try in future
 - Git integration, allows you to launch [lazygit](https://github.com/jesseduffield/lazygit), a seemingly pretty
 cool looking git TUI
 
-**[nvim-ts-rainbow2](https://github.com/HiPhish/nvim-ts-rainbow2)**
+**[rainbow-delimiters.sv](https://github.com/HiPhish/rainbow-delimiters.nvim)**
 - Adds bracket pair colourisation, as in VSCode. I personally quite like this feature, and it should be pretty
-fast as it interfaces with treesitter directly.
+fast as it interfaces with treesitter directly. I also contributed SystemVerilog & Verilog support to this
+plugin so you can use it for HDL work :)
 
 **[suda.nvim](https://github.com/lambdalisue/suda.vim)**
 - Simple script that allows reading/writing files with root permissions. Useful for system configuration.
@@ -140,13 +141,14 @@ Common operations I forget:
 
 - **Comment out a section of code:** visual select, g, c
 - **Search in current buffer:** space, slash
-- **Cut text:** visual select, d
-- **Copy text:** visual select, y (yank)
-- **Quit everything:** :qa
+- **Quit everything:** :qa and :wqa
 - **Find a file:** space, s, f
 - **Cancel autocomplete:** Ctrl+E
 - **Create a new file in neotree:** a (read [documentation](https://github.com/nvim-neo-tree/neo-tree.nvim#longer-example-for-packer))
 - **Rename a file in neotree:** r
 - **Delete a word (like ctrl+bkspce):** ctrl+w
-- **Go to beginning of line:** press ^ (shift 6)
+- **Go to beginning of line:** ^ (shift 6)
 - **Apply fix:** space, c, a
+- **Yank whole document:** ggyG
+- **Go to beginning:** gg
+- **Go to end:** shift g
