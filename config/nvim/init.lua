@@ -466,9 +466,8 @@ local servers = {
   texlab = {},
   pyright = {},
   rust_analyzer = {},
-  --verible = {},
-  --svlangserver = {},
   neocmake = {},
+  kotlin_language_server = {},
 
   lua_ls = {
     Lua = {
@@ -502,6 +501,9 @@ if not configs.slingshot then
 end
 
 lspconfig.slingshot.setup{}
+
+-- add rust_hdl vhdl language server (not in mason)
+require'lspconfig'.vhdl_ls.setup{}
 
 -- Setup neovim lua configuration
 require('neodev').setup()
