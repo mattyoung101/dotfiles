@@ -337,7 +337,7 @@ require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
     'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
-    'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust'},
+    'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'latex'},
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -462,12 +462,9 @@ end
 local servers = {
   -- ADD LANGUAGE SERVERS HERE
   clangd = {},
-  -- TODO: check if we need to add clang-format
   texlab = {},
   pyright = {},
   rust_analyzer = {},
-  --verible = {},
-  --svlangserver = {},
   neocmake = {},
 
   lua_ls = {
@@ -594,6 +591,7 @@ vim.g.rainbow_delimiters = {
         [''] = 'rainbow-delimiters',
         lua = 'rainbow-blocks',
         verilog = 'rainbow-blocks',
+        latex = 'rainbow-blocks',
     },
     highlight = {
         --'RainbowDelimiterRed',
