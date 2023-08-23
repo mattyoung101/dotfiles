@@ -463,10 +463,13 @@ local servers = {
   -- ADD LANGUAGE SERVERS HERE
   clangd = {},
   texlab = {},
-  pyright = {},
   rust_analyzer = {},
   neocmake = {},
   kotlin_language_server = {},
+
+  --pyright = {},
+  jedi_language_server = {},
+  --pylsp = {}, -- python_lsp_server
 
   lua_ls = {
     Lua = {
