@@ -545,6 +545,15 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+  -- disable completion when in comments
+  -- https://github.com/hrsh7th/nvim-cmp/pull/676#issuecomment-1002532096
+  enabled = function()
+    if require"cmp.config.context".in_treesitter_capture("comment")==true or require"cmp.config.context".in_syntax_group("Comment") then
+      return false
+    else
+      return true
+    end
+  end,
   mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
