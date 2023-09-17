@@ -468,8 +468,17 @@ local servers = {
   kotlin_language_server = {},
 
   --pyright = {},
-  jedi_language_server = {},
-  --pylsp = {}, -- python_lsp_server
+  --jedi_language_server = {},
+
+  pylsp = {
+      pylsp = {
+        plugins = {
+          pycodestyle = {
+            ignore = {'W291', 'E261', 'W293'},
+          }
+        }
+      }
+  },
 
   lua_ls = {
     Lua = {
