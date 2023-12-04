@@ -216,6 +216,7 @@ vim.o.termguicolors = true
 
 -- 110 character ruler
 vim.opt.colorcolumn = "110"
+vim.opt.textwidth = 110
 
 -- Spelling
 vim.opt.spell = true
