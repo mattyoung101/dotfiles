@@ -35,7 +35,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  --'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -168,7 +168,11 @@ vim.cmd 'colorscheme darcula-solid'
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
 vim.opt.expandtab = true
+vim.o.expandtab = true
 
 -- Set encoding
 vim.opt.encoding = 'utf-8'
@@ -337,7 +341,7 @@ require('nvim-treesitter.configs').setup {
     lint_events = {"BufWrite", "CursorHold"},
   },
   highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
+  indent = { enable = true, disable = { 'python', 'verilog', 'systemverilog' } },
   incremental_selection = {
     enable = true,
     keymaps = {
