@@ -75,9 +75,45 @@ require('lazy').setup({
       },
     },
   },
-
-  -- dracula colour scheme 
-  { "briones-gabriel/darcula-solid.nvim", version = "*", dependencies = "rktjmp/lush.nvim" },
+  
+  -- COLOUR THEME
+  -- Kanagawa colour theme
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    config = function()
+      -- Patch Kanagawa for nvim-treesitter v0.9.2+
+      -- Will not be necessary if/when Kanagawa patches itself
+      require("kanagawa").setup({
+          overrides = function(colors)
+              return {
+                  -- update kanagawa to handle new treesitter highlight captures
+                  ["@string.regexp"] = { link = "@string.regex" },
+                  ["@variable.parameter"] = { link = "@parameter" },
+                  ["@exception"] = { link = "@exception" },
+                  ["@string.special.symbol"] = { link = "@symbol" },
+                  ["@markup.strong"] = { link = "@text.strong" },
+                  ["@markup.italic"] = { link = "@text.emphasis" },
+                  ["@markup.heading"] = { link = "@text.title" },
+                  ["@markup.raw"] = { link = "@text.literal" },
+                  ["@markup.quote"] = { link = "@text.quote" },
+                  ["@markup.math"] = { link = "@text.math" },
+                  ["@markup.environment"] = { link = "@text.environment" },
+                  ["@markup.environment.name"] = { link = "@text.environment.name" },
+                  ["@markup.link.url"] = { link = "Special" },
+                  ["@markup.link.label"] = { link = "Identifier" },
+                  ["@comment.note"] = { link = "@text.note" },
+                  ["@comment.warning"] = { link = "@text.warning" },
+                  ["@comment.danger"] = { link = "@text.danger" },
+                  ["@diff.plus"] = { link = "@text.diff.add" },
+                  ["@diff.minus"] = { link = "@text.diff.delete" },
+              }
+          end,
+        })
+      -- load the colorscheme here
+      vim.cmd([[colorscheme kanagawa]])
+    end,
+  },
 
   { -- transparent plugin if i have image background
     'xiyaowong/transparent.nvim',
@@ -159,10 +195,6 @@ local links = {
 for newgroup, oldgroup in pairs(links) do
   vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
 end
-
--- Use darcula colour scheme
--- For some reason, we cannot do this with lua, we have to execute a Vim command
-vim.cmd 'colorscheme darcula-solid'
 
 -- Spaces not tabs. I mean it!!!!
 vim.opt.tabstop = 4
