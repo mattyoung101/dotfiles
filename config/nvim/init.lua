@@ -495,6 +495,13 @@ local servers = {
 
   --pyright = {},
   --jedi_language_server = {},
+  
+  -- TODO figure out how to disable ltex's shitty spellchecker
+  -- ltex = {
+  --     ltex = {
+  --       language = "en-GB",
+  --     },
+  -- },
 
   pylsp = {
       pylsp = {

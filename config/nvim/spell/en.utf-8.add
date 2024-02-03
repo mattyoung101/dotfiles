@@ -136,3 +136,9 @@ riscv
 github
 collab
 binutils
+TX
+RX
+etc
+RV32
+TMR
+SEUs
