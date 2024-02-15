@@ -493,6 +493,10 @@ local servers = {
   neocmake = {},
   --kotlin_language_server = {},
 
+  -- for HTML
+  --biome = {}, -- may be only for TS nowadays
+  html = {},
+
   --pyright = {},
   --jedi_language_server = {},
   
