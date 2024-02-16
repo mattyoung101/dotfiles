@@ -142,3 +142,5 @@ etc
 RV32
 TMR
 SEUs
+sim
+MMIO
