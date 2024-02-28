@@ -144,3 +144,9 @@ TMR
 SEUs
 sim
 MMIO
+shader
+shaders
+VBO
+GL
+init
+SDL2
