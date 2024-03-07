@@ -468,7 +468,7 @@ local servers = {
   rust_analyzer = {},
   neocmake = {},
   glsl_analyzer = {},
-  --kotlin_language_server = {},
+  yamlls = {},
 
   -- for HTML
   --biome = {}, -- may be only for TS nowadays
