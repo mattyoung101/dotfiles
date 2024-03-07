@@ -82,18 +82,20 @@ require('lazy').setup({
     "rebelot/kanagawa.nvim",
     lazy = false,
     config = function()
-      require("kanagawa").setup({})
+      require("kanagawa").setup({
+        transparent = true
+      })
       -- load the colorscheme here
       vim.cmd([[colorscheme kanagawa]])
     end,
   },
 
-  { -- transparent plugin if i have image background
-    'xiyaowong/transparent.nvim',
-    config = function()
-      require("transparent").setup()
-    end,
-  },
+  -- { -- transparent plugin if i have image background
+  --   'xiyaowong/transparent.nvim',
+  --   config = function()
+  --     require("transparent").setup({})
+  --   end,
+  -- },
 
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
