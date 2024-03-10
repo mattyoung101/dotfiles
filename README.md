@@ -1,28 +1,27 @@
 # Dotfiles
 dotfiles lfg!!!!!!!!!!!!!!
 
-The install script is from @henrybatt's dotfiles: https://github.com/henrybatt/dotfiles
-
 ## How to use
-Clone with `git clone --recurse-submodules`
+### Prerequisites
+First, clone into `~/.dotfiles`: `git clone --recurse-submodules git@github.com:mattyoung101/dotfiles.git ~/.dotfiles`
 
-Bump submodules with `git submodule update --init --recursive`
+The dotfiles are managed using [rcm](https://github.com/thoughtbot/rcm) and
+[Just](https://github.com/casey/just), which you can install using something like `yay -S rcm just`.
 
-Install dotfiles using `./install -v`
+### Installing
+First, confirm what would be installed using `just show`.
 
-## Patches (TODO)
-Most of my dotfiles are relatively similar across systems, with some minor differences. To fix this, I'm going
-to write a system that takes the _base_ dotfiles and applies a set of public and private git patches to them
-when they are being installed. The patches to apply will automatically be decided based on the machine's 
-`hostname`.
+Install using `just install`. **Warning:** No backups are currently taken. While I've had no issues so far, 
+double check your outputs and probably backup `~/.config` before running.
 
-Public patches are those which can be made publicly available. For example, a patch to
-`~/.config/borgmatic/config.yaml` (the backup system I use) that changes the backup path depending on
-laptop/PC.
+Uninstall using `just uninstall`.
 
-Private patches are those which cannot be made publicly available for various reasons, usually related to
-work. These are kept in a separate, private submodule. My current example is a patch to
-`~/.config/fish/config.fish` that sources some proprietary/confidential software from my employer.
+### Submodules
+There is a GitHub Action setup in my [nvim-setup](https://github.com/mattyoung101/nvim-setup) repo that will
+automatically update the `nvim` submodule whenever I push to it.
+
+To bump submodules with `git submodule update --init --recursive` (although this should be handled by the GH
+action automatically).
 
 ## Note on art
 The cute catboys I use as terminal backgrounds are drawn by talented artists on DeviantArt or Pixiv. Based on
@@ -45,12 +44,9 @@ My current catboy: https://www.deviantart.com/ruruko01/art/c-squid-plushie-97659
 
 > isn't he just the cutest :pleading: with his squid :pleading: :pleading:
 
-## Auto-update
-There is a GitHub Action setup in my [nvim-setup](https://github.com/mattyoung101/nvim-setup) repo that will
-automatically update the `nvim` submodule whenever I push to it.
+## References
+- https://thoughtbot.com/upcase/videos/manage-and-share-your-dotfiles-with-rcm
 
 ## Licence
-My dotfiles: WTFPL 2.0
-
-Henry's install script: MIT licence
+WTFPL 2.0
 
