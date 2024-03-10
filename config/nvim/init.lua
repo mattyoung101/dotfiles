@@ -281,8 +281,10 @@ vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc =
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find()
-end, { desc = '[/] Fuzzily search in current buffer' })
+  -- Note: Grep in current buffer instead of fuzzy find
+  -- Reference: https://github.com/nvim-telescope/telescope.nvim/issues/762#issuecomment-933036711
+  require('telescope.builtin').current_buffer_fuzzy_find({fuzzy=false, case_mode='ignore_case'})
+end, { desc = '[/] Grep in current buffer' })
 
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
