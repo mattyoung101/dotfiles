@@ -23,11 +23,26 @@ Install using `just install`.
 Uninstall using `just uninstall`.
 
 ### Submodules
-There is a GitHub Action setup in my [nvim-setup](https://github.com/mattyoung101/nvim-setup) repo that will
+My neovim config is kept as a submodule in `config/nvim`. It's recommended to edit this _as a submodule_
+inside _this repo_ rather than edit that repo directly. **Important:** You should make note to checkout the
+master branch before editing, otherwise you'll be in a detached head state.
+
+As described below, the terminal background catboy artworks are kept as a private submodule in
+`config/dotfiles-artwork` for copyright reasons.
+
+The `rcm` tool is able to handle host-specific dotfiles as well. Because some of these contain sensitive
+system information, they are also kept in a private submodule as `host-serpent` (workstation) or `host-gecko`
+(laptop). These point to the same `dotfiles-hostspecific` repo, but on different branches.
+You should also probably edit these directly as a submodule, making sure to checkout master.
+
+There is a GitHub Action in my [nvim-setup](https://github.com/mattyoung101/nvim-setup) repo that will
 automatically update the `nvim` submodule whenever I push to it.
 
-To bump submodules with `git submodule update --init --recursive` (although this should be handled by the GH
+Bump submodules with `git submodule update --init --recursive` (although this should be handled by the GH
 action automatically).
+
+FIXME: we may not need this action actually, we could make a post commit hook to update the submodules? or a
+FIXME just action?
 
 ## Note on art
 The cute catboys I use as terminal backgrounds are drawn by talented artists on DeviantArt or Pixiv. Based on

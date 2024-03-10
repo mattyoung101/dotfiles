@@ -4,3 +4,7 @@
 [submodule "config/dotfiles-artwork"]
 	path = config/dotfiles-artwork
 	url = git@github.com:mattyoung101/dotfiles-artwork.git
+[submodule "host-serpent"]
+	path = host-serpent
+	url = git@github.com:mattyoung101/dotfiles-hostspecific.git
+	branch = serpent
