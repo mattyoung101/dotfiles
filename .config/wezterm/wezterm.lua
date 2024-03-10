@@ -23,6 +23,10 @@ config.freetype_load_flags = 'NO_HINTING'
 -- doesn't seem to be necessary, was a font thing
 config.front_end = "OpenGL"
 
+-- scrolling, unlimited scrollback not yet supported (according to GH issues it's more complicated!)
+config.enable_scroll_bar = true
+config.scrollback_lines = 10000
+
 -- Kanagawa Nvim colour scheme
 config.colors = {
     foreground = "#dcd7ba",

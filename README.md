@@ -10,7 +10,7 @@ Bump submodules with `git submodule update --init --recursive`
 
 Install dotfiles using `./install -v`
 
-## Note on patches
+## Patches (TODO)
 Most of my dotfiles are relatively similar across systems, with some minor differences. To fix this, I'm going
 to write a system that takes the _base_ dotfiles and applies a set of public and private git patches to them
 when they are being installed. The patches to apply will automatically be decided based on the machine's 
@@ -45,10 +45,9 @@ My current catboy: https://www.deviantart.com/ruruko01/art/c-squid-plushie-97659
 
 > isn't he just the cutest :pleading: with his squid :pleading: :pleading:
 
-## TODOs
-- Implement patching system
-- Add a GitHub actions pipeline in either this or nvim-config that automatically bumps the nvim subrepo
-whenever it's pushed
+## Auto-update
+There is a GitHub Action setup in my [nvim-setup](https://github.com/mattyoung101/nvim-setup) repo that will
+automatically update the `nvim` submodule whenever I push to it.
 
 ## Licence
 My dotfiles: WTFPL 2.0

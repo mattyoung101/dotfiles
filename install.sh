@@ -113,8 +113,10 @@ if [ "$install_disable" != true ]; then
 	for file in .config/*; do
 		if [ -L "$target_path/$file" ]; then
 			unlink "$target_path/$file"
+            printf "Removed link $target_path/$file\n" >> "$log_output"
 		fi
 		ln -sf "$PWD/$file" "$target_path/$file"
+        printf "Linked $target_path/$file to $PWD/$file\n" >> "$log_output"
 	done
 else 
 	printf "Skipping Installer\n" >> "$log_output"
