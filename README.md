@@ -3,7 +3,11 @@ dotfiles lfg!!!!!!!!!!!!!!
 
 ## How to use
 ### Prerequisites
-First, clone into `~/.dotfiles`: `git clone --recurse-submodules git@github.com:mattyoung101/dotfiles.git ~/.dotfiles`
+First, clone into `~/.dotfiles`: 
+
+```
+git clone --recurse-submodules git@github.com:mattyoung101/dotfiles.git ~/.dotfiles
+```
 
 The dotfiles are managed using [rcm](https://github.com/thoughtbot/rcm) and
 [Just](https://github.com/casey/just), which you can install using something like `yay -S rcm just`.
@@ -11,8 +15,10 @@ The dotfiles are managed using [rcm](https://github.com/thoughtbot/rcm) and
 ### Installing
 First, confirm what would be installed using `just show`.
 
-Install using `just install`. **Warning:** No backups are currently taken. While I've had no issues so far, 
-double check your outputs and probably backup `~/.config` before running.
+Install using `just install`. 
+
+> **Warning:** No backups are currently taken. While I've had no issues so far, double check your outputs and
+> probably backup `~/.config` before running.
 
 Uninstall using `just uninstall`.
 

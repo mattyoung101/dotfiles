@@ -39,7 +39,7 @@ config.colors = {
     selection_fg = "#c8c093",
     selection_bg = "#2d4f67",
 
-    scrollbar_thumb = "#16161d",
+    scrollbar_thumb = "#2d2d3d",
     split = "#16161d",
 
     ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
@@ -48,6 +48,7 @@ config.colors = {
 }
 
 config.background = {
+    -- first, the background colour
     {
         source = {
             Color = config.colors.background
@@ -55,9 +56,10 @@ config.background = {
         width = "100%",
         height = "100%",
     },
+    -- now, our catboy with very low opacity
     {
         source = {
-            File = '/home/matt/Pictures/_c__squid_plushie___by_ruruko01_dg5ftuw-fullview-nvim.jpg'
+            File = '/home/matt/.config/dotfiles-artwork/_c__squid_plushie___by_ruruko01_dg5ftuw-fullview-nvim.jpg'
         },
         opacity = 0.05,
     }
