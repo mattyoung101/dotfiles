@@ -82,18 +82,20 @@ require('lazy').setup({
     "rebelot/kanagawa.nvim",
     lazy = false,
     config = function()
-      require("kanagawa").setup({})
+      require("kanagawa").setup({
+        transparent = true
+      })
       -- load the colorscheme here
       vim.cmd([[colorscheme kanagawa]])
     end,
   },
 
-  { -- transparent plugin if i have image background
-    'xiyaowong/transparent.nvim',
-    config = function()
-      require("transparent").setup()
-    end,
-  },
+  -- { -- transparent plugin if i have image background
+  --   'xiyaowong/transparent.nvim',
+  --   config = function()
+  --     require("transparent").setup({})
+  --   end,
+  -- },
 
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -279,8 +281,10 @@ vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc =
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find()
-end, { desc = '[/] Fuzzily search in current buffer' })
+  -- Note: Grep in current buffer instead of fuzzy find
+  -- Reference: https://github.com/nvim-telescope/telescope.nvim/issues/762#issuecomment-933036711
+  require('telescope.builtin').current_buffer_fuzzy_find({fuzzy=false, case_mode='ignore_case'})
+end, { desc = '[/] Grep in current buffer' })
 
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
@@ -336,7 +340,7 @@ require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
     'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
-    'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'latex', 'glsl'},
+    'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl'},
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -466,7 +470,7 @@ local servers = {
   rust_analyzer = {},
   neocmake = {},
   glsl_analyzer = {},
-  --kotlin_language_server = {},
+  yamlls = {},
 
   -- for HTML
   --biome = {}, -- may be only for TS nowadays
@@ -486,7 +490,7 @@ local servers = {
       pylsp = {
         plugins = {
           pycodestyle = {
-            ignore = {'W291', 'E261', 'W293', 'W504', 'W503'},
+            ignore = {'W291', 'E261', 'W293', 'W504', 'W503', 'E501', 'W501'},
           }
         }
       }
