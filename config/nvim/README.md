@@ -96,15 +96,19 @@ plugin so you can use it for HDL work :)
 **Note:** There are a few extra plugins that I may have forgot to include on this list.
 
 ## Installation
+This repo is mainly managed as a submodule through the [dotfiles](https://github.com/mattyoung101/dotfiles)
+repo. You should clone that repo, and edit the `config/nvim` repo directly as a submodule. Then follow the
+instructions there to install the dotfiles. Once that's done:
+
 1. Install the latest **stable** Neovim (currently 0.9.0 as of 27 May 2023). 
-2. Clone the repo as ~/.config/nvim, for example: `git clone git@github.com:mattyoung101/nvim-setup.git ~/.config/nvim`
-3. (If using nvim.fish): Edit `~/.config/fish/config.fish` to source nvm on startup: `nvm -s use latest`
-4. On Linux Mint, the default terminal font is DejaVu Sans Mono (even though the font is just listed as "Monospace").
+3. (If using nvm.fish): Edit `~/.config/fish/config.fish` to source nvm on startup: `nvm -s use latest`
+4. On Cinnamon, the default terminal font is DejaVu Sans Mono (even though the font is just listed as "Monospace").
 You can prove this to yourself by doing `fc-match monospace`. You will need to install the NerdFont patch for this
 so that the icons show: https://www.nerdfonts.com/font-downloads
 5. Change the monospace font in System Settings to the DejaVu Sans Mono Nerd font.
 6. Install [LazyGit](https://github.com/jesseduffield/lazygit), which may require installing go
 7. You should also have a gcc/clang and the latest stable rust (probably with rustup) on your system
+8. Also install `fzf` and `ripgrep`
 
 ## Wishlist (plugins to be added and changes to make)
 **Needs doing:**
