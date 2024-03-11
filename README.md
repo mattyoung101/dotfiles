@@ -6,7 +6,7 @@ dotfiles lfg!!!!!!!!!!!!!!
 First, clone into `~/.dotfiles`: 
 
 ```
-git clone --recurse-submodules git@github.com:mattyoung101/dotfiles.git ~/.dotfiles
+git clone --recurse-submodules -j8 git@github.com:mattyoung101/dotfiles.git ~/.dotfiles
 ```
 
 The dotfiles are managed using [rcm](https://github.com/thoughtbot/rcm) and
@@ -38,8 +38,7 @@ You should also probably edit these directly as a submodule, making sure to chec
 There is a GitHub Action in my [nvim-setup](https://github.com/mattyoung101/nvim-setup) repo that will
 automatically update the `nvim` submodule whenever I push to it.
 
-Bump submodules with `git submodule update --init --recursive` (although this should be handled by the GH
-action automatically).
+Bump submodules with `just update`.
 
 FIXME: we may not need this action actually, we could make a post commit hook to update the submodules? or a
 FIXME just action?
