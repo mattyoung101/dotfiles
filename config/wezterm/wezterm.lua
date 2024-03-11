@@ -59,9 +59,10 @@ config.background = {
     -- now, our catboy with very low opacity
     {
         source = {
-            File = '/home/matt/.config/dotfiles-artwork/_c__squid_plushie___by_ruruko01_dg5ftuw-fullview-nvim.jpg'
+            File = '/home/matt/.config/dotfiles-artwork/_c__squid_plushie___by_ruruko01_dg5ftuw-fullview-nvim2.jpg'
         },
         opacity = 0.05,
+        vertical_align = "Bottom" -- me fr
     }
 }
 
