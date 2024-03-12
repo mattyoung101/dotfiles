@@ -15,6 +15,7 @@ install:
 uninstall:
     rcdn -v {{IGNORE_LIST}}
 
-# Bump submodules
+# Bump submodules and install any new files
 update:
     git submodule update --init --recursive --remote
+    @just install

@@ -8,7 +8,7 @@ local config = {}
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
 if wezterm.config_builder then
-  config = wezterm.config_builder()
+    config = wezterm.config_builder()
 end
 
 -- This is where you actually apply your config choice
@@ -67,47 +67,57 @@ config.background = {
 }
 
 wezterm.on("gui-startup", function()
-  local tab, pane, window = mux.spawn_window{}
-  window:gui_window():maximize()
+    local tab, pane, window = mux.spawn_window {}
+    window:gui_window():maximize()
 end)
 
 config.window_frame = {
-  -- The font used in the tab bar.
-  -- Roboto Bold is the default; this font is bundled
-  -- with wezterm.
-  -- Whatever font is selected here, it will have the
-  -- main font setting appended to it to pick up any
-  -- fallback fonts you may have used there.
-  --font = wezterm.font { family = 'JetBrainsMono Nerd Font Mono', weight = 'Bold' },
+    -- The font used in the tab bar.
+    -- Roboto Bold is the default; this font is bundled
+    -- with wezterm.
+    -- Whatever font is selected here, it will have the
+    -- main font setting appended to it to pick up any
+    -- fallback fonts you may have used there.
+    --font = wezterm.font { family = 'JetBrainsMono Nerd Font Mono', weight = 'Bold' },
 
-  -- The size of the font in the tab bar.
-  -- Default to 10.0 on Windows but 12.0 on other systems
-  font_size = 10.0,
+    -- The size of the font in the tab bar.
+    -- Default to 10.0 on Windows but 12.0 on other systems
+    font_size = 10.0,
 
-  -- The overall background color of the tab bar when
-  -- the window is focused
-  active_titlebar_bg = '#333333',
+    -- The overall background color of the tab bar when
+    -- the window is focused
+    active_titlebar_bg = '#333333',
 
-  -- The overall background color of the tab bar when
-  -- the window is not focused
-  inactive_titlebar_bg = '#333333',
+    -- The overall background color of the tab bar when
+    -- the window is not focused
+    inactive_titlebar_bg = '#333333',
 }
 
 config.keys = {
-  -- This will create a new split and run your default program inside it
-  {
-    key = '"',
-    mods = 'CTRL|SHIFT|ALT',
-    action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
-  },
-  {
-    key = ':',
-    mods = 'CTRL|SHIFT|ALT',
-    action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
-  },
+    -- This will create a new split and run your default program inside it
+    {
+        key = '"',
+        mods = 'CTRL|SHIFT|ALT',
+        action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+    },
+    {
+        key = ':',
+        mods = 'CTRL|SHIFT|ALT',
+        action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+    },
+    {
+        key = '{',
+        mods = 'SHIFT|ALT',
+        action = wezterm.action.MoveTabRelative(-1)
+    },
+    {
+        key = '}',
+        mods = 'SHIFT|ALT',
+        action = wezterm.action.MoveTabRelative(1)
+    },
+
 }
 
 
 -- and finally, return the configuration to wezterm
 return config
-
