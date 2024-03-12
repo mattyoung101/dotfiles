@@ -19,3 +19,9 @@ uninstall:
 update:
     git submodule update --init --recursive --remote
     @just install
+
+# Bump submodules and push
+updatepush: update
+    git add -A
+    git commit -m "Bump submodules"
+    git push
