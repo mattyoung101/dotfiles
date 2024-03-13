@@ -20,6 +20,9 @@ Install using `just install`.
 > **Warning:** No backups are currently taken. While I've had no issues so far, double check your outputs and
 > probably backup `~/.config` before running.
 
+> **Warning:** When I delete a neovim plugin, you will need to `rm -rf ~/.config/nvim` and run `just update`
+> again.
+
 Uninstall using `just uninstall`.
 
 ### Submodules
