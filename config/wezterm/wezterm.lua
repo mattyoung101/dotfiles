@@ -11,14 +11,35 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
+-- Get the machine hostname
+-- Source: https://gist.github.com/h1k3r/089d43771bdf811eefe8
+function getHostname()
+    local f = io.popen ("/bin/hostname")
+    local hostname = f:read("*a") or ""
+    f:close()
+    hostname =string.gsub(hostname, "\n$", "")
+    return hostname
+end
+
 -- This is where you actually apply your config choice
 config.font = wezterm.font 'DejaVuSansM Nerd Font Mono'
 config.freetype_load_target = 'HorizontalLcd'
 -- disable ligatures (combining <= into a single symbol): https://wezfurlong.org/wezterm/config/font-shaping.html#advanced-font-shaping-options
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
-config.font_size = 10.0
 -- https://github.com/wez/wezterm/issues/3774#issuecomment-1629689265
 config.freetype_load_flags = 'NO_HINTING'
+
+-- host specific ugly hack
+-- we don't really want to make the whole wezterm lua a host-specific file with rcm, we just want different
+-- font sizes
+-- so, we query the machine hostname and put our host specific code here!
+if getHostname() == 'EMT-LPT-095-LNX' then
+    -- work laptop
+    config.font_size = 11.0
+else
+    -- serpent or gecko
+    config.font_size = 10.0
+end
 
 -- doesn't seem to be necessary, was a font thing
 config.front_end = "OpenGL"

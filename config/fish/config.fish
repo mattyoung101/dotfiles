@@ -1,9 +1,14 @@
 # SSH agent, Gnome Keyring
 # Reference: https://wiki.archlinux.org/title/GNOME/Keyring
-set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gcr/ssh
+# This only applies to serpent and gecko, the Ubuntu work laptop does not have this issue, hence the somewhat
+# ugly host specific check.
+# I think $hostname is set by fish, so hopefully this doesn't blow up.
+if test "$hostname" != 'EMT-LPT-095-LNX'
+    set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gcr/ssh
+end
 
 # Go
-fish_add_path $HOME/go/bin
+fish_add_path ~/go/bin
 
 # Rust, cargo
 fish_add_path ~/.cargo/bin
