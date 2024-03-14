@@ -1,4 +1,5 @@
 #!/usr/bin/fish
+# Upstream: https://github.com/rebelot/kanagawa.nvim/blob/master/extras/kanagawa.fish (MIT licence)
 
 # Kanagawa Fish shell theme
 # A template was taken and modified from Tokyonight:

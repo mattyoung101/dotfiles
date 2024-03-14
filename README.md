@@ -1,6 +1,9 @@
 # Dotfiles
 dotfiles lfg!!!!!!!!!!!!!!
 
+This setup is based on the Fish shell, WezTerm terminal emulator, and Neovim editor. Currently I'm using
+Cinnamon on Arch, but may switch to i3 or bspwm when I have more time.
+
 ## How to use
 ### Prerequisites
 First, clone into `~/.dotfiles`: 
@@ -11,6 +14,19 @@ git clone --recurse-submodules -j8 git@github.com:mattyoung101/dotfiles.git ~/.d
 
 The dotfiles are managed using [rcm](https://github.com/thoughtbot/rcm) and
 [Just](https://github.com/casey/just), which you can install using something like `yay -S rcm just`.
+
+In addition, you will need the following tools/libraries/languages/frameworks installed on your system (not
+yet an exhaustive list):
+- Rust
+- Golang
+- fish shell
+- [zoxide](https://github.com/ajeetdsouza/zoxide)
+- [nvm.fish](https://github.com/jorgebucaran/nvm.fish)
+- [WezTerm](https://wezfurlong.org/wezterm/index.html)
+- [LazyGit](https://github.com/jesseduffield/lazygit)
+- fzf
+- ripgrep
+- ...some more I probably forgot and will discover on my next fresh install
 
 ### Installing
 First, confirm what would be installed using `just show`.
@@ -73,3 +89,4 @@ My current catboy: https://www.deviantart.com/ruruko01/art/c-squid-plushie-97659
 ## Licence
 WTFPL 2.0
 
+_except any files marked otherwise_
