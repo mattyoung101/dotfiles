@@ -457,6 +457,10 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  -- Setup clangd_extensions
+  require("clangd_extensions.inlay_hints").setup_autocmd()
+  require("clangd_extensions.inlay_hints").set_inlay_hints()
 end
 
 -- Enable the following language servers
@@ -589,6 +593,7 @@ cmp.setup {
       select = true,
     },
     -- this used to be commented in, but is not the behaviour I want from TAB
+    -- FIXME: Should we put this back in?
     -- ['<Tab>'] = cmp.mapping(function(fallback)
     --   if cmp.visible() then
     --     cmp.select_next_item()
@@ -613,6 +618,19 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'cmp_matlab' },
   },
+  -- use clangd cmp score
+  sorting = {
+    comparators = {
+        cmp.config.compare.offset,
+        cmp.config.compare.exact,
+        cmp.config.compare.recently_used,
+        require("clangd_extensions.cmp_scores"),
+        cmp.config.compare.kind,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+    },
+},
 }
 
 -- This module contains a number of default definitions
