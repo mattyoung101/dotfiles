@@ -136,7 +136,28 @@ config.keys = {
         mods = 'SHIFT|ALT',
         action = wezterm.action.MoveTabRelative(1)
     },
+}
 
+-- https://www.reddit.com/r/wezterm/comments/10jda7o/is_there_a_way_not_to_open_urls_on_simple_click/
+config.mouse_bindings = {
+    -- Disable the default click behavior
+    {
+      event = { Up = { streak = 1, button = "Left"} },
+      mods = "NONE",
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    -- Ctrl-shift-click will open the link under the mouse cursor
+    {
+        event = { Up = { streak = 1, button = "Left" } },
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.OpenLinkAtMouseCursor,
+    },
+    -- Disable the Ctrl-shift-click down event to stop programs from seeing it when a URL is clicked
+    {
+        event = { Down = { streak = 1, button = "Left" } },
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.Nop,
+    },
 }
 
 
