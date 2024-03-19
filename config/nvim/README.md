@@ -17,13 +17,14 @@ instructions there to install the dotfiles. Once that's done:
 
 1. Install the latest **stable** Neovim (currently 0.9.0 as of 27 May 2023). 
 3. (If using nvm.fish): Edit `~/.config/fish/config.fish` to source nvm on startup: `nvm -s use latest`
-4. On Cinnamon, the default terminal font is DejaVu Sans Mono (even though the font is just listed as "Monospace").
-You can prove this to yourself by doing `fc-match monospace`. You will need to install the NerdFont patch for this
-so that the icons show: https://www.nerdfonts.com/font-downloads
-5. Change the monospace font in System Settings to the DejaVu Sans Mono Nerd font.
-6. Install [LazyGit](https://github.com/jesseduffield/lazygit), which may require installing go
+4. Download and install the DejaVuSans Nerd Font: https://www.nerdfonts.com/font-downloads
+5. Make sure your terminal is using the DejaVuSans Nerd Font. I'm using WezTerm, and these dotfiles
+   automatically configure this.
+6. Install [LazyGit](https://github.com/jesseduffield/lazygit), which may require installing golang.
 7. You should also have a gcc/clang and the latest stable rust (probably with rustup) on your system
 8. Also install `fzf` and `ripgrep`
+9. If you're editing Java, you need to install `jdtls` (`yay -S jdtls` on Arch) separately due to how the
+   [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) plugin works - it's not managed using Mason.
 
 ## Wishlist (plugins to be added and changes to make)
 **OUTDATED**
