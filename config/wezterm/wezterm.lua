@@ -43,6 +43,9 @@ end
 
 -- doesn't seem to be necessary, was a font thing
 config.front_end = "OpenGL"
+-- attempt to fix latency (not very successful)
+-- see: https://github.com/wez/wezterm/issues/4052#issuecomment-2004400745
+config.max_fps = 255
 
 -- scrolling, unlimited scrollback not yet supported (according to GH issues it's more complicated!)
 config.enable_scroll_bar = true
