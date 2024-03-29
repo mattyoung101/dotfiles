@@ -110,11 +110,11 @@ config.window_frame = {
 
     -- The overall background color of the tab bar when
     -- the window is focused
-    active_titlebar_bg = '#333333',
+    active_titlebar_bg = '#0b0d15',
 
     -- The overall background color of the tab bar when
     -- the window is not focused
-    inactive_titlebar_bg = '#333333',
+    inactive_titlebar_bg = '#0b0d15',
 }
 
 config.keys = {

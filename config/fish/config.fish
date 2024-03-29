@@ -48,6 +48,9 @@ source ~/.config/fish/kanagawa.fish
 # zoxide
 zoxide init fish --cmd cd | source
 
+# Try to prefer Wayland by default for SDL applications
+set -x SDL_VIDEODRIVER "wayland,x11"
+
 # command to use clang
 function useclang
     set -gx CXX clang++
