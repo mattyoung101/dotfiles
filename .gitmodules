@@ -1,7 +1,3 @@
-[submodule "config/nvim"]
-	path = config/nvim
-    url = git@github.com:mattyoung101/nvim-setup.git
-    branch = master
 [submodule "config/dotfiles-artwork"]
 	path = config/dotfiles-artwork
     url = git@github.com:mattyoung101/dotfiles-artwork.git
