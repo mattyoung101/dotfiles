@@ -412,7 +412,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -455,9 +455,19 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
+  -- Enable inlay hints for clients that support them
+  -- References:
+  -- https://github.com/gennaro-tedesco/dotfiles/blob/master/nvim/lua/plugins/lsp.lua#L46-L59
+  -- https://www.reddit.com/r/neovim/comments/1530wur/comment/jsgnk05/
+  if client.server_capabilities.inlayHintProvider then
+			vim.lsp.inlay_hint.enable(bufnr, true)
+	else
+				print("no inlay hints available")
+	end
+
   -- Setup clangd_extensions
-  require("clangd_extensions.inlay_hints").setup_autocmd()
-  require("clangd_extensions.inlay_hints").set_inlay_hints()
+  -- require("clangd_extensions.inlay_hints").setup_autocmd()
+  -- require("clangd_extensions.inlay_hints").set_inlay_hints()
 end
 
 -- Enable the following language servers

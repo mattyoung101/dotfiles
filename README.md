@@ -1,8 +1,8 @@
 # Dotfiles
 dotfiles lfg!!!!!!!!!!!!!!
 
-This setup is based on the Fish shell, WezTerm terminal emulator, and Neovim editor. Currently I'm using
-Cinnamon on Arch, but may switch to i3 or bspwm when I have more time.
+This setup is based on the Fish shell, WezTerm terminal emulator, and Neovim editor. My DE is currently KDE
+Plasma 6 on Arch Linux.
 
 ## How to use
 ### Prerequisites
@@ -33,19 +33,15 @@ First, confirm what would be installed using `just show`.
 
 Install using `just install`. 
 
-> **Warning:** No backups are currently taken. While I've had no issues so far, double check your outputs and
-> probably backup `~/.config` before running.
+**Warning:** No backups are currently taken. While I've had no issues so far, double check your outputs and
+probably backup `~/.config` before running.
 
-> **Warning:** When I delete a neovim plugin, you will need to `rm -rf ~/.config/nvim` and run `just update`
-> again.
+**Warning:** When I delete a neovim plugin, you will need to `rm -rf ~/.config/nvim` and run `just update`
+again.
 
-Uninstall using `just uninstall`.
+Uninstall using `just uninstall` (untested).
 
 ### Submodules
-My neovim config is kept as a submodule in `config/nvim`. It's recommended to edit this _as a submodule_
-inside _this repo_ rather than edit that repo directly. **Important:** You should make note to checkout the
-master branch before editing, otherwise you'll be in a detached head state.
-
 As described below, the terminal background catboy artworks are kept as a private submodule in
 `config/dotfiles-artwork` for copyright reasons.
 
@@ -54,13 +50,9 @@ system information, they are also kept in a private submodule as `host-serpent` 
 (laptop). These point to the same `dotfiles-hostspecific` repo, but on different branches.
 You should also probably edit these directly as a submodule, making sure to checkout master.
 
-There is a GitHub Action in my [nvim-setup](https://github.com/mattyoung101/nvim-setup) repo that will
-automatically update the `nvim` submodule whenever I push to it.
+Bump submodules with `just update` or `just updatepush`.
 
-Bump submodules with `just update`.
-
-FIXME: we may not need this action actually, we could make a post commit hook to update the submodules? or a
-FIXME just action?
+> Neovim config also used to be a submodule, but I merged it in here instead.
 
 ## Note on art
 The cute catboys I use as terminal backgrounds are drawn by talented artists on DeviantArt or Pixiv. Based on
