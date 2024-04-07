@@ -30,6 +30,7 @@
   "nvim-gdb": { "branch": "master", "commit": "c0328e23b815bbe55935945332c5e5dc88092792" },
   "nvim-jdtls": { "branch": "master", "commit": "a5c6f38f8151d7b4f5b32c005a95022fa66f4c9d" },
   "nvim-lspconfig": { "branch": "master", "commit": "9619e53d3f99f0ca4ea3b88f5d97fce703131820" },
+  "nvim-spider": { "branch": "main", "commit": "828444de406bc7df3b30c8e000ce6f54f0754499" },
   "nvim-surround": { "branch": "main", "commit": "d47001f8ddf9646c24f16d2732d4d0255acd2121" },
   "nvim-treesitter": { "branch": "master", "commit": "11a3584b81c3249d2b6279305aee1c7ad273985a" },
   "nvim-treesitter-context": { "branch": "master", "commit": "f19766163c18515fb4d3c12d572bf9cba6cdb990" },
