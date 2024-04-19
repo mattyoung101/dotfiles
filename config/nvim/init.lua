@@ -462,7 +462,7 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.inlayHintProvider then
 			vim.lsp.inlay_hint.enable(bufnr, true)
 	else
-				print("no inlay hints available")
+			--print("no inlay hints available")
 	end
 
   -- Setup clangd_extensions
