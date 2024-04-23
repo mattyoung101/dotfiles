@@ -163,13 +163,16 @@ config.mouse_bindings = {
     },
 }
 
--- clear padding
-config.window_padding = {
-    left = 0,
-    top = 0,
-    bottom = 0,
-    right = 0
-}
+-- Padding seems to look fine on desktop machines, only clear it on the laptop
+if getHostname() == 'gecko' then
+    -- clear padding
+    config.window_padding = {
+        left = 0,
+        top = 0,
+        bottom = 0,
+        right = 0
+    }
+end
 
 -- and finally, return the configuration to wezterm
 return config
