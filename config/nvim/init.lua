@@ -27,6 +27,22 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Source: https://github.com/nvim-lualine/lualine.nvim/issues/328#issuecomment-982672253
+local function getWords()
+  if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown"
+      or vim.bo.filetype == "tex" or vim.bo.filetype == "latex" then
+    if vim.fn.wordcount().visual_words == 1 then
+      return tostring(vim.fn.wordcount().visual_words) .. " word"
+    elseif not (vim.fn.wordcount().visual_words == nil) then
+      return tostring(vim.fn.wordcount().visual_words) .. " words"
+    else
+      return tostring(vim.fn.wordcount().words) .. " words"
+    end
+  else
+    return ""
+  end
+end
+
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
@@ -71,7 +87,7 @@ require('lazy').setup({
       },
     },
   },
-  
+
   -- COLOUR THEME
   -- Kanagawa colour theme
   {
@@ -96,6 +112,7 @@ require('lazy').setup({
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
+
     opts = {
       options = {
         icons_enabled = true,
@@ -103,6 +120,9 @@ require('lazy').setup({
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_x = {getWords, 'encoding', 'fileformat', 'filetype'}
+      }
     },
   },
 
