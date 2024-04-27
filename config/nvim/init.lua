@@ -27,10 +27,19 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Source: https://stackoverflow.com/a/656232/5007892
+function Set (list)
+  local set = {}
+  for _, l in ipairs(list) do set[l] = true end
+  return set
+end
+
+-- File types which we should display a word count in
+local wcFileTypes = Set { "md", "txt", "markdown", "tex", "latex", "typst", "typ" }
+
 -- Source: https://github.com/nvim-lualine/lualine.nvim/issues/328#issuecomment-982672253
 local function getWords()
-  if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown"
-      or vim.bo.filetype == "tex" or vim.bo.filetype == "latex" then
+  if wcFileTypes[vim.bo.filetype] then
     if vim.fn.wordcount().visual_words == 1 then
       return tostring(vim.fn.wordcount().visual_words) .. " word"
     elseif not (vim.fn.wordcount().visual_words == nil) then
@@ -358,7 +367,7 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
     'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
     'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
-    'proto', 'latex'},
+    'proto', 'latex', 'typst'},
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -503,14 +512,12 @@ local servers = {
   neocmake = {},
   glsl_analyzer = {},
   yamlls = {},
+  typst_lsp = {}, -- TODO replace this with "tinymist", but lspconfig won't accept this rn for some reason
 
   -- for HTML
   --biome = {}, -- may be only for TS nowadays
   html = {},
 
-  --pyright = {},
-  --jedi_language_server = {},
-  
   -- TODO figure out how to disable ltex's shitty spellchecker
   -- ltex = {
   --     ltex = {
@@ -534,6 +541,8 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+
+  -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
 }
 
 -- setup my slingshot systemverilog LSP for development
