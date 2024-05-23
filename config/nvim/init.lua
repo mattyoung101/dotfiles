@@ -512,7 +512,7 @@ local servers = {
   neocmake = {},
   glsl_analyzer = {},
   yamlls = {},
-  typst_lsp = {}, -- TODO replace this with "tinymist", but lspconfig won't accept this rn for some reason
+  typst_lsp = {},
 
   -- for HTML
   --biome = {}, -- may be only for TS nowadays
