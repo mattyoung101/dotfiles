@@ -21,6 +21,8 @@ function getHostname()
     return hostname
 end
 
+config.warn_about_missing_glyphs = false
+
 -- This is where you actually apply your config choice
 config.font = wezterm.font 'DejaVuSansM Nerd Font Mono'
 config.freetype_load_target = 'HorizontalLcd'
