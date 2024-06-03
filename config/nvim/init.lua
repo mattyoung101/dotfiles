@@ -489,14 +489,10 @@ local on_attach = function(client, bufnr)
   -- https://github.com/gennaro-tedesco/dotfiles/blob/master/nvim/lua/plugins/lsp.lua#L46-L59
   -- https://www.reddit.com/r/neovim/comments/1530wur/comment/jsgnk05/
   if client.server_capabilities.inlayHintProvider then
-			vim.lsp.inlay_hint.enable(bufnr, true)
+			vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	else
 			--print("no inlay hints available")
 	end
-
-  -- Setup clangd_extensions
-  -- require("clangd_extensions.inlay_hints").setup_autocmd()
-  -- require("clangd_extensions.inlay_hints").set_inlay_hints()
 end
 
 -- Enable the following language servers
