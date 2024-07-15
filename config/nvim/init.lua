@@ -367,7 +367,7 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
     'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
     'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
-    'proto', 'latex', 'typst'},
+    'proto', 'latex', 'typst', 'robot'},
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -509,6 +509,7 @@ local servers = {
   glsl_analyzer = {},
   yamlls = {},
   typst_lsp = {},
+  robotframework_ls = {},
 
   -- for HTML
   --biome = {}, -- may be only for TS nowadays
