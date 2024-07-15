@@ -554,7 +554,7 @@ if not configs.slingshot then
   -- this require lspconfig.configs is the trick required to make it work
   require("lspconfig.configs").slingshot = {
     default_config = {
-      cmd = {'java', '-jar', '/home/matt/workspace/slingshot/build/libs/slingshot-1.0-SNAPSHOT-all.jar'};
+      cmd = {'java', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005', '-jar', '/home/matt/workspace/slingshot/build/libs/slingshot-1.0-SNAPSHOT-all.jar'};
       filetypes = {'verilog', 'systemverilog'};
       root_dir = function(fname)
         return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
