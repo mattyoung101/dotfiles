@@ -35,8 +35,8 @@ config.freetype_load_flags = 'NO_HINTING'
 -- we don't really want to make the whole wezterm lua a host-specific file with rcm, we just want different
 -- font sizes
 -- so, we query the machine hostname and put our host specific code here!
-if getHostname() == 'EMT-LPT-095-LNX' then
-    -- work laptop
+if getHostname() == 'EMT-LPT-095-LNX' or getHostname() == 'EMT-LPT-144' then
+    -- work laptops
     config.font_size = 11.0
 else
     -- serpent or gecko
