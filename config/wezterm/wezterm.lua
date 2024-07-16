@@ -14,7 +14,7 @@ end
 -- Get the machine hostname
 -- Source: https://gist.github.com/h1k3r/089d43771bdf811eefe8
 function getHostname()
-    local f = io.popen ("/bin/hostname")
+    local f = io.popen ("hostname")
     local hostname = f:read("*a") or ""
     f:close()
     hostname =string.gsub(hostname, "\n$", "")
@@ -73,6 +73,13 @@ config.colors = {
     indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
 }
 
+-- check for Windows work laptop: has a different artwork location
+if getHostname() == 'EMT-LPT-144' then
+    BackgroundPath = 'C:\\Users\\matt.young\\.dotfiles\\config\\dotfiles-artwork\\_c__squid_plushie___by_ruruko01_dg5ftuw-fullview-nvim2.jpg'
+else
+    BackgroundPath = '/home/matt/.config/dotfiles-artwork/_c__squid_plushie___by_ruruko01_dg5ftuw-fullview-nvim2.jpg'
+end
+
 config.background = {
     -- first, the background colour
     {
@@ -85,7 +92,7 @@ config.background = {
     -- now, our catboy with very low opacity
     {
         source = {
-            File = '/home/matt/.config/dotfiles-artwork/_c__squid_plushie___by_ruruko01_dg5ftuw-fullview-nvim2.jpg'
+            File = BackgroundPath
         },
         opacity = 0.05,
         vertical_align = "Bottom" -- me fr
