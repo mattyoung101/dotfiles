@@ -17,6 +17,7 @@ The dotfiles are managed using [rcm](https://github.com/thoughtbot/rcm) and
 
 In addition, you will need the following tools/libraries/languages/frameworks installed on your system (not
 yet an exhaustive list):
+- Python 3, including venv
 - Rust
 - Golang
 - fish shell
@@ -24,8 +25,9 @@ yet an exhaustive list):
 - [nvm.fish](https://github.com/jorgebucaran/nvm.fish)
 - [WezTerm](https://wezfurlong.org/wezterm/index.html)
 - [LazyGit](https://github.com/jesseduffield/lazygit)
-- fzf
+- [fzf](https://github.com/junegunn/fzf)
 - ripgrep
+- tree-sitter-cli
 - ...some more I probably forgot and will discover on my next fresh install
 
 ### Installing
