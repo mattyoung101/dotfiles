@@ -508,7 +508,8 @@ local servers = {
   neocmake = {},
   glsl_analyzer = {},
   yamlls = {},
-  typst_lsp = {},
+  --typst_lsp = {},
+  tinymist = {},
   robotframework_ls = {},
 
   -- for HTML
