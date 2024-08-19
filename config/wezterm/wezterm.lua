@@ -21,6 +21,16 @@ function getHostname()
     return hostname
 end
 
+-- Determines if we're running on Windows
+-- Source: https://stackoverflow.com/a/74073523/5007892
+function isWindows()
+    return package.config:sub(1,1) == "\\" and true or false
+end
+
+-- store the hostname up here to prevent flickering on Windows
+-- Windows is dumb (as usual) and seems to open a new shell just to run "hostname"
+local hostName = getHostname()
+
 config.warn_about_missing_glyphs = false
 
 -- This is where you actually apply your config choice
@@ -35,7 +45,7 @@ config.freetype_load_flags = 'NO_HINTING'
 -- we don't really want to make the whole wezterm lua a host-specific file with rcm, we just want different
 -- font sizes
 -- so, we query the machine hostname and put our host specific code here!
-if getHostname() == 'EMT-LPT-095-LNX' then
+if hostName == 'EMT-LPT-095-LNX' then
     -- work laptops
     config.font_size = 11.0
 else
@@ -74,10 +84,15 @@ config.colors = {
 }
 
 -- check for Windows work laptop: has a different artwork location
-if getHostname() == 'EMT-LPT-144' then
+if isWindows() then
     BackgroundPath = 'C:\\Users\\matt.young\\.dotfiles\\config\\dotfiles-artwork\\_c__squid_plushie___by_ruruko01_dg5ftuw-fullview-nvim2.jpg'
 else
     BackgroundPath = '/home/matt/.config/dotfiles-artwork/_c__squid_plushie___by_ruruko01_dg5ftuw-fullview-nvim2.jpg'
+end
+
+-- On Windows, use PowerShell
+if isWindows() then
+    config.default_prog = { 'powershell.exe' }
 end
 
 config.background = {
@@ -171,17 +186,6 @@ config.mouse_bindings = {
         action = wezterm.action.Nop,
     },
 }
-
--- Padding seems to look fine on desktop machines, only clear it on the laptop
--- if getHostname() == 'gecko' then
---     -- clear padding
---     config.window_padding = {
---         left = 0,
---         top = 0,
---         bottom = 0,
---         right = 0
---     }
--- end
 
 -- and finally, return the configuration to wezterm
 return config
