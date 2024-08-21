@@ -509,7 +509,13 @@ local servers = {
   glsl_analyzer = {},
   yamlls = {},
   --typst_lsp = {},
-  tinymist = {},
+  tinymist = {
+    settings = {
+      systemFonts = false,
+      formatterMode = "typstyle",
+      previewFeature = "disable"
+    }
+  },
   robotframework_ls = {},
 
   -- for HTML
@@ -695,6 +701,3 @@ vim.g.rainbow_delimiters = {
         'RainbowDelimiterCyan',
     },
 }
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
