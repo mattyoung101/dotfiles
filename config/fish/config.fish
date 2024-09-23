@@ -13,6 +13,9 @@ fish_add_path ~/go/bin
 # Rust, cargo
 fish_add_path ~/.cargo/bin
 
+# ghcup (Haskell)
+fish_add_path ~/.ghcup/bin
+
 # Use latest Clang (since we're on Arch now) as compiler
 # currently some packages seem to fail with Clang, this is the package's fault,
 # but use gcc instead
