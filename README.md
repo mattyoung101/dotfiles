@@ -21,6 +21,7 @@ yet an exhaustive list):
 - Rust
 - Golang
 - fish shell
+- ccache
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
 - [nvm.fish](https://github.com/jorgebucaran/nvm.fish)
 - [WezTerm](https://wezfurlong.org/wezterm/index.html)

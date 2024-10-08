@@ -54,11 +54,11 @@ zoxide init fish --cmd cd | source
 # Try to prefer Wayland by default for SDL applications
 set -x SDL_VIDEODRIVER "wayland,x11"
 
-# command to use clang
-function useclang
-    set -gx CXX clang++
-    set -gx CC clang
-    echo "Using Clang"
+# command to use clang (with ccache)
+function use_clang
+    set -gx CXX ccache clang++
+    set -gx CC ccache clang
+    echo "Using ccache Clang"
 end
 
 ########################
