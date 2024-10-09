@@ -680,6 +680,10 @@ cmp.setup {
             cmp.config.compare.order,
         },
     },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
 }
 
 -- This module contains a number of default definitions
