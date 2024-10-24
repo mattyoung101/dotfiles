@@ -56,8 +56,8 @@ set -x SDL_VIDEODRIVER "wayland,x11"
 
 # command to use clang (with ccache)
 function use_clang
-    set -gx CXX ccache clang++
-    set -gx CC ccache clang
+    set -gx CXX /usr/lib/ccache/bin/clang++
+    set -gx CC /usr/lib/ccache/bin/clang
     echo "Using ccache Clang"
 end
 
