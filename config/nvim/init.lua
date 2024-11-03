@@ -327,6 +327,17 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>lg', require('lazygit').lazygit, { desc = '[L]azy[G]it' })
+vim.keymap.set("n", "<Leader>tf",
+    function() require("telescope").extensions.frecency.frecency {} end,
+    { desc = '[T]elescope [F]recency' }
+)
+vim.keymap.set("n", "<Leader>tw", function()
+        require("telescope").extensions.frecency.frecency {
+            workspace = "CWD",
+        }
+    end,
+    { desc = '[T]elescope [W]orkspace Frecency' }
+)
 
 -- Barbar keybindings
 local bbmap = vim.api.nvim_set_keymap
