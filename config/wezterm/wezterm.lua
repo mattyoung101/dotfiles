@@ -61,7 +61,7 @@ config.max_fps = 255
 
 -- scrolling, unlimited scrollback not yet supported (according to GH issues it's more complicated!)
 config.enable_scroll_bar = true
-config.scrollback_lines = 10000
+config.scrollback_lines = 100000
 
 -- Kanagawa Nvim colour scheme
 config.colors = {
