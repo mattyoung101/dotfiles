@@ -54,6 +54,9 @@ zoxide init fish --cmd cd | source
 # Try to prefer Wayland by default for SDL applications
 set -x SDL_VIDEODRIVER "wayland,x11"
 
+# Rust logging
+set -x RUST_LOG info
+
 # command to use clang (with ccache)
 function use_clang
     set -gx CXX /usr/lib/ccache/bin/clang++

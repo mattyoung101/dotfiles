@@ -529,6 +529,7 @@ local servers = {
     neocmake = {},
     glsl_analyzer = {},
     yamlls = {},
+    sqls = {},
     --typst_lsp = {},
     tinymist = {
         settings = {
