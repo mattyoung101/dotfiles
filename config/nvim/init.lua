@@ -525,7 +525,11 @@ local servers = {
     -- ADD LANGUAGE SERVERS HERE
     clangd = {},
     texlab = {},
-    rust_analyzer = {},
+    rust_analyzer = {
+        cargo = {
+            loadOutDirsFromCheck = true
+        }
+    },
     neocmake = {},
     glsl_analyzer = {},
     yamlls = {},
