@@ -64,6 +64,10 @@ function use_clang
     echo "Using ccache Clang"
 end
 
+# Rust sccache
+set -x RUSTC_WRAPPER /usr/bin/sccache
+set -x SCCACHE_CACHE_SIZE 30G
+
 ########################
 
 # legacy stuff
