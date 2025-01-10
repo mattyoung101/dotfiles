@@ -52,6 +52,32 @@ local function getWords()
     end
 end
 
+local function tinymistPinMain(path)
+    -- For some reason, this doesn't work; exec_cmd is nil. We have to use buf_request directly.
+    -- local tinymist_options = vim.lsp.get_clients({name = "tinymist"})
+    -- if next(tinymist_options) == nil then
+    --     print("Tinymist is not active.")
+    --     return
+    -- end
+    -- local tinymist = tinymist_options[1]
+    -- print("Found Tinymist client")
+    -- tinymist:exec_cmd({
+    --     command = "tinymist.pinMain",
+    --     arguments = {"/home/matt/workspace/tamara/papers/thesis/uqthesis.typ"}
+    -- })
+
+    vim.lsp.buf_request(0, "workspace/executeCommand", {
+        command = "tinymist.pinMain",
+        arguments = { path },
+    }, function(err, _, _)
+        if err then
+            vim.notify("Error executing tinymist.pinMain: " .. err.message, vim.log.levels.ERROR)
+        else
+            vim.notify("Command tinymist.pinMain executed successfully", vim.log.levels.INFO)
+        end
+    end)
+end
+
 require('lazy').setup({
     -- NOTE: First, some plugins that don't require any configuration
 
@@ -379,6 +405,11 @@ bbmap('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', bbopts)
 bbmap('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', bbopts)
 bbmap('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', bbopts)
 bbmap('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', bbopts)
+
+-- Pin thesis main file (for TaMaRa thesis)
+vim.api.nvim_create_user_command("PinThesisMain", function()
+    tinymistPinMain("/home/matt/workspace/tamara/papers/thesis/uqthesis.typ")
+end, {})
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
