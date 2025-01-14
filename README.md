@@ -22,6 +22,7 @@ yet an exhaustive list):
 - Golang
 - fish shell
 - ccache
+- sccache
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
 - [nvm.fish](https://github.com/jorgebucaran/nvm.fish)
 - [WezTerm](https://wezfurlong.org/wezterm/index.html)
@@ -29,6 +30,8 @@ yet an exhaustive list):
 - [fzf](https://github.com/junegunn/fzf)
 - ripgrep
 - tree-sitter-cli
+- fortune-mod
+- lolcat
 - ...some more I probably forgot and will discover on my next fresh install
 
 ### Installing

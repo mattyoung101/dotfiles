@@ -70,6 +70,18 @@ set -x SCCACHE_CACHE_SIZE 30G
 
 ########################
 
+# as suggested by avery on uqcs (and slightly modified by me)
+
+function fish_greeting
+    fortune -s /usr/share/fortune/computers /usr/share/fortune/science /usr/share/fortune/wisdom | lolcat
+    echo
+    echo (fish --version)
+    echo
+    echo The time is (set_color yellow; date; set_color normal) on machine (set_color green; hostname; set_color normal)
+end
+
+########################
+
 # legacy stuff
 
 #ESP32
@@ -80,3 +92,4 @@ set -x SCCACHE_CACHE_SIZE 30G
 # ROS
 # alias ros='bass source devel/setup.bash'
 # alias git-pullall='ls | xargs -P10 -I{} git -C {} pull'
+
