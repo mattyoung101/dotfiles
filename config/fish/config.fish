@@ -73,7 +73,14 @@ set -x SCCACHE_CACHE_SIZE 30G
 # as suggested by avery on uqcs (and slightly modified by me)
 
 function fish_greeting
-    fortune -s /usr/share/fortune/computers /usr/share/fortune/science /usr/share/fortune/wisdom | lolcat
+    # Fortunes location differs on Ubuntu and Arch
+    if test "$hostname" = 'EMT-LPT-095-LNX'
+        # Ubuntu
+        fortune -s /usr/share/games/fortunes/computers /usr/share/games/fortunes/science /usr/share/games/fortunes/wisdom | lolcat
+    else
+        # Arch
+        fortune -s /usr/share/fortune/computers /usr/share/fortune/science /usr/share/fortune/wisdom | lolcat
+    end
     echo
     echo (fish --version)
     echo
