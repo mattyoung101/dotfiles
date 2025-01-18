@@ -156,7 +156,7 @@ require('lazy').setup({
                 section_separators = '',
             },
             sections = {
-                lualine_x = { getWords, 'encoding', 'fileformat', 'filetype' }
+                lualine_x = { getWords, 'aerial', 'encoding', 'fileformat', 'filetype' }
             }
         },
     },
