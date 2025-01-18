@@ -558,7 +558,8 @@ local servers = {
     texlab = {},
     rust_analyzer = {
         cargo = {
-            loadOutDirsFromCheck = true
+            loadOutDirsFromCheck = true,
+            runBuildScripts = true
         }
     },
     neocmake = {},
