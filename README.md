@@ -17,6 +17,8 @@ The dotfiles are managed using [rcm](https://github.com/thoughtbot/rcm) and
 
 In addition, you will need the following tools/libraries/languages/frameworks installed on your system (not
 yet an exhaustive list):
+- Just
+- rcm
 - Python 3, including venv
 - Rust
 - Golang
