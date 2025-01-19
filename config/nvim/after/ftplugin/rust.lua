@@ -10,3 +10,8 @@ for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) d
         return default_diagnostic_handler(err, result, context, config)
     end
 end
+
+-- Ensure Aerial is opened
+require("aerial").open()
+-- Return focus to main window
+vim.cmd("wincmd h")
