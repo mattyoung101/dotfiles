@@ -216,3 +216,4 @@ NOLINTBEGIN
 NOLINTEND
 prev
 hashmap
+fuzzer
