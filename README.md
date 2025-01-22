@@ -34,6 +34,7 @@ yet an exhaustive list):
 - tree-sitter-cli
 - fortune-mod
 - lolcat
+- Lua 5.1 (lua51 on Arch)
 - ...some more I probably forgot and will discover on my next fresh install
 
 ### Installing
