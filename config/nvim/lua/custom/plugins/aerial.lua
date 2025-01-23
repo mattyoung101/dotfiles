@@ -11,6 +11,7 @@ return {
             vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>"),
             backends = { "lsp", "treesitter", "markdown", "asciidoc", "man" },
             filter_kind = false,
+            lazy_load = true
         }
 
         require("telescope").setup({
