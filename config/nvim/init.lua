@@ -690,17 +690,15 @@ cmp.setup {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         },
-        -- this used to be commented in, but is not the behaviour I want from TAB
-        -- FIXME: Should we put this back in?
-        -- ['<Tab>'] = cmp.mapping(function(fallback)
-        --   if cmp.visible() then
-        --     cmp.select_next_item()
-        --   elseif luasnip.expand_or_jumpable() then
-        --     luasnip.expand_or_jump()
-        --   else
-        --     fallback()
-        --   end
-        -- end, { 'i', 's' }),
+        ['<Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
