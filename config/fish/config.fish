@@ -85,6 +85,12 @@ function fish_greeting
     echo (fish --version)
     echo
     echo The time is (set_color yellow; date; set_color normal) on machine (set_color green; hostname; set_color normal)
+
+    # Keep track of how many shells we ever opened (for fun)
+    if ! set -q shells_opened
+        set -u shells_opened 1
+    end
+    set -U shells_opened (math $shells_opened + 1)
 end
 
 ########################
