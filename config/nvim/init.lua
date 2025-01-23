@@ -130,7 +130,9 @@ require('lazy').setup({
         lazy = false,
         config = function()
             require("kanagawa").setup({
-                transparent = true
+                transparent = true,
+                undercurl = true,
+                compile = true,
             })
             -- load the colorscheme here
             vim.cmd([[colorscheme kanagawa]])

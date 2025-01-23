@@ -1,4 +1,6 @@
 return {
-  "mfussenegger/nvim-jdtls",
-  version = "*",
+    "mfussenegger/nvim-jdtls",
+    lazy = true,
+    event = "VeryLazy",
+    version = "*",
 }
