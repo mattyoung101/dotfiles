@@ -8,7 +8,7 @@ Plasma 6 on Arch Linux.
 ### Prerequisites
 First, clone into `~/.dotfiles`: 
 
-```
+```bash
 git clone --recurse-submodules -j8 git@github.com:mattyoung101/dotfiles.git ~/.dotfiles
 ```
 
@@ -17,6 +17,8 @@ The dotfiles are managed using [rcm](https://github.com/thoughtbot/rcm) and
 
 In addition, you will need the following tools/libraries/languages/frameworks installed on your system (not
 yet an exhaustive list):
+- Essential build tools (recent C/C++ compiler, make, etc)
+- Neovim 0.10
 - Just
 - rcm
 - Python 3, including venv
@@ -34,8 +36,18 @@ yet an exhaustive list):
 - tree-sitter-cli
 - fortune-mod
 - lolcat
+- Nerd Fonts (on Arch, `yay -S --needed nerd-fonts`)
 - Lua 5.1 (lua51 on Arch)
 - ...some more I probably forgot and will discover on my next fresh install
+
+**NEW!** There are now scripts that make a best-effort attempt to install the above dependencies.
+- For Arch, there is `./install_arch.sh` which should work reliably.
+    - I use Arch on all my systems and it covers all the dependencies very well, so this should work fine
+- For Ubuntu, there is `./install_ubuntu.sh` that only works on a best-effort basis because I really dislike
+Ubuntu and only use it at work.
+    - This currently requires you build Neovim from source until the year 2100 when they actually ship Neovim
+      0.10 in the default repos
+- Windows TBA, similar to Ubuntu but worse. This will be a nightmare.
 
 ### Installing
 First, confirm what would be installed using `just show`.
