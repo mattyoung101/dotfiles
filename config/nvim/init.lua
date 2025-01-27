@@ -493,6 +493,10 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
+vim.keymap.set("n", "<leader>rn", function()
+  return ":IncRename " .. vim.fn.expand("<cword>")
+end, { expr = true, desc = "[R]e[n]ame" })
+
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(client, bufnr)
@@ -510,7 +514,6 @@ local on_attach = function(client, bufnr)
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
     end
 
-    nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
     nmap('<leader>fm', vim.lsp.buf.format, 'LSP [F]or[m]at')
 

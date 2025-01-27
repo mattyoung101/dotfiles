@@ -1,6 +1,7 @@
 return {
     'RRethy/vim-illuminate',
     version = "*",
+    event = "CursorMoved",
     config = function()
         -- default configuration
         require('illuminate').configure({

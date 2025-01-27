@@ -15,6 +15,7 @@
   "git-conflict.nvim": { "branch": "main", "commit": "4bbfdd92d547d2862a75b4e80afaf30e73f7bbb4" },
   "gitsigns.nvim": { "branch": "main", "commit": "3868c176d406b217ec8961e47ad033105ddc486c" },
   "hex.nvim": { "branch": "master", "commit": "fcff75fcf43b5a6c5b471eed65b3a06c412d6020" },
+  "inc-rename.nvim": { "branch": "main", "commit": "f9b9e5b9a75074810f40881b7e254b5bbeaf122e" },
   "indent-blankline.nvim": { "branch": "master", "commit": "e10626f7fcd51ccd56d7ffc00883ba7e0aa28f78" },
   "kanagawa.nvim": { "branch": "master", "commit": "988082eb00b845e4afbcaa4fd8e903da8a3ab3b9" },
   "lazy.nvim": { "branch": "main", "commit": "d8f26efd456190241afd1b0f5235fe6fdba13d4a" },
