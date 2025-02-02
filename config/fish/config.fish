@@ -105,9 +105,12 @@ function fish_greeting
     end
 end
 
+# Activate micromamba, but only on specific machines
+if contains (hostname) serpent EMT-LPT-095-LNX
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'micromamba shell init' !!
 set -gx MAMBA_EXE "/home/matt/.local/bin/micromamba"
 set -gx MAMBA_ROOT_PREFIX "/home/matt/micromamba"
 $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
 # <<< mamba initialize <<<
+end
