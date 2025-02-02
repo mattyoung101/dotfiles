@@ -59,6 +59,7 @@ set -x RUST_LOG info
 
 # command to use clang (with ccache)
 function use_clang
+    # TODO Fix this properly on Ubuntu
     set -gx CXX /usr/lib/ccache/bin/clang++
     set -gx CC /usr/lib/ccache/bin/clang
     echo "Using ccache Clang"
@@ -74,12 +75,18 @@ set -x SCCACHE_CACHE_SIZE 30G
 
 function fish_greeting
     # Fortunes location differs on Ubuntu and Arch
-    if test "$hostname" = 'EMT-LPT-095-LNX'
+    if test (awk -F= '/^NAME/{print $2}' /etc/os-release) = '"Ubuntu"'
         # Ubuntu
-        fortune -s /usr/share/games/fortunes/computers /usr/share/games/fortunes/science /usr/share/games/fortunes/wisdom | lolcat
+        fortune -s  /usr/share/games/fortunes/computers \
+                    /usr/share/games/fortunes/science \
+                    /usr/share/games/fortunes/wisdom \
+                    /usr/share/games/fortunes/platitudes | lolcat
     else
         # Arch
-        fortune -s /usr/share/fortune/computers /usr/share/fortune/science /usr/share/fortune/wisdom | lolcat
+        fortune -s  /usr/share/fortune/computers \
+                    /usr/share/fortune/science \
+                    /usr/share/fortune/wisdom \
+                    /usr/share/fortune/platitudes | lolcat
     end
     echo
     echo (fish --version)
@@ -91,18 +98,16 @@ function fish_greeting
         set -u shells_opened 1
     end
     set -U shells_opened (math $shells_opened + 1)
+
+    if test (math $shells_opened % 100) -eq 0
+        echo
+        echo -e "\033[1mCongratulations on opening $shells_opened shells!\033[0m" | lolcat
+    end
 end
 
-########################
-
-# legacy stuff
-
-#ESP32
-#fish_add_path $HOME/esp/xtensa-esp32-elf/bin $HOME/esp/esp-idf/tools
-#fish_add_path /home/matt/workspace/nanopb-0.3.9.3-linux-x86/generator-bin
-#set IDF_PATH ~/esp/esp-idf
-
-# ROS
-# alias ros='bass source devel/setup.bash'
-# alias git-pullall='ls | xargs -P10 -I{} git -C {} pull'
-
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'micromamba shell init' !!
+set -gx MAMBA_EXE "/home/matt/.local/bin/micromamba"
+set -gx MAMBA_ROOT_PREFIX "/home/matt/micromamba"
+$MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
+# <<< mamba initialize <<<
