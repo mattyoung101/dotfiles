@@ -32,7 +32,10 @@ yay -S --needed python3 \
     inetutils \
     unzip \
     lua51 \
-    nerd-fonts
+    nerd-fonts \
+    cmake \
+    clang \
+    ninja
 go install github.com/jesseduffield/lazygit@latest
 rustup install stable
 
