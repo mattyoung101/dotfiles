@@ -1,6 +1,5 @@
 return {
 	'lambdalisue/suda.vim',
-    lazy = true,
-    event = "VeryLazy",
+    cmd = "SudaWrite",
 	version='*',
 }
