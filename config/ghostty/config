@@ -7,3 +7,4 @@ cursor-style-blink = false
 shell-integration-features = no-cursor
 gtk-wide-tabs = false
 gtk-custom-css = /home/matt/.config/ghostty/tab-style.css
+mouse-scroll-multiplier = 0.45

@@ -1,6 +1,8 @@
 /*
  * source: https://github.com/ttys3/my-ghostty-config/blob/main/tab-style.css
  * via: https://github.com/ghostty-org/ghostty/discussions/3297
+ *
+ * slightly modified by me (matt)
  */
 
 /*
@@ -11,31 +13,32 @@ https://docs.gtk.org/gtk4/css-properties.html
 
 
 headerbar {
-  min-height: 24px;
-  padding: 0;
-  margin: 0;
+    min-height: 24px;
+    padding: 0;
+    margin: 0;
 }
 
 tabbar tabbox {
-  margin: 0;
-  padding: 0;
-  min-height: 10px;
-  background-color: #1a1a1a;
-  font-family: monospace;
+    margin: 0;
+    padding: 0;
+    min-height: 10px;
+    background-color: #1a1a1a;
+    /* font-family: monospace; */
+    font-weight: bold;
 }
 
 tabbar tabbox tab {
-  margin: 0;
-  padding: 0;
-  color: #9ca3af;
-  border-right: 1px solid #374151;
+    margin: 0;
+    padding: 0;
+    color: #9ca3af;
+    border-right: 1px solid #374151;
 }
 
 tabbar tabbox tab:selected {
-  background-color: #2d2d2d;
-  color: #ffffff;
+    background-color: #2d2d2d;
+    color: #ffffff;
 }
 
 tabbar tabbox tab label {
-  font-size: 13px;
+    font-size: 13px;
 }
