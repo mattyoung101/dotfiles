@@ -1,4 +1,9 @@
 theme = Kanagawa Wave
-font-family = DejaVuSansM Nerd Font
+font-family = FiraCode Nerd Font
 font-size = 11
 cursor-style = block
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+gtk-wide-tabs = false
+gtk-custom-css = /home/matt/.config/ghostty/tab-style.css
