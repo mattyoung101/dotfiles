@@ -101,7 +101,7 @@ function fish_greeting
 
     if test (math $shells_opened % 100) -eq 0
         echo
-        echo -e "\033[1mCongratulations on opening $shells_opened shells!\033[0m" | lolcat
+        echo -e "\033[1m ==========> Congratulations on opening $shells_opened shells! <========== \033[0m" | lolcat
     end
 end
 
