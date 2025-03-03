@@ -284,7 +284,7 @@ vim.opt.textwidth = 110
 
 -- Spelling
 vim.opt.spell = true
-vim.opt.spelllang = { 'en_gb' }
+vim.opt.spelllang = { 'en_gb', 'en', 'programming' }
 vim.opt.spelloptions = 'camel'
 
 -- [[ Basic Keymaps ]]
@@ -421,7 +421,7 @@ require('nvim-treesitter.configs').setup {
     ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
         'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
         'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
-        'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash' },
+        'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash', 'json', 'xml' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -494,7 +494,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 vim.keymap.set("n", "<leader>rn", function()
-  return ":IncRename " .. vim.fn.expand("<cword>")
+    return ":IncRename " .. vim.fn.expand("<cword>")
 end, { expr = true, desc = "[R]e[n]ame" })
 
 -- LSP settings.
@@ -571,7 +571,6 @@ local servers = {
     glsl_analyzer = {},
     yamlls = {},
     sqls = {},
-    --typst_lsp = {},
     tinymist = {
         settings = {
             systemFonts = false,
@@ -581,15 +580,20 @@ local servers = {
     },
     robotframework_ls = {},
 
-    -- for HTML
     --biome = {}, -- may be only for TS nowadays
     html = {},
 
-    -- TODO figure out how to disable ltex's shitty spellchecker
-    -- ltex = {
-    --     ltex = {
-    --       language = "en-GB",
-    --     },
+    -- too annoying, disabled it
+    -- harper_ls = {
+    --     ["harper-ls"] = {
+    --         linters = {
+    --             spell_check = false,
+    --             -- fuck off ya prick
+    --             avoid_curses = false,
+    --             -- typst false positives
+    --             ellipsis_length = false,
+    --         }
+    --     }
     -- },
 
     pylsp = {
@@ -696,13 +700,13 @@ cmp.setup {
             select = true,
         },
         ['<Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback()
-          end
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
         end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
