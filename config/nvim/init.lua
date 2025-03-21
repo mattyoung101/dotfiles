@@ -421,7 +421,8 @@ require('nvim-treesitter.configs').setup {
     ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
         'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
         'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
-        'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash', 'json', 'xml', 'http', 'terraform' },
+        'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash', 'json', 'xml', 'http', 'terraform',
+        'd' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -592,6 +593,7 @@ local servers = {
             }
         }
     },
+    black = {},
 
     lua_ls = {
         Lua = {
@@ -599,6 +601,8 @@ local servers = {
             telemetry = { enable = false },
         },
     },
+
+    serve_d = {},
 
     -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
 }
