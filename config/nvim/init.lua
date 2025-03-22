@@ -515,7 +515,7 @@ local on_attach = function(client, bufnr)
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
     end
 
-    nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+    nmap('<leader>ca', require("actions-preview").code_actions, '[C]ode [A]ction')
     nmap('<leader>fm', vim.lsp.buf.format, 'LSP [F]or[m]at')
 
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
@@ -583,6 +583,7 @@ local servers = {
 
     html = {},
     terraformls = {},
+    biome = {},
 
     pylsp = {
         pylsp = {
@@ -593,7 +594,6 @@ local servers = {
             }
         }
     },
-    black = {},
 
     lua_ls = {
         Lua = {
