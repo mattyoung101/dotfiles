@@ -328,7 +328,10 @@ require('telescope').setup {
         },
         live_grep = {
             hidden = true,
+            file_ignore_patterns = { ".git/", "node_modules", "poetry.lock" },
             -- https://github.com/nvim-telescope/telescope.nvim/issues/855#issuecomment-1032325327
+            -- https://github.com/fredrikaverpil/dotfiles/blob/ee04215d632f7c91287031af41497bae98d63dd8/nvim-lazyvim/lua/plugins/telescope.lua#L43-L54
+            -- https://github.com/LazyVim/LazyVim/discussions/804#discussioncomment-7184331
             additional_args = function(opts)
                 return { "--hidden" }
             end
