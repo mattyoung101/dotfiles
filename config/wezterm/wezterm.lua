@@ -35,7 +35,6 @@ config.warn_about_missing_glyphs = false
 
 -- This is where you actually apply your config choice
 config.font = wezterm.font 'FiraCode Nerd Font'
-config.freetype_load_target = 'HorizontalLcd'
 -- disable ligatures (combining <= into a single symbol): https://wezfurlong.org/wezterm/config/font-shaping.html#advanced-font-shaping-options
 -- config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 -- https://github.com/wez/wezterm/issues/3774#issuecomment-1629689265
@@ -53,8 +52,16 @@ else
     config.font_size = 10.0
 end
 
--- doesn't seem to be necessary, was a font thing
-config.front_end = "OpenGL"
+-- use WebGpu, only on work laptop, OpenGL seems to lag
+if hostName == 'EMT-LPT-095-LNX' then
+    config.front_end = "WebGpu"
+    config.webgpu_power_preference = "HighPerformance"
+    config.freetype_load_target = 'Light'
+else
+    config.front_end = "OpenGL"
+    config.freetype_load_target = 'HorizontalLcd'
+end
+
 -- attempt to fix latency (not very successful)
 -- see: https://github.com/wez/wezterm/issues/4052#issuecomment-2004400745
 config.max_fps = 255
@@ -95,6 +102,12 @@ if isWindows() then
     config.default_prog = { 'powershell.exe' }
 end
 
+if config.front_end == "WebGpu" then
+    bg_opacity = 0.01
+else
+    bg_opacity = 0.05
+end
+
 config.background = {
     -- first, the background colour
     {
@@ -109,7 +122,7 @@ config.background = {
         source = {
             File = BackgroundPath
         },
-        opacity = 0.05,
+        opacity = bg_opacity,
         vertical_align = "Bottom" -- me fr
     }
 }
