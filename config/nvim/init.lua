@@ -584,6 +584,7 @@ local servers = {
     html = {},
     terraformls = {},
     biome = {},
+    ts_ls = {},
 
     pylsp = {
         pylsp = {
