@@ -12,7 +12,7 @@ return {
     },
     config = function()
         require("overseer").setup({
-            templates = { "builtin", "user.typst_watch" },
+            templates = { "builtin", "user.typst_watch", "user.typst_thesis" },
         })
     end
 }
