@@ -1,0 +1,21 @@
+# based on https://rahulgoel.xyz/blog/zathura-saves-my-eyes/
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+set page-padding 1
+set selection-clipboard clipboard
+
+set default-bg "#555555"
+
+set recolor-keephue
+# set recolor-lightcolor "#282828"
+# set recolor-darkcolor "#ebdbb2"
+set recolor-lightcolor "#1f1f28"
+set recolor-darkcolor "#dcd7ba"
+
+set statusbar-bg "#282828"
+set statusbar-fg "#8ec07c"
+set completion-bg "#282828"
+set completion-fg "#8ec07c"
+set completion-highlight-bg "#add8e6"
+set inputbar-bg "#282828"
+set inputbar-fg "#8ec07c"
