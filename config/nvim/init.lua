@@ -607,6 +607,7 @@ local servers = {
     },
 
     serve_d = {},
+    pest_ls = {},
 
     -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
 }
