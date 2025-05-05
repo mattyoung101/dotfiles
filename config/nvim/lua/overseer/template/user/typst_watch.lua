@@ -1,5 +1,5 @@
 return {
-  name = "typst watch",
+  name = "Typst: Watch current file",
   builder = function()
     -- Full path to current file (see :help expand())
     local file = vim.fn.expand("%:p")
