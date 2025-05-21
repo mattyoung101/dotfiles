@@ -425,7 +425,7 @@ require('nvim-treesitter.configs').setup {
         'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
         'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
         'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash', 'json', 'xml', 'http', 'terraform',
-        'd' },
+        'd', 'supercollider' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -609,6 +609,8 @@ local servers = {
     serve_d = {},
     pest_ls = {},
 
+    svlangserver = {},
+
     -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
 }
 
@@ -634,7 +636,7 @@ if not configs.slingshot then
         },
     }
 end
-lspconfig.slingshot.setup {}
+-- lspconfig.slingshot.setup {}
 
 -- add rust_hdl vhdl language server (not in mason)
 require 'lspconfig'.vhdl_ls.setup {}
