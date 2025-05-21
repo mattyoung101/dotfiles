@@ -425,7 +425,7 @@ require('nvim-treesitter.configs').setup {
         'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
         'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
         'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash', 'json', 'xml', 'http', 'terraform',
-        'd', 'supercollider' },
+        'd', 'supercollider', 'go' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -562,7 +562,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-    -- ADD LANGUAGE SERVERS HERE
+    -- ADD LSP LANGUAGE SERVERS HERE
     clangd = {},
     texlab = {},
     rust_analyzer = {
@@ -610,6 +610,8 @@ local servers = {
     pest_ls = {},
 
     svlangserver = {},
+
+    gopls = {},
 
     -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
 }
