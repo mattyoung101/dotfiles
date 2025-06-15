@@ -775,11 +775,13 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
     function(server_name)
-        require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = servers[server_name],
-        }
+        if server_name ~= "rust-analyzer" and server_name ~= "rust_analyzer" then
+            require('lspconfig')[server_name].setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+                settings = servers[server_name],
+            }
+        end
     end,
 }
 
@@ -814,5 +816,23 @@ vim.g.rainbow_delimiters = {
         'RainbowDelimiterGreen',
         'RainbowDelimiterViolet',
         'RainbowDelimiterCyan',
+    },
+}
+
+-- Rustaceanvim config; force the usage of the mason rust-analyzer binary despite rustaceanvim's warnings
+vim.g.rustaceanvim = {
+    server = {
+        cmd = function()
+            local mason_registry = require('mason-registry')
+            if mason_registry.is_installed('rust-analyzer') then
+                -- This may need to be tweaked depending on the operating system.
+                local ra = mason_registry.get_package('rust-analyzer')
+                local ra_filename = ra:get_receipt():get().links.bin['rust-analyzer']
+                return { ('%s/%s'):format(ra:get_install_path(), ra_filename or 'rust-analyzer') }
+            else
+                -- global installation
+                return { 'rust-analyzer' }
+            end
+        end,
     },
 }
