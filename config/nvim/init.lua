@@ -90,21 +90,132 @@ require('lazy').setup({
         'neovim/nvim-lspconfig',
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
-            { "mason-org/mason.nvim", version = "^1.0.0" },
+            { "mason-org/mason.nvim",           version = "^1.0.0" },
             { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
 
             -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim', branch = 'legacy', opts = {} },
+            { 'j-hui/fidget.nvim',              branch = 'legacy', opts = {} },
 
             -- Additional lua configuration, makes nvim stuff amazing!
             'folke/neodev.nvim',
+
+            -- Allows extra capabilities provided by blink.cmp
+            'saghen/blink.cmp',
         },
     },
 
+
     { -- Autocompletion
-        'hrsh7th/nvim-cmp',
-        dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'mstanciu552/cmp-matlab' },
+        'saghen/blink.cmp',
+        event = 'VimEnter',
+        version = '1.*',
+        dependencies = {
+            -- Snippet Engine
+            {
+                'L3MON4D3/LuaSnip',
+                version = '2.*',
+                build = (function()
+                    -- Build Step is needed for regex support in snippets.
+                    -- This step is not supported in many windows environments.
+                    -- Remove the below condition to re-enable on windows.
+                    if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+                        return
+                    end
+                    return 'make install_jsregexp'
+                end)(),
+                dependencies = {
+                    -- `friendly-snippets` contains a variety of premade snippets.
+                    --    See the README about individual language/framework/plugin snippets:
+                    --    https://github.com/rafamadriz/friendly-snippets
+                    -- {
+                    --   'rafamadriz/friendly-snippets',
+                    --   config = function()
+                    --     require('luasnip.loaders.from_vscode').lazy_load()
+                    --   end,
+                    -- },
+                },
+                opts = {},
+            },
+            'folke/lazydev.nvim',
+
+            -- doesn't currently seem to work
+            -- "p00f/clangd_extensions.nvim"
+        },
+        --- @module 'blink.cmp'
+        --- @type blink.cmp.Config
+        opts = {
+            keymap = {
+                -- 'default' (recommended) for mappings similar to built-in completions
+                --   <c-y> to accept ([y]es) the completion.
+                --    This will auto-import if your LSP supports it.
+                --    This will expand snippets if the LSP sent a snippet.
+                -- 'super-tab' for tab to accept
+                -- 'enter' for enter to accept
+                -- 'none' for no mappings
+                --
+                -- For an understanding of why the 'default' preset is recommended,
+                -- you will need to read `:help ins-completion`
+                --
+                -- No, but seriously. Please read `:help ins-completion`, it is really good!
+                --
+                -- All presets have the following mappings:
+                -- <tab>/<s-tab>: move to right/left of your snippet expansion
+                -- <c-space>: Open menu or open docs if already open
+                -- <c-n>/<c-p> or <up>/<down>: Select next/previous item
+                -- <c-e>: Hide menu
+                -- <c-k>: Toggle signature help
+                --
+                -- See :h blink-cmp-config-keymap for defining your own keymap
+                preset = 'enter',
+
+                -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
+                --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+            },
+
+            appearance = {
+                -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+                -- Adjusts spacing to ensure icons are aligned
+                nerd_font_variant = 'mono',
+            },
+
+            completion = {
+                -- By default, you may press `<c-space>` to show the documentation.
+                -- Optionally, set `auto_show = true` to show the documentation after a delay.
+                documentation = { auto_show = true, auto_show_delay_ms = 500 },
+            },
+
+            sources = {
+                default = { 'lsp', 'path', 'snippets', 'lazydev' },
+                providers = {
+                    lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+                },
+            },
+
+            snippets = { preset = 'luasnip' },
+
+            -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
+            -- which automatically downloads a prebuilt binary when enabled.
+            --
+            -- By default, we use the Lua implementation instead, but you may enable
+            -- the rust implementation via `'prefer_rust_with_warning'`
+            --
+            -- See :h blink-cmp-config-fuzzy for more information
+            fuzzy = {
+                implementation = 'prefer_rust_with_warning',
+                sorts = {
+                    'exact',
+                    -- default sorts
+                    'score',
+                    -- doesn't currently seem to work
+                    -- require("clangd_extensions").cmp_scores,
+                    'sort_text',
+                },
+            },
+
+            -- Shows a signature help window while you type arguments for a function
+            signature = { enabled = true },
+        },
     },
 
     -- Useful plugin to show you pending keybinds.
@@ -556,6 +667,12 @@ local on_attach = function(client, bufnr)
     end
 end
 
+-- LSP servers and clients are able to communicate to each other what features they support.
+--  By default, Neovim doesn't support everything that is in the LSP specification.
+--  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
+--  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
+local capabilities = require('blink.cmp').get_lsp_capabilities()
+
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -646,10 +763,6 @@ require 'lspconfig'.vhdl_ls.setup {}
 -- Setup neovim lua configuration
 require('neodev').setup()
 
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
 -- Setup mason so it can manage external tooling
 require('mason').setup()
 
@@ -670,76 +783,9 @@ mason_lspconfig.setup_handlers {
     end,
 }
 
--- nvim-cmp setup
-local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
 luasnip.config.setup {}
-
-cmp.setup {
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end,
-    },
-    -- disable completion when in comments
-    -- https://github.com/hrsh7th/nvim-cmp/pull/676#issuecomment-1002532096
-    enabled = function()
-        if require "cmp.config.context".in_treesitter_capture("comment") == true or require "cmp.config.context".in_syntax_group("Comment") then
-            return false
-        else
-            return true
-        end
-    end,
-    mapping = cmp.mapping.preset.insert {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete {},
-        ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-        },
-        ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-            else
-                fallback()
-            end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end, { 'i', 's' }),
-    },
-    sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-    },
-    -- use clangd cmp score
-    sorting = {
-        comparators = {
-            cmp.config.compare.offset,
-            cmp.config.compare.exact,
-            cmp.config.compare.recently_used,
-            require("clangd_extensions.cmp_scores"),
-            cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
-        },
-    },
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-    },
-}
 
 -- This module contains a number of default definitions
 local rainbow_delimiters = require 'rainbow-delimiters'
