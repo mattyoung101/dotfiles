@@ -1,6 +1,5 @@
 return {
     "chrisgrieser/nvim-spider",
-    version = "*",
     config = function()
         require("spider").setup {
             skipInsignificantPunctuation = false,
