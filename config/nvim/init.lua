@@ -301,6 +301,7 @@ require('lazy').setup({
         'nvim-treesitter/playground',
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
+            "OXY2DEV/markview.nvim" -- force markview to do an early load
         },
         config = function()
             pcall(require('nvim-treesitter.install').update { with_sync = true })

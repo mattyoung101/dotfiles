@@ -18,7 +18,7 @@ The dotfiles are managed using [rcm](https://github.com/thoughtbot/rcm) and
 In addition, you will need the following tools/libraries/languages/frameworks installed on your system (not
 yet an exhaustive list):
 - Essential build tools (recent C/C++ compiler, make, etc)
-- Neovim 0.10
+- Neovim 0.11
 - Just
 - rcm
 - Python 3, including venv
