@@ -734,12 +734,12 @@ local servers = {
     biome = {},
     ts_ls = {},
 
-    pylsp = {
-        pylsp = {
-            plugins = {
-                pycodestyle = {
-                    ignore = { 'W291', 'E261', 'W293', 'W504', 'W503', 'E501', 'W501' },
-                }
+    -- https://www.reddit.com/r/neovim/comments/1lmd4ic/comment/n06upm2/
+    basedpyright = {
+        basedpyright = {
+            analysis = {
+                autoImportCompletions = false,
+                typeCheckingMode = "standard"
             }
         }
     },
