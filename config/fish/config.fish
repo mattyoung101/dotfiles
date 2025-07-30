@@ -93,3 +93,6 @@ set -gx MAMBA_ROOT_PREFIX "/home/matt/micromamba"
 $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
 # <<< mamba initialize <<<
 end
+
+# OpenBSD: use a less shitty mirror
+set -x PKG_PATH https://mirror.aarnet.edu.au/pub/OpenBSD/7.7/packages-stable/amd64/
