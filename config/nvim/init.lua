@@ -257,7 +257,7 @@ require('lazy').setup({
             --
             -- See :h blink-cmp-config-fuzzy for more information
             fuzzy = {
-                implementation = 'prefer_rust_with_warning',
+                implementation = 'lua',
                 sorts = {
                     'exact',
                     -- default sorts
@@ -616,10 +616,8 @@ require('nvim-treesitter.configs').setup {
     -- ADD TREESITTER LANGUAGES HERE
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
-        'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
-        'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
-        'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash', 'json', 'xml', 'http', 'terraform',
-        'd', 'supercollider', 'go', 'scala' },
+        'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'ini', 'rust',
+        'bash', 'json', 'xml' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -708,57 +706,6 @@ local capabilities = require('blink.cmp').get_lsp_capabilities()
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
     -- ADD LSP LANGUAGE SERVERS HERE
-    clangd = {},
-    texlab = {},
-    rust_analyzer = {
-        cargo = {
-            loadOutDirsFromCheck = true,
-            runBuildScripts = true
-        }
-    },
-    neocmake = {},
-    glsl_analyzer = {},
-    yamlls = {},
-    sqls = {},
-    tinymist = {
-        settings = {
-            systemFonts = false,
-            formatterMode = "typstyle",
-            previewFeature = "disable"
-        }
-    },
-    robotframework_ls = {},
-
-    html = {},
-    terraformls = {},
-    biome = {},
-    ts_ls = {},
-
-    -- https://www.reddit.com/r/neovim/comments/1lmd4ic/comment/n06upm2/
-    basedpyright = {
-        basedpyright = {
-            analysis = {
-                autoImportCompletions = false,
-                typeCheckingMode = "standard"
-            }
-        }
-    },
-
-    lua_ls = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
-    },
-
-    serve_d = {},
-    pest_ls = {},
-
-    svlangserver = {},
-
-    gopls = {},
-
-    -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
 }
 
 -- setup my slingshot systemverilog LSP for development
@@ -785,8 +732,8 @@ if not configs.slingshot then
 end
 -- lspconfig.slingshot.setup {}
 
--- add rust_hdl vhdl language server (not in mason)
-require 'lspconfig'.vhdl_ls.setup {}
+-- OPENBSD: Clangd
+lspconfig.clangd.setup {}
 
 -- Setup neovim lua configuration
 require('neodev').setup()

@@ -11,7 +11,7 @@ return {
     config = function()
         require('aerial').setup {
             vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>"),
-            backends = { "lsp", "treesitter", "markdown", "asciidoc", "man" },
+            backends = { "treesitter", "markdown", "asciidoc", "man" },
             filter_kind = false,
             lazy_load = true
         }

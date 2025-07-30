@@ -23,9 +23,6 @@ fish_add_path ~/.ghcup/bin
 #set -x CXX clang++
 #set -x CC clang
 
-# Node (fish nvm)
-nvm -s use latest
-
 # Alias vim to nvim because I accidentally type vim sometimes
 alias vim=nvim
 
@@ -65,29 +62,11 @@ function use_clang
     echo "Using ccache Clang"
 end
 
-# Rust sccache
-set -x RUSTC_WRAPPER /usr/bin/sccache
-set -x SCCACHE_CACHE_SIZE 30G
-
 ########################
 
 # as suggested by avery on uqcs (and slightly modified by me)
 
 function fish_greeting
-    # Fortunes location differs on Ubuntu and Arch
-    if test (awk -F= '/^NAME/{print $2}' /etc/os-release) = '"Ubuntu"'
-        # Ubuntu
-        fortune -s  /usr/share/games/fortunes/computers \
-                    /usr/share/games/fortunes/science \
-                    /usr/share/games/fortunes/wisdom \
-                    /usr/share/games/fortunes/platitudes | lolcat
-    else
-        # Arch
-        fortune -s  /usr/share/fortune/computers \
-                    /usr/share/fortune/science \
-                    /usr/share/fortune/wisdom \
-                    /usr/share/fortune/platitudes | lolcat
-    end
     echo
     echo (fish --version)
     echo
