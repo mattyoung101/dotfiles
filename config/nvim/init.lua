@@ -418,6 +418,9 @@ for newgroup, oldgroup in pairs(links) do
     vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
 end
 
+-- OpenBSD: add ctags
+vim.opt.tags:append({ ".git/tags", "tags" })
+
 -- Spaces not tabs. I mean it!!!!
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -733,7 +736,7 @@ end
 -- lspconfig.slingshot.setup {}
 
 -- OPENBSD: Clangd
-lspconfig.clangd.setup {}
+-- lspconfig.clangd.setup {}
 
 -- Setup neovim lua configuration
 require('neodev').setup()
