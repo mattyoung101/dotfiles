@@ -361,6 +361,7 @@ require('lazy').setup({
         config = function()
             pcall(require('nvim-treesitter.install').update { with_sync = true })
         end,
+        lazy = false,
     },
 
     {

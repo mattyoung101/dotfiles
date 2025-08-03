@@ -4,6 +4,7 @@ return {
     config = function ()
         require("markview").setup {
             typst = {
+                enable = false, -- due to bugs with how it handles list indent
                 code_blocks = {
                     enable = false
                 }
