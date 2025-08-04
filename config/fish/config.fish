@@ -56,9 +56,8 @@ set -x RUST_LOG info
 
 # command to use clang (with ccache)
 function use_clang
-    # TODO Fix this properly on Ubuntu
-    set -gx CXX /usr/lib/ccache/bin/clang++
-    set -gx CC /usr/lib/ccache/bin/clang
+    set -gx CXX ccache clang++
+    set -gx CC ccache clang
     echo "Using ccache Clang"
 end
 
