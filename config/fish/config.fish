@@ -52,7 +52,9 @@ source ~/.config/fish/kanagawa.fish
 zoxide init fish --cmd cd | source
 
 # Try to prefer Wayland by default for SDL applications
-set -x SDL_VIDEODRIVER "wayland,x11"
+# Removed 06/08/2025 since it breaks every single Steam game
+# TODO only set this if it's an interactive shell
+# set -x SDL_VIDEODRIVER "wayland,x11"
 
 # Rust logging
 set -x RUST_LOG info
@@ -68,6 +70,10 @@ end
 # Rust sccache
 set -x RUSTC_WRAPPER /usr/bin/sccache
 set -x SCCACHE_CACHE_SIZE 30G
+
+# libvirt connect to QEMU
+# ref https://serverfault.com/a/803321
+set -x LIBVIRT_DEFAULT_URI qemu:///system
 
 ########################
 
