@@ -23,9 +23,6 @@ fish_add_path ~/.ghcup/bin
 #set -x CXX clang++
 #set -x CC clang
 
-# Node (fish nvm)
-nvm -s use latest
-
 # Alias vim to nvim because I accidentally type vim sometimes
 alias vim=nvim
 
@@ -52,48 +49,23 @@ source ~/.config/fish/kanagawa.fish
 zoxide init fish --cmd cd | source
 
 # Try to prefer Wayland by default for SDL applications
-# Removed 06/08/2025 since it breaks every single Steam game
-# TODO only set this if it's an interactive shell
-# set -x SDL_VIDEODRIVER "wayland,x11"
+set -x SDL_VIDEODRIVER "wayland,x11"
 
 # Rust logging
 set -x RUST_LOG info
 
 # command to use clang (with ccache)
 function use_clang
-    # TODO Fix this properly on Ubuntu
-    set -gx CXX /usr/lib/ccache/bin/clang++
-    set -gx CC /usr/lib/ccache/bin/clang
+    set -gx CXX ccache clang++
+    set -gx CC ccache clang
     echo "Using ccache Clang"
 end
-
-# Rust sccache
-set -x RUSTC_WRAPPER /usr/bin/sccache
-set -x SCCACHE_CACHE_SIZE 30G
-
-# libvirt connect to QEMU
-# ref https://serverfault.com/a/803321
-set -x LIBVIRT_DEFAULT_URI qemu:///system
 
 ########################
 
 # as suggested by avery on uqcs (and slightly modified by me)
 
 function fish_greeting
-    # Fortunes location differs on Ubuntu and Arch
-    if test (awk -F= '/^NAME/{print $2}' /etc/os-release) = '"Ubuntu"'
-        # Ubuntu
-        fortune -s  /usr/share/games/fortunes/computers \
-                    /usr/share/games/fortunes/science \
-                    /usr/share/games/fortunes/wisdom \
-                    /usr/share/games/fortunes/platitudes | lolcat
-    else
-        # Arch
-        fortune -s  /usr/share/fortune/computers \
-                    /usr/share/fortune/science \
-                    /usr/share/fortune/wisdom \
-                    /usr/share/fortune/platitudes | lolcat
-    end
     echo
     echo (fish --version)
     echo
@@ -120,3 +92,6 @@ set -gx MAMBA_ROOT_PREFIX "/home/matt/micromamba"
 $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
 # <<< mamba initialize <<<
 end
+
+# OpenBSD: use a less shitty mirror
+set -x PKG_PATH https://mirror.aarnet.edu.au/pub/OpenBSD/7.7/packages-stable/amd64/

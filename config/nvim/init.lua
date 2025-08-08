@@ -195,63 +195,6 @@ require('lazy').setup({
             --  Add any additional override configuration in the following tables. They will be passed to
             --  the `settings` field of the server config. You must look up that documentation yourself.
             local servers = {
-                -- ADD LSP LANGUAGE SERVERS HERE
-                clangd = {},
-                texlab = {},
-                rust_analyzer = {
-                    cargo = {
-                        loadOutDirsFromCheck = true,
-                        runBuildScripts = true
-                    }
-                },
-                neocmake = {},
-                glsl_analyzer = {},
-                yamlls = {},
-                sqls = {},
-                tinymist = {
-                    settings = {
-                        systemFonts = false,
-                        formatterMode = "typstyle",
-                        previewFeature = "disable"
-                    }
-                },
-
-                html = {},
-                terraformls = {},
-                biome = {},
-                ts_ls = {},
-
-                -- https://www.reddit.com/r/neovim/comments/1lmd4ic/comment/n06upm2/
-                basedpyright = {
-                    settings = {
-                        basedpyright = {
-                            analysis = {
-                                autoImportCompletions = false,
-                                typeCheckingMode = "standard"
-                            }
-                        }
-                    }
-                },
-
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            workspace = { checkThirdParty = false },
-                            telemetry = { enable = false },
-                        },
-                    }
-                },
-
-                serve_d = {},
-                pest_ls = {},
-
-                svlangserver = {},
-
-                gopls = {},
-
-                kotlin_lsp = {},
-
-                -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
             }
 
             -- setup my slingshot systemverilog LSP for development
@@ -278,42 +221,8 @@ require('lazy').setup({
             end
             -- lspconfig.slingshot.setup {}
 
-            -- add rust_hdl vhdl language server (not in mason)
-            require 'lspconfig'.vhdl_ls.setup {}
-
-            -- Ensure the servers and tools above are installed
-            --
-            -- To check the current status of installed tools and/or manually install
-            -- other tools, you can run
-            --    :Mason
-            --
-            -- You can press `g?` for help in this menu.
-            --
-            -- `mason` had to be setup earlier: to configure its options see the
-            -- `dependencies` table for `nvim-lspconfig` above.
-            --
-            -- You can add other tools here that you want Mason to install
-            -- for you, so that they are available from within Neovim.
-            local ensure_installed = vim.tbl_keys(servers or {})
-            vim.list_extend(ensure_installed, {
-                'stylua', -- Used to format Lua code
-            })
-            require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-            require('mason-lspconfig').setup {
-                ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-                automatic_installation = false,
-                handlers = {
-                    function(server_name)
-                        local server = servers[server_name] or {}
-                        -- This handles overriding only values explicitly passed
-                        -- by the server configuration above. Useful when disabling
-                        -- certain features of an LSP (for example, turning off formatting for ts_ls)
-                        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-                        require('lspconfig')[server_name].setup(server)
-                    end,
-                },
-            }
+            -- OPENBSD: Clangd
+            lspconfig.clangd.setup {}
         end
     },
 
@@ -414,7 +323,7 @@ require('lazy').setup({
             --
             -- See :h blink-cmp-config-fuzzy for more information
             fuzzy = {
-                implementation = 'prefer_rust_with_warning',
+                implementation = 'lua',
                 sorts = {
                     'exact',
                     -- default sorts
@@ -516,10 +425,8 @@ require('lazy').setup({
             -- ADD TREESITTER LANGUAGES HERE
             -- Add languages to be installed here that you want installed for treesitter
             ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
-                'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
-                'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
-                'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash', 'json', 'xml', 'http', 'terraform',
-                'd', 'supercollider', 'go', 'scala', 'regex' },
+                'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'ini', 'rust',
+                'bash', 'json', 'xml' },
 
             -- Autoinstall languages that are not installed
             auto_install = true,
