@@ -484,7 +484,9 @@ require('lazy').setup({
     },
 
     { import = 'custom.plugins' },
-}, {})
+}, {
+        concurrency = 2
+    })
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
