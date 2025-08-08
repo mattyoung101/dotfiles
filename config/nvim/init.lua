@@ -223,19 +223,23 @@ require('lazy').setup({
 
                 -- https://www.reddit.com/r/neovim/comments/1lmd4ic/comment/n06upm2/
                 basedpyright = {
-                    basedpyright = {
-                        analysis = {
-                            autoImportCompletions = false,
-                            typeCheckingMode = "standard"
+                    settings = {
+                        basedpyright = {
+                            analysis = {
+                                autoImportCompletions = false,
+                                typeCheckingMode = "standard"
+                            }
                         }
                     }
                 },
 
                 lua_ls = {
-                    Lua = {
-                        workspace = { checkThirdParty = false },
-                        telemetry = { enable = false },
-                    },
+                    settings = {
+                        Lua = {
+                            workspace = { checkThirdParty = false },
+                            telemetry = { enable = false },
+                        },
+                    }
                 },
 
                 serve_d = {},
