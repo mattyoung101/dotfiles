@@ -151,24 +151,34 @@ require('lazy').setup({
 
             -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim',    branch = 'legacy', opts = {} },
-
-            -- Additional lua configuration, makes nvim stuff amazing!
-            'folke/neodev.nvim',
+            { 'j-hui/fidget.nvim',    opts = {} },
 
             -- Allows extra capabilities provided by blink.cmp
             'saghen/blink.cmp',
+
+            -- lazydev for init.lua editing
+            {
+                "folke/lazydev.nvim",
+                ft = "lua", -- only load on lua files
+                opts = {
+                    library = {
+                        -- See the configuration section for more details
+                        -- Load luvit types when the `vim.uv` word is found
+                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                    },
+                },
+            },
         },
         config = function()
             vim.api.nvim_create_autocmd('LspAttach', {
-                group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+                -- group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
                 callback = function(event)
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
                     local bufnr = event.buf
                     on_attach(client, bufnr)
 
                     vim.api.nvim_create_autocmd('LspDetach', {
-                        group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+                        -- group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
                         callback = function(event2)
                             vim.lsp.buf.clear_references()
                             vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
@@ -270,10 +280,6 @@ require('lazy').setup({
 
             -- add rust_hdl vhdl language server (not in mason)
             require 'lspconfig'.vhdl_ls.setup {}
-
-            -- Setup neovim lua configuration
-            require('neodev').setup()
-
 
             -- Ensure the servers and tools above are installed
             --
