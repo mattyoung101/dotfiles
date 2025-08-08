@@ -21,6 +21,9 @@ return {
                     ["vim.lsp.util.stylize_markdown"] = true,
                     ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
                 },
+                progress = {
+                    enabled = true
+                }
             },
             -- you can enable a preset for easier configuration
             presets = {
