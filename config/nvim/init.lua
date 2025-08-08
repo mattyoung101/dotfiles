@@ -145,12 +145,13 @@ require('lazy').setup({
         'neovim/nvim-lspconfig',
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
-            { "mason-org/mason.nvim",           version = "^1.0.0" },
-            { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
+            { 'mason-org/mason.nvim', opts = {} },
+            'mason-org/mason-lspconfig.nvim',
+            'WhoIsSethDaniel/mason-tool-installer.nvim',
 
             -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim',              branch = 'legacy', opts = {} },
+            { 'j-hui/fidget.nvim',    branch = 'legacy', opts = {} },
 
             -- Additional lua configuration, makes nvim stuff amazing!
             'folke/neodev.nvim',
@@ -158,6 +159,156 @@ require('lazy').setup({
             -- Allows extra capabilities provided by blink.cmp
             'saghen/blink.cmp',
         },
+        config = function()
+            vim.api.nvim_create_autocmd('LspAttach', {
+                group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+                callback = function(event)
+                    local client = vim.lsp.get_client_by_id(event.data.client_id)
+                    local bufnr = event.buf
+                    on_attach(client, bufnr)
+
+                    vim.api.nvim_create_autocmd('LspDetach', {
+                        group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+                        callback = function(event2)
+                            vim.lsp.buf.clear_references()
+                            vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+                        end,
+                    })
+                end
+            })
+
+            -- LSP servers and clients are able to communicate to each other what features they support.
+            --  By default, Neovim doesn't support everything that is in the LSP specification.
+            --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
+            --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+            -- Enable the following language servers
+            --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+            --
+            --  Add any additional override configuration in the following tables. They will be passed to
+            --  the `settings` field of the server config. You must look up that documentation yourself.
+            local servers = {
+                -- ADD LSP LANGUAGE SERVERS HERE
+                clangd = {},
+                texlab = {},
+                rust_analyzer = {
+                    cargo = {
+                        loadOutDirsFromCheck = true,
+                        runBuildScripts = true
+                    }
+                },
+                neocmake = {},
+                glsl_analyzer = {},
+                yamlls = {},
+                sqls = {},
+                tinymist = {
+                    settings = {
+                        systemFonts = false,
+                        formatterMode = "typstyle",
+                        previewFeature = "disable"
+                    }
+                },
+
+                html = {},
+                terraformls = {},
+                biome = {},
+                ts_ls = {},
+
+                -- https://www.reddit.com/r/neovim/comments/1lmd4ic/comment/n06upm2/
+                basedpyright = {
+                    basedpyright = {
+                        analysis = {
+                            autoImportCompletions = false,
+                            typeCheckingMode = "standard"
+                        }
+                    }
+                },
+
+                lua_ls = {
+                    Lua = {
+                        workspace = { checkThirdParty = false },
+                        telemetry = { enable = false },
+                    },
+                },
+
+                serve_d = {},
+                pest_ls = {},
+
+                svlangserver = {},
+
+                gopls = {},
+
+                kotlin_lsp = {},
+
+                -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
+            }
+
+            -- setup my slingshot systemverilog LSP for development
+            -- references used:
+            --  https://neovim.discourse.group/t/how-to-add-a-custom-server-to-nvim-lspconfig/3925a
+            --  https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/veridian.lua
+            --  https://github.com/neovim/nvim-lspconfig/issues/691#issuecomment-766199011
+            --  https://github.com/VHDL-LS/rust_hdl/issues/10#issuecomment-1000289556
+            local lspconfig = require 'lspconfig'
+            local configs = require 'lspconfig.configs'
+
+            if not configs.slingshot then
+                -- this require lspconfig.configs is the trick required to make it work
+                require("lspconfig.configs").slingshot = {
+                    default_config = {
+                        cmd = { 'java', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005', '-jar', '/home/matt/workspace/slingshot/build/libs/slingshot-1.0-SNAPSHOT-all.jar' },
+                        filetypes = { 'verilog', 'systemverilog' },
+                        root_dir = function(fname)
+                            return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+                        end,
+                        settings = {},
+                    },
+                }
+            end
+            -- lspconfig.slingshot.setup {}
+
+            -- add rust_hdl vhdl language server (not in mason)
+            require 'lspconfig'.vhdl_ls.setup {}
+
+            -- Setup neovim lua configuration
+            require('neodev').setup()
+
+
+            -- Ensure the servers and tools above are installed
+            --
+            -- To check the current status of installed tools and/or manually install
+            -- other tools, you can run
+            --    :Mason
+            --
+            -- You can press `g?` for help in this menu.
+            --
+            -- `mason` had to be setup earlier: to configure its options see the
+            -- `dependencies` table for `nvim-lspconfig` above.
+            --
+            -- You can add other tools here that you want Mason to install
+            -- for you, so that they are available from within Neovim.
+            local ensure_installed = vim.tbl_keys(servers or {})
+            vim.list_extend(ensure_installed, {
+                'stylua', -- Used to format Lua code
+            })
+            require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+            require('mason-lspconfig').setup {
+                ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+                automatic_installation = false,
+                handlers = {
+                    function(server_name)
+                        local server = servers[server_name] or {}
+                        -- This handles overriding only values explicitly passed
+                        -- by the server configuration above. Useful when disabling
+                        -- certain features of an LSP (for example, turning off formatting for ts_ls)
+                        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+                        require('lspconfig')[server_name].setup(server)
+                    end,
+                },
+            }
+        end
     },
 
 
@@ -695,124 +846,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 vim.keymap.set("n", "<leader>rn", function()
     return ":IncRename " .. vim.fn.expand("<cword>")
 end, { expr = true, desc = "[R]e[n]ame" })
-
--- LSP servers and clients are able to communicate to each other what features they support.
---  By default, Neovim doesn't support everything that is in the LSP specification.
---  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
---  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-local capabilities = require('blink.cmp').get_lsp_capabilities()
-
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
-local servers = {
-    -- ADD LSP LANGUAGE SERVERS HERE
-    clangd = {},
-    texlab = {},
-    rust_analyzer = {
-        cargo = {
-            loadOutDirsFromCheck = true,
-            runBuildScripts = true
-        }
-    },
-    neocmake = {},
-    glsl_analyzer = {},
-    yamlls = {},
-    sqls = {},
-    tinymist = {
-        settings = {
-            systemFonts = false,
-            formatterMode = "typstyle",
-            previewFeature = "disable"
-        }
-    },
-    robotframework_ls = {},
-
-    html = {},
-    terraformls = {},
-    biome = {},
-    ts_ls = {},
-
-    -- https://www.reddit.com/r/neovim/comments/1lmd4ic/comment/n06upm2/
-    basedpyright = {
-        basedpyright = {
-            analysis = {
-                autoImportCompletions = false,
-                typeCheckingMode = "standard"
-            }
-        }
-    },
-
-    lua_ls = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
-    },
-
-    serve_d = {},
-    pest_ls = {},
-
-    svlangserver = {},
-
-    gopls = {},
-
-    kotlin_lsp = {},
-
-    -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
-}
-
--- setup my slingshot systemverilog LSP for development
--- references used:
---  https://neovim.discourse.group/t/how-to-add-a-custom-server-to-nvim-lspconfig/3925a
---  https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/veridian.lua
---  https://github.com/neovim/nvim-lspconfig/issues/691#issuecomment-766199011
---  https://github.com/VHDL-LS/rust_hdl/issues/10#issuecomment-1000289556
-local lspconfig = require 'lspconfig'
-local configs = require 'lspconfig.configs'
-
-if not configs.slingshot then
-    -- this require lspconfig.configs is the trick required to make it work
-    require("lspconfig.configs").slingshot = {
-        default_config = {
-            cmd = { 'java', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005', '-jar', '/home/matt/workspace/slingshot/build/libs/slingshot-1.0-SNAPSHOT-all.jar' },
-            filetypes = { 'verilog', 'systemverilog' },
-            root_dir = function(fname)
-                return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-            end,
-            settings = {},
-        },
-    }
-end
--- lspconfig.slingshot.setup {}
-
--- add rust_hdl vhdl language server (not in mason)
-require 'lspconfig'.vhdl_ls.setup {}
-
--- Setup neovim lua configuration
-require('neodev').setup()
-
--- Setup mason so it can manage external tooling
-require('mason').setup()
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-    ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-    function(server_name)
-        require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = servers[server_name],
-        }
-    end,
-}
 
 local luasnip = require 'luasnip'
 
