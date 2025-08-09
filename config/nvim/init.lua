@@ -528,7 +528,7 @@ require('lazy').setup({
                 -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
                 --  If you are experiencing weird indenting issues, add the language to
                 --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-                additional_vim_regex_highlighting = { 'ruby' },
+                additional_vim_regex_highlighting = { 'markdown' },
             },
             indent = { enable = true, disable = { 'python', 'verilog', 'systemverilog' } },
             incremental_selection = {
@@ -701,7 +701,8 @@ require('telescope').setup {
     },
     pickers = {
         find_files = {
-            hidden = true
+            hidden = true,
+            file_ignore_patterns = { ".git/", "node_modules", "poetry.lock" },
         },
         grep_string = {
             hidden = true
