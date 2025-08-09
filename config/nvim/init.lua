@@ -177,7 +177,6 @@ require('lazy').setup({
                         -- group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
                         callback = function(event2)
                             vim.lsp.buf.clear_references()
-                            vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
                         end,
                     })
                 end
@@ -519,7 +518,7 @@ require('lazy').setup({
                 'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
                 'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
                 'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash', 'json', 'xml', 'http', 'terraform',
-                'd', 'supercollider', 'go', 'scala', 'regex' },
+                'd', 'supercollider', 'go', 'scala', 'regex', 'commonlisp' },
 
             -- Autoinstall languages that are not installed
             auto_install = true,
