@@ -719,6 +719,15 @@ require('telescope').setup {
     }
 }
 
+vim.g.lazygit_on_exit_callback = function ()
+    -- once LazyGit has exited, update the neo-tree git status
+    -- ref: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1381#issuecomment-1985679097
+    local state = require("neo-tree.sources.manager").get_state("filesystem")
+    require("neo-tree.sources.filesystem.commands").refresh(state)
+end
+
+vim.keymap.set('n', '<leader>lg', require('lazygit').lazygit, { desc = '[L]azy[G]it' })
+
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
@@ -737,7 +746,6 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>lg', require('lazygit').lazygit, { desc = '[L]azy[G]it' })
 vim.keymap.set("n", "<Leader>tf",
     function() require("telescope").extensions.frecency.frecency {} end,
     { desc = '[T]elescope [F]recency' }
