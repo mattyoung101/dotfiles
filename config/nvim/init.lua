@@ -126,11 +126,11 @@ local on_attach = function(client, bufnr)
     -- References:
     -- https://github.com/gennaro-tedesco/dotfiles/blob/master/nvim/lua/plugins/lsp.lua#L46-L59
     -- https://www.reddit.com/r/neovim/comments/1530wur/comment/jsgnk05/
-    if client.server_capabilities.inlayHintProvider then
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-    else
-        --print("no inlay hints available")
-    end
+    -- if client.server_capabilities.inlayHintProvider then
+    --     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    -- else
+    --     --print("no inlay hints available")
+    -- end
 end
 
 require('lazy').setup({
@@ -513,12 +513,12 @@ for newgroup, oldgroup in pairs(links) do
 end
 
 -- Spaces not tabs. I mean it!!!!
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
+vim.opt.tabstop = 8
+vim.opt.shiftwidth = 8
+vim.opt.softtabstop = 8
+vim.o.tabstop = 8
+vim.o.shiftwidth = 8
+vim.o.softtabstop = 8
 vim.opt.expandtab = true
 vim.o.expandtab = true
 
