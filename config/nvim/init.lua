@@ -566,9 +566,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- 110 character ruler
-vim.opt.colorcolumn = "110"
-vim.opt.textwidth = 110
+-- 80 character ruler
+vim.opt.colorcolumn = "80"
+vim.opt.textwidth = 80
 
 -- Spelling
 vim.opt.spell = true
