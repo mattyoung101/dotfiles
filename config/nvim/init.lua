@@ -506,46 +506,60 @@ require('lazy').setup({
         end,
     },
 
-    { -- Highlight, edit, and navigate code
-        'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate',
-        main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-        -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-        opts = {
-            -- ADD TREESITTER LANGUAGES HERE
-            -- Add languages to be installed here that you want installed for treesitter
-            ensure_installed = { 'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
+    -- greetz to henry
+    -- https://github.com/henrybatt/neovim-config/blob/refactor/lua/plugins/treesitter.lua
+    {
+        "nvim-treesitter/nvim-treesitter",
+        lazy = false,
+        branch = "main",
+        build = ":TSUpdate",
+
+        dependencies = {
+            { "nvim-treesitter/nvim-treesitter-context" },
+            { "HiPhish/rainbow-delimiters.nvim" },
+        },
+
+        opts = function()
+            -- Install default parsers using nvim-treesitter
+            require("nvim-treesitter").install({
+                'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
                 'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
                 'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
                 'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash', 'json', 'xml', 'http', 'terraform',
-                'd', 'supercollider', 'go', 'scala', 'regex', 'commonlisp' },
+                'd', 'supercollider', 'go', 'scala', 'regex', 'commonlisp', 'gitmodules', 'gitignore'
+            })
 
-            -- Autoinstall languages that are not installed
-            auto_install = true,
-            highlight = {
-                enable = true,
-                -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-                --  If you are experiencing weird indenting issues, add the language to
-                --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-                additional_vim_regex_highlighting = { 'markdown' },
-            },
-            indent = { enable = true, disable = { 'python', 'verilog', 'systemverilog' } },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = '<c-space>',
-                    node_incremental = '<c-space>',
-                    scope_incremental = '<c-s>',
-                    node_decremental = '<M-space>',
-                },
-            },
-        },
-        -- There are additional nvim-treesitter modules that you can use to interact
-        -- with nvim-treesitter. You should go explore a few and see what interests you:
-        --
-        --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-        --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-        --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+            -- autocmd to automatically install and start treesitter parsers based on filetype
+            -- from: https://www.reddit.com/r/neovim/comments/1kuj9xm/has_anyone_successfully_switched_to_the_new/
+            vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+                desc = "Start (and install missing) treesitter parsers based on filetype",
+                group = vim.api.nvim_create_augroup("treesitter-buf-win-enter", { clear = true }),
+                callback = function(event)
+                    local filetype = vim.api.nvim_get_option_value("filetype", { buf = event.buf })
+
+                    if filetype == "" then
+                        return
+                    end
+
+                    local name = vim.treesitter.language.get_lang(filetype)
+
+                    if name and require("nvim-treesitter.parsers")[name] then
+                        if not vim.treesitter.language.add(name) then
+                            require("nvim-treesitter").install({ name }):wait(60000)
+                            if not vim.treesitter.language.add(name) then
+                                vim.notify("Failed to find " .. name .. " parser after installation.",
+                                    vim.log.levels.WARN,
+                                    { title = "treesitter" }
+                                )
+                                return
+                            end
+                        end
+
+                        vim.treesitter.start(event.buf, name)
+                    end
+                end,
+            })
+        end,
     },
 
     {
@@ -719,7 +733,7 @@ require('telescope').setup {
     }
 }
 
-vim.g.lazygit_on_exit_callback = function ()
+vim.g.lazygit_on_exit_callback = function()
     -- once LazyGit has exited, update the neo-tree git status
     -- ref: https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1381#issuecomment-1985679097
     local state = require("neo-tree.sources.manager").get_state("filesystem")
