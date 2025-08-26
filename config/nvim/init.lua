@@ -349,6 +349,7 @@ require('lazy').setup({
                 opts = {},
             },
             'folke/lazydev.nvim',
+            "moyiz/blink-emoji.nvim",
 
             -- doesn't currently seem to work
             -- "p00f/clangd_extensions.nvim"
@@ -397,9 +398,29 @@ require('lazy').setup({
             },
 
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'lazydev' },
+                default = { 'lsp', 'path', 'snippets', 'lazydev', 'emoji' },
                 providers = {
                     lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+                    emoji = {
+                        module = "blink-emoji",
+                        name = "Emoji",
+                        score_offset = 15, -- Tune by preference
+                        opts = {
+                            insert = true, -- Insert emoji (default) or complete its name
+                            ---@type string|table|fun():table
+                            trigger = function()
+                                return { ":" }
+                            end,
+                        },
+                        should_show_items = function()
+                            return vim.tbl_contains(
+                            -- Enable emoji completion only for git commits and markdown.
+                            -- By default, enabled for all file-types.
+                                { "gitcommit", "markdown" },
+                                vim.o.filetype
+                            )
+                        end,
+                    }
                 },
             },
 
