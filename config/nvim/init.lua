@@ -250,6 +250,8 @@ require('lazy').setup({
 
                 kotlin_lsp = {},
 
+                gh_actions_ls = {},
+
                 -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
             }
 
