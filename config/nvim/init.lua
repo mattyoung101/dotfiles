@@ -397,6 +397,14 @@ require('lazy').setup({
                 -- By default, you may press `<c-space>` to show the documentation.
                 -- Optionally, set `auto_show = true` to show the documentation after a delay.
                 documentation = { auto_show = true, auto_show_delay_ms = 500 },
+                ghost_text = {
+                    enabled = true
+                },
+                accept = {
+                    auto_brackets = {
+                        enabled = true
+                    }
+                }
             },
 
             sources = {
@@ -418,7 +426,7 @@ require('lazy').setup({
                             return vim.tbl_contains(
                             -- Enable emoji completion only for git commits and markdown.
                             -- By default, enabled for all file-types.
-                                { "gitcommit", "markdown" },
+                                { "gitcommit", "markdown", "typst" },
                                 vim.o.filetype
                             )
                         end,
