@@ -221,6 +221,9 @@ require('lazy').setup({
             -- lspconfig.slingshot.setup {}
 
             -- OPENBSD: Clangd
+            lspconfig.clangd.setup {
+                cmd = { "clangd", "-j=2" }
+            }
             lspconfig.clangd.setup {}
         end
     },
