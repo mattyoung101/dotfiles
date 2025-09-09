@@ -28,7 +28,7 @@ alias vim=nvim
 
 # Use neovim as man pager
 # https://www.chrisdeluca.me/article/use-neovim-as-your-man-pager/
-set -x MANPAGER "nvim -c 'Man!' -o -"
+set -x MANPAGER "nvim +Man!"
 
 # Use nvim as editor
 set -x EDITOR nvim
