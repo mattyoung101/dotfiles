@@ -242,7 +242,6 @@ require('lazy').setup({
                 },
 
                 serve_d = {},
-                pest_ls = {},
 
                 svlangserver = {},
 
@@ -251,6 +250,8 @@ require('lazy').setup({
                 kotlin_lsp = {},
 
                 gh_actions_ls = {},
+
+                ruff = {}, -- ruff ruff :3
 
                 -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
             }
