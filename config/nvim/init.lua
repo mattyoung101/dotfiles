@@ -281,7 +281,7 @@ require('lazy').setup({
             -- lspconfig.slingshot.setup {}
 
             -- add rust_hdl vhdl language server (not in mason)
-            require 'lspconfig'.vhdl_ls.setup {}
+            -- require 'lspconfig'.vhdl_ls.setup {}
 
             -- Ensure the servers and tools above are installed
             --
