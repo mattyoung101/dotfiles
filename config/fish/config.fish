@@ -56,9 +56,6 @@ zoxide init fish --cmd cd | source
 # TODO only set this if it's an interactive shell
 # set -x SDL_VIDEODRIVER "wayland,x11"
 
-# Rust logging
-set -x RUST_LOG info
-
 # command to use clang (with ccache)
 function use_clang
     # TODO Fix this properly on Ubuntu
