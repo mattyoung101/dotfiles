@@ -25,36 +25,6 @@ return {
                 },
             },
             preset = "default",
-            layout = "custom_default",
-            layouts = {
-                custom_default = {
-                    layout = {
-                        box = "horizontal",
-                        width = 0.9,
-                        min_width = 120,
-                        height = 0.85,
-                        {
-                            box = "vertical",
-                            title = "{title} {live} {flags}",
-                            { win = "input", border = "rounded", title = "{title} {live} {flags}", height = 1 },
-                            { win = "list",  border = "rounded", title = "Results" },
-                        },
-                        { win = "preview", title = "{preview}", border = "rounded", width = 0.8 },
-                    },
-                },
-                vertical_list_only = {
-                    layout = {
-                        backdrop = false,
-                        width = 0.9,
-                        min_width = 80,
-                        height = 0.8,
-                        min_height = 30,
-                        box = "vertical",
-                        { win = "input", border = "rounded", title = "{title} {live} {flags}", height = 1 },
-                        { win = "list",  border = "rounded", title = "Results" },
-                    },
-                },
-            },
         },
     },
 
@@ -163,7 +133,7 @@ return {
         {
             "<leader>sg",
             function()
-                Snacks.picker.grep({ hidden = true, ignored = true })
+                Snacks.picker.grep({ hidden = true, ignored = true, exclude = { "build/**", "*.json" } })
             end,
             desc = "Grep",
         },
