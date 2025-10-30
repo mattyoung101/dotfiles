@@ -8,34 +8,36 @@ and just added stuff as I went.
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system {
-        'git',
-        'clone',
-        '--filter=blob:none',
-        'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable', -- latest stable release
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
         lazypath,
-    }
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
 -- Source: https://stackoverflow.com/a/656232/5007892
 function Set(list)
     local set = {}
-    for _, l in ipairs(list) do set[l] = true end
+    for _, l in ipairs(list) do
+        set[l] = true
+    end
     return set
 end
 
 -- File types which we should display a word count in
-local wcFileTypes = Set { "md", "txt", "markdown", "tex", "latex", "typst", "typ" }
+local wcFileTypes = Set({ "md", "txt", "markdown", "tex", "latex", "typst", "typ" })
 
 -- Source: https://github.com/nvim-lualine/lualine.nvim/issues/328#issuecomment-982672253
 local function getWords()
@@ -89,35 +91,35 @@ local on_attach = function(client, bufnr)
     -- for LSP related items. It sets the mode, buffer and description for us each time.
     local nmap = function(keys, func, desc)
         if desc then
-            desc = 'LSP: ' .. desc
+            desc = "LSP: " .. desc
         end
 
-        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+        vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
     end
 
-    nmap('<leader>ca', require("actions-preview").code_actions, '[C]ode [A]ction')
-    nmap('<leader>fm', vim.lsp.buf.format, 'LSP [F]or[m]at')
+    nmap("<leader>ca", require("actions-preview").code_actions, "[C]ode [A]ction")
+    nmap("<leader>fm", vim.lsp.buf.format, "LSP [F]or[m]at")
 
-    nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-    nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-    nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+    nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+    nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+    nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
 
     -- See `:help K` for why this keymap
-    nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-    nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+    nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
     -- Lesser used LSP functionality
-    nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-    nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-    nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-    nmap('<leader>wl', function()
+    nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+    nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+    nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+    nmap("<leader>wl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, '[W]orkspace [L]ist Folders')
+    end, "[W]orkspace [L]ist Folders")
 
     -- Create a command `:Format` local to the LSP buffer
-    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
         vim.lsp.buf.format()
-    end, { desc = 'Format current buffer with LSP' })
+    end, { desc = "Format current buffer with LSP" })
 
     -- Enable inlay hints for clients that support them
     -- References:
@@ -130,7 +132,7 @@ local on_attach = function(client, bufnr)
     end
 end
 
-require('lazy').setup({
+require("lazy").setup({
     -- NOTE: First, some plugins that don't require any configuration
 
     -- Detect tabstop and shiftwidth automatically
@@ -139,15 +141,15 @@ require('lazy').setup({
     -- NOTE: This is where your plugins related to LSP can be installed.
     --  The configuration is done below. Search for lspconfig to find it below.
     { -- LSP Configuration & Plugins
-        'neovim/nvim-lspconfig',
+        "neovim/nvim-lspconfig",
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
-            { 'mason-org/mason.nvim', opts = {} },
-            'mason-org/mason-lspconfig.nvim',
-            'WhoIsSethDaniel/mason-tool-installer.nvim',
+            { "mason-org/mason.nvim", opts = {} },
+            "mason-org/mason-lspconfig.nvim",
+            "WhoIsSethDaniel/mason-tool-installer.nvim",
 
             -- Allows extra capabilities provided by blink.cmp
-            'saghen/blink.cmp',
+            "saghen/blink.cmp",
 
             -- lazydev for init.lua editing
             {
@@ -163,27 +165,27 @@ require('lazy').setup({
             },
         },
         config = function()
-            vim.api.nvim_create_autocmd('LspAttach', {
+            vim.api.nvim_create_autocmd("LspAttach", {
                 -- group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
                 callback = function(event)
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
                     local bufnr = event.buf
                     on_attach(client, bufnr)
 
-                    vim.api.nvim_create_autocmd('LspDetach', {
+                    vim.api.nvim_create_autocmd("LspDetach", {
                         -- group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
                         callback = function(event2)
                             vim.lsp.buf.clear_references()
                         end,
                     })
-                end
+                end,
             })
 
             -- LSP servers and clients are able to communicate to each other what features they support.
             --  By default, Neovim doesn't support everything that is in the LSP specification.
             --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
             --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            local capabilities = require("blink.cmp").get_lsp_capabilities()
 
             -- Enable the following language servers
             --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -197,8 +199,8 @@ require('lazy').setup({
                 rust_analyzer = {
                     cargo = {
                         loadOutDirsFromCheck = true,
-                        runBuildScripts = true
-                    }
+                        runBuildScripts = true,
+                    },
                 },
                 neocmake = {},
                 glsl_analyzer = {},
@@ -208,8 +210,8 @@ require('lazy').setup({
                     settings = {
                         systemFonts = false,
                         formatterMode = "typstyle",
-                        previewFeature = "disable"
-                    }
+                        previewFeature = "disable",
+                    },
                 },
 
                 html = {},
@@ -223,10 +225,44 @@ require('lazy').setup({
                         basedpyright = {
                             analysis = {
                                 autoImportCompletions = false,
-                                typeCheckingMode = "standard"
-                            }
-                        }
-                    }
+                                typeCheckingMode = "standard",
+                                reportAttributeAccessIssue = false,
+                                diagnosticRuleSet = {
+                                    reportArgumentType = "none",
+                                    reportAttributeAccessIssue = "none",
+                                    reportCallIssue = "none",
+                                    reportFunctionMemberAccess = "none",
+                                    reportGeneralTypeIssues = "none",
+                                    reportIncompatibleMethodOverride = "none",
+                                    reportIncompatibleVariableOverride = "none",
+                                    reportIndexIssue = "none",
+                                    reportOptionalMemberAccess = "none",
+                                    reportOptionalSubscript = "none",
+                                    reportPrivateImportUsage = "none",
+                                },
+                            },
+                        },
+                        python = {
+                            analysis = {
+                                autoImportCompletions = false,
+                                typeCheckingMode = "standard",
+                                reportAttributeAccessIssue = false,
+                                diagnosticRuleSet = {
+                                    reportArgumentType = "none",
+                                    reportAttributeAccessIssue = "none",
+                                    reportCallIssue = "none",
+                                    reportFunctionMemberAccess = "none",
+                                    reportGeneralTypeIssues = "none",
+                                    reportIncompatibleMethodOverride = "none",
+                                    reportIncompatibleVariableOverride = "none",
+                                    reportIndexIssue = "none",
+                                    reportOptionalMemberAccess = "none",
+                                    reportOptionalSubscript = "none",
+                                    reportPrivateImportUsage = "none",
+                                },
+                            },
+                        },
+                    },
                 },
 
                 lua_ls = {
@@ -235,7 +271,7 @@ require('lazy').setup({
                             workspace = { checkThirdParty = false },
                             telemetry = { enable = false },
                         },
-                    }
+                    },
                 },
 
                 serve_d = {},
@@ -259,15 +295,20 @@ require('lazy').setup({
             --  https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/veridian.lua
             --  https://github.com/neovim/nvim-lspconfig/issues/691#issuecomment-766199011
             --  https://github.com/VHDL-LS/rust_hdl/issues/10#issuecomment-1000289556
-            local lspconfig = require 'lspconfig'
-            local configs = require 'lspconfig.configs'
+            local lspconfig = require("lspconfig")
+            local configs = require("lspconfig.configs")
 
             if not configs.slingshot then
                 -- this require lspconfig.configs is the trick required to make it work
                 require("lspconfig.configs").slingshot = {
                     default_config = {
-                        cmd = { 'java', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005', '-jar', '/home/matt/workspace/slingshot/build/libs/slingshot-1.0-SNAPSHOT-all.jar' },
-                        filetypes = { 'verilog', 'systemverilog' },
+                        cmd = {
+                            "java",
+                            "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005",
+                            "-jar",
+                            "/home/matt/workspace/slingshot/build/libs/slingshot-1.0-SNAPSHOT-all.jar",
+                        },
+                        filetypes = { "verilog", "systemverilog" },
                         root_dir = function(fname)
                             return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
                         end,
@@ -295,11 +336,11 @@ require('lazy').setup({
             -- for you, so that they are available from within Neovim.
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
-                'stylua', -- Used to format Lua code
+                "stylua", -- Used to format Lua code
             })
-            require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+            require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-            require('mason-lspconfig').setup {
+            require("mason-lspconfig").setup({
                 ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
                 automatic_installation = false,
                 handlers = {
@@ -308,32 +349,31 @@ require('lazy').setup({
                         -- This handles overriding only values explicitly passed
                         -- by the server configuration above. Useful when disabling
                         -- certain features of an LSP (for example, turning off formatting for ts_ls)
-                        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-                        require('lspconfig')[server_name].setup(server)
+                        server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+                        require("lspconfig")[server_name].setup(server)
                     end,
                 },
-            }
-        end
+            })
+        end,
     },
 
-
     { -- Autocompletion
-        'saghen/blink.cmp',
-        event = 'VimEnter',
-        version = '1.*',
+        "saghen/blink.cmp",
+        event = "VimEnter",
+        version = "1.*",
         dependencies = {
             -- Snippet Engine
             {
-                'L3MON4D3/LuaSnip',
-                version = '2.*',
+                "L3MON4D3/LuaSnip",
+                version = "2.*",
                 build = (function()
                     -- Build Step is needed for regex support in snippets.
                     -- This step is not supported in many windows environments.
                     -- Remove the below condition to re-enable on windows.
-                    if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+                    if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
                         return
                     end
-                    return 'make install_jsregexp'
+                    return "make install_jsregexp"
                 end)(),
                 dependencies = {
                     -- `friendly-snippets` contains a variety of premade snippets.
@@ -348,7 +388,7 @@ require('lazy').setup({
                 },
                 opts = {},
             },
-            'folke/lazydev.nvim',
+            "folke/lazydev.nvim",
             "moyiz/blink-emoji.nvim",
 
             -- doesn't currently seem to work
@@ -379,7 +419,7 @@ require('lazy').setup({
                 -- <c-k>: Toggle signature help
                 --
                 -- See :h blink-cmp-config-keymap for defining your own keymap
-                preset = 'enter',
+                preset = "enter",
 
                 -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
                 --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -388,7 +428,7 @@ require('lazy').setup({
             appearance = {
                 -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
                 -- Adjusts spacing to ensure icons are aligned
-                nerd_font_variant = 'mono',
+                nerd_font_variant = "mono",
             },
 
             completion = {
@@ -396,19 +436,19 @@ require('lazy').setup({
                 -- Optionally, set `auto_show = true` to show the documentation after a delay.
                 documentation = { auto_show = true, auto_show_delay_ms = 500 },
                 ghost_text = {
-                    enabled = true
+                    enabled = true,
                 },
                 accept = {
                     auto_brackets = {
-                        enabled = true
-                    }
-                }
+                        enabled = true,
+                    },
+                },
             },
 
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'lazydev', 'emoji' },
+                default = { "lsp", "path", "snippets", "lazydev", "emoji" },
                 providers = {
-                    lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+                    lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
                     emoji = {
                         module = "blink-emoji",
                         name = "Emoji",
@@ -428,11 +468,11 @@ require('lazy').setup({
                                 vim.o.filetype
                             )
                         end,
-                    }
+                    },
                 },
             },
 
-            snippets = { preset = 'luasnip' },
+            snippets = { preset = "luasnip" },
 
             -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
             -- which automatically downloads a prebuilt binary when enabled.
@@ -442,14 +482,14 @@ require('lazy').setup({
             --
             -- See :h blink-cmp-config-fuzzy for more information
             fuzzy = {
-                implementation = 'prefer_rust_with_warning',
+                implementation = "prefer_rust_with_warning",
                 sorts = {
-                    'exact',
+                    "exact",
                     -- default sorts
-                    'score',
+                    "score",
                     -- doesn't currently seem to work
                     -- require("clangd_extensions").cmp_scores,
-                    'sort_text',
+                    "sort_text",
                 },
             },
 
@@ -459,17 +499,17 @@ require('lazy').setup({
     },
 
     -- Useful plugin to show you pending keybinds.
-    { 'folke/which-key.nvim',                opts = {} },
+    { "folke/which-key.nvim",                opts = {} },
     { -- Adds git releated signs to the gutter, as well as utilities for managing changes
-        'lewis6991/gitsigns.nvim',
+        "lewis6991/gitsigns.nvim",
         opts = {
             -- See `:help gitsigns.txt`
             signs = {
-                add = { text = '+' },
-                change = { text = '~' },
-                delete = { text = '_' },
-                topdelete = { text = '‾' },
-                changedelete = { text = '~' },
+                add = { text = "+" },
+                change = { text = "~" },
+                delete = { text = "_" },
+                topdelete = { text = "‾" },
+                changedelete = { text = "~" },
             },
         },
     },
@@ -498,26 +538,26 @@ require('lazy').setup({
     -- },
 
     { -- Set lualine as statusline
-        'nvim-lualine/lualine.nvim',
+        "nvim-lualine/lualine.nvim",
         -- See `:help lualine.txt`
 
         opts = {
             options = {
                 icons_enabled = true,
-                theme = 'auto',
-                component_separators = '|',
-                section_separators = '',
+                theme = "auto",
+                component_separators = "|",
+                section_separators = "",
             },
             sections = {
-                lualine_x = { getWords, 'aerial', 'encoding', 'fileformat', 'filetype' }
-            }
+                lualine_x = { getWords, "aerial", "encoding", "fileformat", "filetype" },
+            },
         },
     },
 
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl",      opts = {} },
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
     -- "gc" to comment visual regions/lines
-    { 'numToStr/Comment.nvim',               opts = {} },
+    { "numToStr/Comment.nvim",               opts = {} },
 
     -- greetz to henry
     -- https://github.com/henrybatt/neovim-config/blob/refactor/lua/plugins/treesitter.lua
@@ -534,12 +574,59 @@ require('lazy').setup({
 
         opts = function()
             -- Install default parsers using nvim-treesitter
+            -- ADD TREESITTER LANGUAGES HERE
             require("nvim-treesitter").install({
-                'c', 'cpp', 'lua', 'python', 'rust', 'vimdoc', 'vim', 'markdown', 'markdown_inline',
-                'jsonc', 'cmake', 'bibtex', 'fish', 'make', 'javascript', 'php', 'verilog', 'yaml', 'toml', 'html',
-                'javascript', 'java', 'kotlin', 'dockerfile', 'cuda', 'query', 'css', 'ini', 'rust', 'glsl', 'capnp',
-                'proto', 'latex', 'typst', 'robot', 'mermaid', 'groovy', 'bash', 'json', 'xml', 'http', 'terraform',
-                'd', 'supercollider', 'go', 'scala', 'regex', 'commonlisp', 'gitmodules', 'gitignore'
+                "c",
+                "cpp",
+                "lua",
+                "python",
+                "rust",
+                "vimdoc",
+                "vim",
+                "markdown",
+                "markdown_inline",
+                "jsonc",
+                "cmake",
+                "bibtex",
+                "fish",
+                "make",
+                "javascript",
+                "php",
+                "verilog",
+                "yaml",
+                "toml",
+                "html",
+                "javascript",
+                "java",
+                "kotlin",
+                "dockerfile",
+                "cuda",
+                "query",
+                "css",
+                "ini",
+                "rust",
+                "glsl",
+                "capnp",
+                "proto",
+                "latex",
+                "typst",
+                "robot",
+                "mermaid",
+                "groovy",
+                "bash",
+                "json",
+                "xml",
+                "http",
+                "terraform",
+                "d",
+                "supercollider",
+                "go",
+                "scala",
+                "regex",
+                "commonlisp",
+                "gitmodules",
+                "gitignore",
+                "diff",
             })
 
             -- autocmd to automatically install and start treesitter parsers based on filetype
@@ -560,7 +647,8 @@ require('lazy').setup({
                         if not vim.treesitter.language.add(name) then
                             require("nvim-treesitter").install({ name }):wait(60000)
                             if not vim.treesitter.language.add(name) then
-                                vim.notify("Failed to find " .. name .. " parser after installation.",
+                                vim.notify(
+                                    "Failed to find " .. name .. " parser after installation.",
                                     vim.log.levels.WARN,
                                     { title = "treesitter" }
                                 )
@@ -575,7 +663,7 @@ require('lazy').setup({
         end,
     },
 
-    { import = 'custom.plugins' },
+    { import = "custom.plugins" },
 }, {})
 
 -- [[ Setting options ]]
@@ -585,19 +673,19 @@ require('lazy').setup({
 -- source: https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316
 local links = {
     --['@lsp.type.namespace'] = '@namespace',
-    ['@lsp.type.type'] = '@type',
-    ['@lsp.type.class'] = '@type',
-    ['@lsp.type.enum'] = '@type',
-    ['@lsp.type.interface'] = '@type',
-    ['@lsp.type.struct'] = '@structure',
-    ['@lsp.type.parameter'] = '@parameter',
-    ['@lsp.type.variable'] = '@variable',
-    ['@lsp.type.property'] = '@property',
-    ['@lsp.type.enumMember'] = '@constant',
-    ['@lsp.type.function'] = '@function',
-    ['@lsp.type.method'] = '@method',
-    ['@lsp.type.macro'] = '@macro',
-    ['@lsp.type.decorator'] = '@function',
+    ["@lsp.type.type"] = "@type",
+    ["@lsp.type.class"] = "@type",
+    ["@lsp.type.enum"] = "@type",
+    ["@lsp.type.interface"] = "@type",
+    ["@lsp.type.struct"] = "@structure",
+    ["@lsp.type.parameter"] = "@parameter",
+    ["@lsp.type.variable"] = "@variable",
+    ["@lsp.type.property"] = "@property",
+    ["@lsp.type.enumMember"] = "@constant",
+    ["@lsp.type.function"] = "@function",
+    ["@lsp.type.method"] = "@method",
+    ["@lsp.type.macro"] = "@macro",
+    ["@lsp.type.decorator"] = "@function",
 }
 for newgroup, oldgroup in pairs(links) do
     vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
@@ -614,7 +702,7 @@ vim.opt.expandtab = true
 vim.o.expandtab = true
 
 -- Set encoding
-vim.opt.encoding = 'utf-8'
+vim.opt.encoding = "utf-8"
 
 -- No line wrap
 vim.opt.wrap = false
@@ -626,12 +714,12 @@ vim.o.hlsearch = false
 vim.wo.number = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = "unnamedplus"
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -644,7 +732,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -652,7 +740,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
@@ -663,28 +751,28 @@ vim.opt.textwidth = 110
 
 -- Spelling
 vim.opt.spell = true
-vim.opt.spelllang = { 'en_gb', 'en', 'programming' }
-vim.opt.spelloptions = 'camel'
+vim.opt.spelllang = { "en_gb", "en", "programming" }
+vim.opt.spelloptions = "camel"
 
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
         vim.highlight.on_yank()
     end,
     group = highlight_group,
-    pattern = '*',
+    pattern = "*",
 })
 
 vim.g.lazygit_on_exit_callback = function()
@@ -694,33 +782,33 @@ vim.g.lazygit_on_exit_callback = function()
     require("neo-tree.sources.filesystem.commands").refresh(state)
 end
 
-vim.keymap.set('n', '<leader>lg', require('lazygit').lazygit, { desc = '[L]azy[G]it' })
+vim.keymap.set("n", "<leader>lg", require("lazygit").lazygit, { desc = "[L]azy[G]it" })
 
 -- Barbar keybindings
 local bbmap = vim.api.nvim_set_keymap
 local bbopts = { noremap = true, silent = true }
 
 -- Move to previous/next
-bbmap('n', '<A-,>', '<Cmd>BufferPrevious<CR>', bbopts)
-bbmap('n', '<A-.>', '<Cmd>BufferNext<CR>', bbopts)
+bbmap("n", "<A-,>", "<Cmd>BufferPrevious<CR>", bbopts)
+bbmap("n", "<A-.>", "<Cmd>BufferNext<CR>", bbopts)
 -- Re-order to previous/next
-bbmap('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', bbopts)
-bbmap('n', '<A->>', '<Cmd>BufferMoveNext<CR>', bbopts)
+bbmap("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", bbopts)
+bbmap("n", "<A->>", "<Cmd>BufferMoveNext<CR>", bbopts)
 -- Goto buffer in position...
-bbmap('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', bbopts)
-bbmap('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', bbopts)
-bbmap('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', bbopts)
-bbmap('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', bbopts)
-bbmap('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', bbopts)
-bbmap('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', bbopts)
-bbmap('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', bbopts)
-bbmap('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', bbopts)
-bbmap('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', bbopts)
-bbmap('n', '<A-0>', '<Cmd>BufferLast<CR>', bbopts)
+bbmap("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", bbopts)
+bbmap("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", bbopts)
+bbmap("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", bbopts)
+bbmap("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", bbopts)
+bbmap("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", bbopts)
+bbmap("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", bbopts)
+bbmap("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", bbopts)
+bbmap("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", bbopts)
+bbmap("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", bbopts)
+bbmap("n", "<A-0>", "<Cmd>BufferLast<CR>", bbopts)
 -- Pin/unpin buffer
-bbmap('n', '<A-p>', '<Cmd>BufferPin<CR>', bbopts)
+bbmap("n", "<A-p>", "<Cmd>BufferPin<CR>", bbopts)
 -- Close buffer
-bbmap('n', '<A-c>', '<Cmd>BufferClose<CR>', bbopts)
+bbmap("n", "<A-c>", "<Cmd>BufferClose<CR>", bbopts)
 -- Wipeout buffer
 --                 :BufferWipeout
 -- Close commands
@@ -730,12 +818,12 @@ bbmap('n', '<A-c>', '<Cmd>BufferClose<CR>', bbopts)
 --                 :BufferCloseBuffersLeft
 --                 :BufferCloseBuffersRight
 -- Magic buffer-picking mode
-bbmap('n', '<C-p>', '<Cmd>BufferPick<CR>', bbopts)
+bbmap("n", "<C-p>", "<Cmd>BufferPick<CR>", bbopts)
 -- Sort automatically by...
-bbmap('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', bbopts)
-bbmap('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', bbopts)
-bbmap('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', bbopts)
-bbmap('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', bbopts)
+bbmap("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", bbopts)
+bbmap("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", bbopts)
+bbmap("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", bbopts)
+bbmap("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", bbopts)
 
 -- Pin thesis main file (for TaMaRa thesis)
 vim.api.nvim_create_user_command("PinThesisMain", function()
@@ -743,21 +831,21 @@ vim.api.nvim_create_user_command("PinThesisMain", function()
 end, {})
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 vim.keymap.set("n", "<leader>rn", function()
     return ":IncRename " .. vim.fn.expand("<cword>")
 end, { expr = true, desc = "[R]e[n]ame" })
 
-local luasnip = require 'luasnip'
+local luasnip = require("luasnip")
 
-luasnip.config.setup {}
+luasnip.config.setup({})
 
 -- This module contains a number of default definitions
-local rainbow_delimiters = require 'rainbow-delimiters'
+local rainbow_delimiters = require("rainbow-delimiters")
 
 -- We have to configure rainbow delimiters here like this. It seems like any
 -- configuration we attempt to do in the rainbow.lua file shits up the entire
@@ -766,22 +854,22 @@ local rainbow_delimiters = require 'rainbow-delimiters'
 -- FIXME: configure this in the rainbow.lua file not here
 vim.g.rainbow_delimiters = {
     strategy = {
-        [''] = rainbow_delimiters.strategy['global'],
-        commonlisp = rainbow_delimiters.strategy['local'],
+        [""] = rainbow_delimiters.strategy["global"],
+        commonlisp = rainbow_delimiters.strategy["local"],
     },
     query = {
-        [''] = 'rainbow-delimiters',
-        lua = 'rainbow-blocks',
-        verilog = 'rainbow-blocks',
-        latex = 'rainbow-blocks',
+        [""] = "rainbow-delimiters",
+        lua = "rainbow-blocks",
+        verilog = "rainbow-blocks",
+        latex = "rainbow-blocks",
     },
     highlight = {
         --'RainbowDelimiterRed',
-        'RainbowDelimiterYellow',
-        'RainbowDelimiterBlue',
-        'RainbowDelimiterOrange',
-        'RainbowDelimiterGreen',
-        'RainbowDelimiterViolet',
-        'RainbowDelimiterCyan',
+        "RainbowDelimiterYellow",
+        "RainbowDelimiterBlue",
+        "RainbowDelimiterOrange",
+        "RainbowDelimiterGreen",
+        "RainbowDelimiterViolet",
+        "RainbowDelimiterCyan",
     },
 }

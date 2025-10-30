@@ -133,7 +133,7 @@ return {
         {
             "<leader>sg",
             function()
-                Snacks.picker.grep({ hidden = true, ignored = true, exclude = { "build/**", "*.json" } })
+                Snacks.picker.grep({ hidden = true, ignored = true, exclude = { "build/**", "*.json", "target/**" } })
             end,
             desc = "Grep",
         },
