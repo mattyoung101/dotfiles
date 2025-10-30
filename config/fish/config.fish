@@ -66,7 +66,7 @@ end
 
 # Rust sccache
 set -x RUSTC_WRAPPER /usr/bin/sccache
-set -x SCCACHE_CACHE_SIZE 30G
+set -x SCCACHE_CACHE_SIZE 16G
 
 # libvirt connect to QEMU
 # ref https://serverfault.com/a/803321
