@@ -218,6 +218,9 @@ require("lazy").setup({
                 terraformls = {},
                 biome = {},
                 ts_ls = {},
+                omnisharp_mono = {},
+                -- omnisharp = {},
+                csharp_ls = {},
 
                 -- https://www.reddit.com/r/neovim/comments/1lmd4ic/comment/n06upm2/
                 basedpyright = {
@@ -276,8 +279,6 @@ require("lazy").setup({
 
                 serve_d = {},
 
-                svlangserver = {},
-
                 gopls = {},
 
                 kotlin_lsp = {},
@@ -295,31 +296,37 @@ require("lazy").setup({
             --  https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/veridian.lua
             --  https://github.com/neovim/nvim-lspconfig/issues/691#issuecomment-766199011
             --  https://github.com/VHDL-LS/rust_hdl/issues/10#issuecomment-1000289556
-            local lspconfig = require("lspconfig")
-            local configs = require("lspconfig.configs")
-
-            if not configs.slingshot then
-                -- this require lspconfig.configs is the trick required to make it work
-                require("lspconfig.configs").slingshot = {
-                    default_config = {
-                        cmd = {
-                            "java",
-                            "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005",
-                            "-jar",
-                            "/home/matt/workspace/slingshot/build/libs/slingshot-1.0-SNAPSHOT-all.jar",
-                        },
-                        filetypes = { "verilog", "systemverilog" },
-                        root_dir = function(fname)
-                            return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-                        end,
-                        settings = {},
-                    },
-                }
-            end
+            -- local lspconfig = require("lspconfig")
+            -- local configs = require("lspconfig.configs")
+            --
+            -- if not configs.slingshot then
+            --     -- this require lspconfig.configs is the trick required to make it work
+            --     require("lspconfig.configs").slingshot = {
+            --         default_config = {
+            --             cmd = {
+            --                 "/home/matt/workspace/slingshot/build/slingshot",
+            --             },
+            --             filetypes = { "verilog", "systemverilog" },
+            --             root_dir = function(fname)
+            --                 return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+            --             end,
+            --             settings = {},
+            --         },
+            --     }
+            -- end
             -- lspconfig.slingshot.setup {}
 
-            -- add rust_hdl vhdl language server (not in mason)
-            -- require 'lspconfig'.vhdl_ls.setup {}
+            -- add slang server: https://hudson-trading.github.io/slang-server/start/installing/#neovim
+            vim.lsp.config("slang-server", {
+                cmd = { "slang-server" },
+                root_markers = { ".git", ".slang" },
+                filetypes = {
+                    "systemverilog",
+                    "verilog",
+                },
+            })
+
+            vim.lsp.enable("slang-server")
 
             -- Ensure the servers and tools above are installed
             --
