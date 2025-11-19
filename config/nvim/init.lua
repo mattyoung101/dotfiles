@@ -218,7 +218,7 @@ require("lazy").setup({
                 terraformls = {},
                 biome = {},
                 ts_ls = {},
-                omnisharp_mono = {},
+                --omnisharp_mono = {},
                 -- omnisharp = {},
                 csharp_ls = {},
 
