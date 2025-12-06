@@ -290,43 +290,28 @@ require("lazy").setup({
                 -- NOTE: jdtls is handled by AUR, so we can use it with the jdtls extension
             }
 
-            -- setup my slingshot systemverilog LSP for development
-            -- references used:
-            --  https://neovim.discourse.group/t/how-to-add-a-custom-server-to-nvim-lspconfig/3925a
-            --  https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/veridian.lua
-            --  https://github.com/neovim/nvim-lspconfig/issues/691#issuecomment-766199011
-            --  https://github.com/VHDL-LS/rust_hdl/issues/10#issuecomment-1000289556
-            -- local lspconfig = require("lspconfig")
-            -- local configs = require("lspconfig.configs")
-            --
-            -- if not configs.slingshot then
-            --     -- this require lspconfig.configs is the trick required to make it work
-            --     require("lspconfig.configs").slingshot = {
-            --         default_config = {
-            --             cmd = {
-            --                 "/home/matt/workspace/slingshot/build/slingshot",
-            --             },
-            --             filetypes = { "verilog", "systemverilog" },
-            --             root_dir = function(fname)
-            --                 return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-            --             end,
-            --             settings = {},
-            --         },
-            --     }
-            -- end
-            -- lspconfig.slingshot.setup {}
-
             -- add slang server: https://hudson-trading.github.io/slang-server/start/installing/#neovim
-            vim.lsp.config("slang-server", {
-                cmd = { "slang-server" },
-                root_markers = { ".git", ".slang" },
+            -- vim.lsp.config("slang-server", {
+            --     cmd = { "/home/matt/workspace/slang-server/build/bin/slang-server" },
+            --     root_markers = { ".git", ".slang" },
+            --     filetypes = {
+            --         "systemverilog",
+            --         "verilog",
+            --     },
+            -- })
+            --
+            -- vim.lsp.enable("slang-server")
+
+            vim.lsp.config("sv-slingshot", {
+                cmd = { "/home/matt/workspace/slingshot/build_debug/slingshot" },
+                root_markers = { ".git", ".slingshot.yaml" },
                 filetypes = {
                     "systemverilog",
                     "verilog",
                 },
             })
 
-            vim.lsp.enable("slang-server")
+            vim.lsp.enable("sv-slingshot")
 
             -- Ensure the servers and tools above are installed
             --

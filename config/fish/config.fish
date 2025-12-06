@@ -89,6 +89,7 @@ function fish_greeting
         fortune -s  /usr/share/fortune/computers \
                     /usr/share/fortune/science \
                     /usr/share/fortune/wisdom \
+                    /usr/share/fortune/fortunes \
                     /usr/share/fortune/platitudes | lolcat
     end
     echo
