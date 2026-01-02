@@ -299,7 +299,6 @@ require("lazy").setup({
             --         "verilog",
             --     },
             -- })
-            --
             -- vim.lsp.enable("slang-server")
 
             vim.lsp.config("sv-slingshot", {
@@ -310,7 +309,6 @@ require("lazy").setup({
                     "verilog",
                 },
             })
-
             vim.lsp.enable("sv-slingshot")
 
             -- Ensure the servers and tools above are installed
@@ -577,14 +575,12 @@ require("lazy").setup({
                 "vim",
                 "markdown",
                 "markdown_inline",
-                "jsonc",
                 "cmake",
                 "bibtex",
                 "fish",
                 "make",
                 "javascript",
                 "php",
-                "verilog",
                 "yaml",
                 "toml",
                 "html",
@@ -616,7 +612,6 @@ require("lazy").setup({
                 "scala",
                 "regex",
                 "commonlisp",
-                "gitmodules",
                 "gitignore",
                 "diff",
             })
