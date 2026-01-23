@@ -72,6 +72,12 @@ set -x SCCACHE_CACHE_SIZE 16G
 # ref https://serverfault.com/a/803321
 set -x LIBVIRT_DEFAULT_URI qemu:///system
 
+set -x TSAN_OPTIONS second_deadlock_stack=1
+
+function git_update_origin
+    git remote set-url origin (echo (git remote get-url origin) | sed s/matt/ml/g)
+end
+
 ########################
 
 # as suggested by avery on uqcs (and slightly modified by me)
